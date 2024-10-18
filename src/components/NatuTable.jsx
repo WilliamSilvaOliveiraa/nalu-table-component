@@ -81,7 +81,7 @@ export default function NaluTable({
           <>
             <div
               className="flex w-full items-end justify-between
-            overflow-hidden overflow-x-auto"
+          "
             >
               <PresetTabs
                 TabsInfo={tableData.tabs}

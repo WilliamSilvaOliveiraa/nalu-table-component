@@ -10,7 +10,7 @@ import { Checkbox, Skeleton } from "@mui/material";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import styled from "styled-components";
-import NotFoundIcon from "../../assets/NotFoundIcon";
+import not_found from "../../assets/not_found.svg";
 
 export default function Table({
   data,
@@ -1112,7 +1112,8 @@ export default function Table({
                 <div className="flex h-full w-full flex-col items-center justify-center gap-5 pt-11">
                   <div className="w-[20%]">
                     <img
-                      src={NotFoundIcon}
+                      src={not_found}
+                      //   src="https://placehold.co/400"
                       alt="Nenhum registro encontrado"
                       className="h-full w-full object-contain"
                     />
