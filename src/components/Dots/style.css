@@ -1,0 +1,80 @@
+@keyframes animate-wave {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(20px);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes animate-fade {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes animate-scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-wave {
+  animation: animate-wave 2s infinite ease-in-out;
+}
+
+.animate-fade {
+  animation: animate-fade 2s infinite ease-in-out;
+}
+
+.animate-scale {
+  animation: animate-scale 2s infinite ease-in-out;
+}
+
+@keyframes animate-undulate {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-4px);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+  75% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-undulate .h-2:first-child {
+  animation: animate-undulate 2.4s ease-in-out infinite;
+}
+
+.animate-undulate .h-2:nth-child(2) {
+  animation: animate-undulate 2.4s 0.4s ease-in-out infinite;
+}
+
+.animate-undulate .h-2:last-child {
+  animation: animate-undulate 2.4s 0.8s ease-in-out infinite;
+}
