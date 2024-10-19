@@ -4,6 +4,8 @@ const getOptionText = (option) => {
   return option.label || option.name || option.title || "";
 };
 
+const LogoMarca = "https://placehold.co/600x400";
+
 const getInitials = (text) => {
   const words = text.split(" ");
   return words
@@ -99,6 +101,7 @@ const SearchInput = ({
         onBlur={handleInputBlur}
         disabled={loading}
         readOnly={loading}
+        style={{ backgroundColor: loading ? "#f9f9f9" : "white" }}
       />
       {!loading && isListOpen && (
         <div

@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="p-12">
+    <div className="p-28">
       <NaluTable
         tableData={tableData}
         totalItems={20}

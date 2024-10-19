@@ -34,7 +34,7 @@ export default function Table({
 
   console.log("dentro de tablwe", data);
 
-  const hasVariations = data?.tableInfo?.itens?.some((item) => {
+  const hasVariations = data?.tableInfo?.items?.some((item) => {
     return Array.isArray(item.variations) && item.variations.length > 0;
   });
 
@@ -65,7 +65,7 @@ export default function Table({
     setInputValue("");
   }
 
-  const sortedItems = [...(data?.tableInfo?.itens ?? [])].sort((a, b) => {
+  const sortedItems = [...(data?.tableInfo?.items ?? [])].sort((a, b) => {
     if (!sortColumn) return 0;
 
     const aValue =
@@ -126,7 +126,7 @@ export default function Table({
     setIsAllSelected(isChecked);
 
     if (isChecked) {
-      const allItemIds = data?.tableInfo?.itens.map((item) => item.id);
+      const allItemIds = data?.tableInfo?.items.map((item) => item.id);
       setSelectedCheckbox(new Set(allItemIds));
     } else {
       setSelectedCheckbox(new Set());
@@ -151,7 +151,7 @@ export default function Table({
 
       // Verifica se todos os itens estão selecionados para atualizar a checkbox pai
       const allItemIds = new Set(
-        data?.tableInfo?.itens?.map((item) => item.id)
+        data?.tableInfo?.items?.map((item) => item.id)
       );
       setIsAllSelected(newSelectedItems.size === allItemIds.size);
 
@@ -184,7 +184,7 @@ export default function Table({
 
   return (
     <div
-      className={`relative flex flex-col border-neutral-200 bg-white ${
+      className={`relative flex flex-col border-neutral-200 bg-white overflow-hidden ${
         hasTabs
           ? loading
             ? "h-full rounded-e-2xl rounded-bl-2xl rounded-tl-none border-[1px] lg:rounded-e-2xl lg:rounded-bl-2xl lg:rounded-tl-none lg:border-b-[1px] lg:border-l-[1px] lg:border-r-[1px] lg:border-t-[0px]" // Caso hasTabs seja true e loading true
@@ -203,7 +203,7 @@ export default function Table({
           <div className="relative w-full lg:w-1/2">
             {data && (
               <SearchInput
-                displayedOptions={data?.tableInfo?.itens}
+                displayedOptions={data?.tableInfo?.items}
                 inputValue={inputValue}
                 setInputValue={setInputValue}
                 onItemClick={handleItemClick}
@@ -262,7 +262,7 @@ export default function Table({
                 size === "small" ? "px-4 py-2" : "px-10 py-3"
               } ${loading ? "pointer-events-none opacity-0" : ""} `}
             >
-              {data?.tableInfo?.itens?.length > 0 ? (
+              {data?.tableInfo?.items?.length > 0 ? (
                 <>
                   {onSelectionChange && (
                     // CheckboxPai
@@ -380,9 +380,8 @@ export default function Table({
             </div>
           ) : (
             <>
-              {data?.tableInfo?.itens?.length > 0 ? (
+              {data?.tableInfo?.items?.length > 0 ? (
                 <>
-                  {" "}
                   {selectedItem ? (
                     <div className="flex flex-col">
                       {/* Renderiza apenas o item selecionado */}
@@ -506,156 +505,180 @@ export default function Table({
                       {/* Conteúdo expandido */}
                       {selectedItem.variations &&
                         selectedItem.variations.length > 0 && (
-                          <div
-                            className={`overflow-hidden rounded-b-xl transition-all duration-300 ease-in-out ${
-                              expandedItems[selectedItem.id]
-                                ? `max-h-[${
-                                    selectedItem.variations.length * 100
-                                  }px] opacity-100`
-                                : "max-h-0 opacity-0"
-                            }`}
-                          >
-                            <div className="bg-[#FBFAF9]">
-                              {selectedItem.variations.map(
-                                (variation, vIndex) => (
-                                  <div
-                                    key={vIndex}
-                                    className={`flex px-10 ${
-                                      vIndex <
-                                      selectedItem.variations.length - 1
-                                        ? "border-b-[1px] border-[#E5E2E1]"
-                                        : ""
-                                    } ${
-                                      vIndex === 0
-                                        ? "border-t-[1px] border-[#E5E2E1]"
-                                        : ""
-                                    }`}
-                                  >
-                                    {onSelectionChange && (
-                                      <div className="mr-4 select-none opacity-0">
-                                        <SmallCheckbox
-                                          sx={{ cursor: "default" }}
-                                        ></SmallCheckbox>
-                                      </div>
-                                    )}
+                          <>
+                            {/* Remova ou comente a linha de console.log */}
 
-                                    {data.tableInfo.columns.map(
-                                      (column, idx) => (
+                            {(() => {
+                              const maxHeight =
+                                selectedItem.variations.length * 70;
+                              console.log("aqui", maxHeight);
+
+                              return (
+                                <div
+                                  className={`overflow-hidden rounded-b-xl transition-all duration-300 ease-in-out ${
+                                    expandedItems[selectedItem.id]
+                                      ? "opacity-100"
+                                      : "opacity-0"
+                                  }`}
+                                  style={
+                                    expandedItems[selectedItem.id]
+                                      ? { maxHeight: `${maxHeight}px` }
+                                      : { maxHeight: "0px" }
+                                  }
+                                >
+                                  <div className="bg-[#FBFAF9]">
+                                    {selectedItem.variations.map(
+                                      (variation, vIndex) => (
                                         <div
-                                          key={idx}
-                                          className={`${
-                                            column.header.toLowerCase() ===
-                                            "imagem"
-                                              ? "w-[100px]"
-                                              : "flex-1"
-                                          } flex items-center ${
-                                            column.alignment === "left"
-                                              ? "justify-start"
-                                              : column.alignment === "center"
-                                              ? "justify-center"
-                                              : "justify-end"
+                                          key={vIndex}
+                                          className={`flex px-10 ${
+                                            vIndex <
+                                            selectedItem.variations.length - 1
+                                              ? "border-b-[1px] border-[#E5E2E1] "
+                                              : ""
+                                          } ${
+                                            vIndex === 0
+                                              ? "border-t-[1px] border-[#E5E2E1]"
+                                              : ""
                                           }`}
                                         >
-                                          {column.ref === "image" ? (
-                                            <div className="flex h-auto w-full items-center justify-start">
-                                              <img
-                                                className="h-[25%] w-[25%] object-contain"
-                                                src={
-                                                  variation[column.ref] ||
-                                                  LogoMarca
-                                                }
-                                                alt=""
-                                              />
+                                          {onSelectionChange && (
+                                            <div className="mr-4 select-none opacity-0">
+                                              <SmallCheckbox
+                                                sx={{ cursor: "default" }}
+                                              ></SmallCheckbox>
                                             </div>
-                                          ) : (
-                                            <p className="z-[3] text-[12px] font-medium text-[#787776]">
-                                              {truncateText(
-                                                variation[column.ref],
-                                                18
+                                          )}
+
+                                          {data.tableInfo.columns.map(
+                                            (column, idx) => (
+                                              <div
+                                                key={idx}
+                                                className={`${
+                                                  column.header.toLowerCase() ===
+                                                  "imagem"
+                                                    ? "w-[100px]"
+                                                    : "flex-1"
+                                                } flex items-center ${
+                                                  column.alignment === "left"
+                                                    ? "justify-start"
+                                                    : column.alignment ===
+                                                      "center"
+                                                    ? "justify-center"
+                                                    : "justify-end"
+                                                }`}
+                                              >
+                                                {column.ref === "image" ? (
+                                                  <div className="flex h-auto w-full items-center justify-start">
+                                                    <img
+                                                      className="h-[25%] w-[25%] object-contain"
+                                                      src={
+                                                        variation[column.ref] ||
+                                                        LogoMarca
+                                                      }
+                                                      alt=""
+                                                    />
+                                                  </div>
+                                                ) : (
+                                                  <p className="z-[3] text-[12px] font-medium text-[#787776]">
+                                                    {truncateText(
+                                                      variation[column.ref],
+                                                      18
+                                                    )}
+                                                  </p>
+                                                )}
+                                              </div>
+                                            )
+                                          )}
+                                          {(hasVariations ||
+                                            viewItemFunction ||
+                                            addItemFunction ||
+                                            removeItemFunction ||
+                                            editItemFunction) && (
+                                            <div className="flex flex-1 items-center justify-center gap-1 py-5">
+                                              {viewItemFunction && (
+                                                <div
+                                                  className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#C2D6E8] transition-all duration-300 ease-in-out hover:bg-[#ADC6DD]"
+                                                  onClick={() =>
+                                                    viewItemFunction(
+                                                      selectedItem.id
+                                                    )
+                                                  }
+                                                >
+                                                  <RemoveRedEyeIcon
+                                                    sx={{
+                                                      fontSize: 16,
+                                                      color: "#0053A0",
+                                                    }}
+                                                  />
+                                                </div>
                                               )}
-                                            </p>
+                                              {addItemFunction && (
+                                                <div
+                                                  className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#DFCDEB] transition-all duration-300 ease-in-out hover:bg-[#D7C2E6] lg:flex"
+                                                  onClick={() =>
+                                                    addItemFunction(
+                                                      variation.id
+                                                    )
+                                                  }
+                                                >
+                                                  <span className="flex rotate-0 items-center justify-center transition-all duration-300 ease-in-out group-hover:rotate-45">
+                                                    <AddRoundedIcon
+                                                      sx={{
+                                                        fontSize: 16,
+                                                        color: "#9B09FF",
+                                                      }}
+                                                    />
+                                                  </span>
+                                                </div>
+                                              )}
+
+                                              {editItemFunction && (
+                                                <div
+                                                  className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#EBEBEB] transition-all duration-300 ease-in-out hover:bg-[#DDDCDC] lg:flex"
+                                                  onClick={() =>
+                                                    editItemFunction(
+                                                      variation.id
+                                                    )
+                                                  }
+                                                >
+                                                  <ModeEditOutlineOutlinedIcon
+                                                    sx={{
+                                                      fontSize: 16,
+                                                      color: "#3E3E3E",
+                                                    }}
+                                                  />
+                                                </div>
+                                              )}
+                                              {removeItemFunction && (
+                                                <div
+                                                  className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#FFCCCC] transition-all duration-300 ease-in-out hover:bg-[#EEB2B2] lg:flex"
+                                                  onClick={() =>
+                                                    removeItemFunction(
+                                                      variation.id
+                                                    )
+                                                  }
+                                                >
+                                                  <span className="flex items-center justify-center transition-all duration-300 ease-in-out">
+                                                    <DeleteOutlineOutlinedIcon
+                                                      sx={{
+                                                        fontSize: 16,
+                                                        color: "#AE4A4A",
+                                                      }}
+                                                    />
+                                                  </span>
+                                                </div>
+                                              )}
+                                            </div>
                                           )}
                                         </div>
                                       )
                                     )}
-                                    {(hasVariations ||
-                                      viewItemFunction ||
-                                      addItemFunction ||
-                                      removeItemFunction ||
-                                      editItemFunction) && (
-                                      <div className="flex flex-1 items-center justify-center gap-1 py-5">
-                                        {viewItemFunction && (
-                                          <div
-                                            className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#C2D6E8] transition-all duration-300 ease-in-out hover:bg-[#ADC6DD]"
-                                            onClick={() =>
-                                              viewItemFunction(selectedItem.id)
-                                            }
-                                          >
-                                            <RemoveRedEyeIcon
-                                              sx={{
-                                                fontSize: 16,
-                                                color: "#0053A0",
-                                              }}
-                                            />
-                                          </div>
-                                        )}
-                                        {addItemFunction && (
-                                          <div
-                                            className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#DFCDEB] transition-all duration-300 ease-in-out hover:bg-[#D7C2E6] lg:flex"
-                                            onClick={() =>
-                                              addItemFunction(variation.id)
-                                            }
-                                          >
-                                            <span className="flex rotate-0 items-center justify-center transition-all duration-300 ease-in-out group-hover:rotate-45">
-                                              <AddRoundedIcon
-                                                sx={{
-                                                  fontSize: 16,
-                                                  color: "#9B09FF",
-                                                }}
-                                              />
-                                            </span>
-                                          </div>
-                                        )}
-
-                                        {editItemFunction && (
-                                          <div
-                                            className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#EBEBEB] transition-all duration-300 ease-in-out hover:bg-[#DDDCDC] lg:flex"
-                                            onClick={() =>
-                                              editItemFunction(variation.id)
-                                            }
-                                          >
-                                            <ModeEditOutlineOutlinedIcon
-                                              sx={{
-                                                fontSize: 16,
-                                                color: "#3E3E3E",
-                                              }}
-                                            />
-                                          </div>
-                                        )}
-                                        {removeItemFunction && (
-                                          <div
-                                            className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#FFCCCC] transition-all duration-300 ease-in-out hover:bg-[#EEB2B2] lg:flex"
-                                            onClick={() =>
-                                              removeItemFunction(variation.id)
-                                            }
-                                          >
-                                            <span className="flex items-center justify-center transition-all duration-300 ease-in-out">
-                                              <DeleteOutlineOutlinedIcon
-                                                sx={{
-                                                  fontSize: 16,
-                                                  color: "#AE4A4A",
-                                                }}
-                                              />
-                                            </span>
-                                          </div>
-                                        )}
-                                      </div>
-                                    )}
                                   </div>
-                                )
-                              )}
-                            </div>
-                          </div>
+                                </div>
+                              );
+                            })()}
+                          </>
                         )}
                     </div>
                   ) : loading ? (
@@ -960,148 +983,180 @@ export default function Table({
                           )}
 
                           {/* Conteúdo expandido */}
-                          {item.variations && item.variations.length > 0 && (
-                            <div
-                              className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                                expandedItems[index]
-                                  ? `max-h-[${
-                                      item.variations.length * 100
-                                    }px] opacity-100`
-                                  : "max-h-0 opacity-0"
-                              }`}
-                            >
-                              <div className="bg-[#FBFAF9]">
-                                {item.variations.map((variation, vIndex) => (
-                                  <>
-                                    <div
-                                      key={vIndex}
-                                      className="flex border-b-[1px] border-[#E5E2E1] px-10"
-                                    >
-                                      {onSelectionChange && (
-                                        <div className="mr-4 select-none opacity-0">
-                                          <SmallCheckbox
-                                            sx={{ cursor: "default" }}
-                                          ></SmallCheckbox>
-                                        </div>
-                                      )}
+                          {item?.variations && item.variations.length > 0 && (
+                            <>
+                              {/* Remova ou comente a linha de console.log */}
 
-                                      {data.tableInfo.columns.map(
-                                        (column, idx) => (
+                              {(() => {
+                                const maxHeight = item.variations.length * 70;
+                                console.log("aqui", maxHeight);
+
+                                return (
+                                  <div
+                                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                                      expandedItems[index]
+                                        ? "opacity-100"
+                                        : "max-h-0 opacity-0"
+                                    }`}
+                                    style={
+                                      expandedItems[index]
+                                        ? { maxHeight: `${maxHeight}px` }
+                                        : {}
+                                    }
+                                  >
+                                    <div className="bg-[#FBFAF9]">
+                                      {item.variations.map(
+                                        (variation, vIndex) => (
                                           <div
-                                            key={idx}
-                                            className={`${
-                                              column.header.toLowerCase() ===
-                                              "imagem"
-                                                ? "w-[100px]"
-                                                : "flex-1"
-                                            } flex items-center ${
-                                              column.alignment === "left"
-                                                ? "justify-start"
-                                                : column.alignment === "center"
-                                                ? "justify-center"
-                                                : "justify-end"
+                                            key={vIndex}
+                                            className={`flex px-10 ${
+                                              !(
+                                                index ===
+                                                  sortedItems.length - 1 &&
+                                                vIndex ===
+                                                  item.variations.length - 1
+                                              )
+                                                ? "border-b-[1px] border-[#E5E2E1]"
+                                                : ""
                                             }`}
                                           >
-                                            {column.ref === "image" ? (
-                                              <div className="flex h-auto w-full items-center justify-start">
-                                                <img
-                                                  className="h-6 w-6 object-contain"
-                                                  src={
-                                                    variation[column.ref] ||
-                                                    LogoMarca
-                                                  }
-                                                  alt=""
+                                            {onSelectionChange && (
+                                              <div className="mr-4 select-none opacity-0">
+                                                <SmallCheckbox
+                                                  sx={{ cursor: "default" }}
                                                 />
                                               </div>
-                                            ) : (
-                                              <p className="z-[3] text-[12px] font-medium text-[#787776]">
-                                                {truncateText(
-                                                  variation[column.ref],
-                                                  18
+                                            )}
+
+                                            {data.tableInfo.columns.map(
+                                              (column, idx) => (
+                                                <div
+                                                  key={idx}
+                                                  className={`${
+                                                    column.header.toLowerCase() ===
+                                                    "imagem"
+                                                      ? "w-[100px]"
+                                                      : "flex-1"
+                                                  } flex items-center ${
+                                                    column.alignment === "left"
+                                                      ? "justify-start"
+                                                      : column.alignment ===
+                                                        "center"
+                                                      ? "justify-center"
+                                                      : "justify-end"
+                                                  }`}
+                                                >
+                                                  {column.ref === "image" ? (
+                                                    <div className="flex h-auto w-full items-center justify-start">
+                                                      <img
+                                                        className="h-6 w-6 object-contain"
+                                                        src={
+                                                          variation[
+                                                            column.ref
+                                                          ] || LogoMarca
+                                                        }
+                                                        alt=""
+                                                      />
+                                                    </div>
+                                                  ) : (
+                                                    <p className="z-[3] text-[12px] font-medium text-[#787776]">
+                                                      {truncateText(
+                                                        variation[column.ref],
+                                                        18
+                                                      )}
+                                                    </p>
+                                                  )}
+                                                </div>
+                                              )
+                                            )}
+                                            {(hasVariations ||
+                                              viewItemFunction ||
+                                              addItemFunction ||
+                                              removeItemFunction ||
+                                              editItemFunction) && (
+                                              <div className="flex flex-1 items-center justify-center gap-1 py-5">
+                                                {viewItemFunction && (
+                                                  <div
+                                                    className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#C2D6E8] transition-all duration-300 ease-in-out hover:bg-[#ADC6DD]"
+                                                    onClick={() =>
+                                                      viewItemFunction(
+                                                        variation.id
+                                                      )
+                                                    }
+                                                  >
+                                                    <RemoveRedEyeIcon
+                                                      sx={{
+                                                        fontSize: 16,
+                                                        color: "#0053A0",
+                                                      }}
+                                                    />
+                                                  </div>
                                                 )}
-                                              </p>
+                                                {addItemFunction && (
+                                                  <div
+                                                    className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#DFCDEB] transition-all duration-300 ease-in-out hover:bg-[#D7C2E6] lg:flex"
+                                                    onClick={() =>
+                                                      addItemFunction(
+                                                        variation.id
+                                                      )
+                                                    }
+                                                  >
+                                                    <span className="flex rotate-0 items-center justify-center transition-all duration-300 ease-in-out group-hover:rotate-45">
+                                                      <AddRoundedIcon
+                                                        sx={{
+                                                          fontSize: 16,
+                                                          color: "#9B09FF",
+                                                        }}
+                                                      />
+                                                    </span>
+                                                  </div>
+                                                )}
+                                                {editItemFunction && (
+                                                  <div
+                                                    className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#EBEBEB] transition-all duration-300 ease-in-out hover:bg-[#DDDCDC] lg:flex"
+                                                    onClick={() =>
+                                                      editItemFunction(
+                                                        variation.id
+                                                      )
+                                                    }
+                                                  >
+                                                    <ModeEditOutlineOutlinedIcon
+                                                      sx={{
+                                                        fontSize: 16,
+                                                        color: "#3E3E3E",
+                                                      }}
+                                                    />
+                                                  </div>
+                                                )}
+                                                {removeItemFunction && (
+                                                  <div
+                                                    className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#FFCCCC] transition-all duration-300 ease-in-out hover:bg-[#EEB2B2] lg:flex"
+                                                    onClick={() =>
+                                                      removeItemFunction(
+                                                        variation.id
+                                                      )
+                                                    }
+                                                  >
+                                                    <span className="flex items-center justify-center transition-all duration-300 ease-in-out">
+                                                      <DeleteOutlineOutlinedIcon
+                                                        sx={{
+                                                          fontSize: 16,
+                                                          color: "#AE4A4A",
+                                                        }}
+                                                      />
+                                                    </span>
+                                                  </div>
+                                                )}
+                                              </div>
                                             )}
                                           </div>
                                         )
                                       )}
-                                      {(hasVariations ||
-                                        viewItemFunction ||
-                                        addItemFunction ||
-                                        removeItemFunction ||
-                                        editItemFunction) && (
-                                        <div className="flex flex-1 items-center justify-center gap-1 py-5">
-                                          {viewItemFunction && (
-                                            <div
-                                              className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#C2D6E8] transition-all duration-300 ease-in-out hover:bg-[#ADC6DD]"
-                                              onClick={() =>
-                                                viewItemFunction(variation.id)
-                                              }
-                                            >
-                                              <RemoveRedEyeIcon
-                                                sx={{
-                                                  fontSize: 16,
-                                                  color: "#0053A0",
-                                                }}
-                                              />
-                                            </div>
-                                          )}
-                                          {addItemFunction && (
-                                            <div
-                                              className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#DFCDEB] transition-all duration-300 ease-in-out hover:bg-[#D7C2E6] lg:flex"
-                                              onClick={() =>
-                                                addItemFunction(variation.id)
-                                              }
-                                            >
-                                              <span className="flex rotate-0 items-center justify-center transition-all duration-300 ease-in-out group-hover:rotate-45">
-                                                <AddRoundedIcon
-                                                  sx={{
-                                                    fontSize: 16,
-                                                    color: "#9B09FF",
-                                                  }}
-                                                />
-                                              </span>
-                                            </div>
-                                          )}
-
-                                          {editItemFunction && (
-                                            <div
-                                              className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#EBEBEB] transition-all duration-300 ease-in-out hover:bg-[#DDDCDC] lg:flex"
-                                              onClick={() =>
-                                                editItemFunction(variation.id)
-                                              }
-                                            >
-                                              <ModeEditOutlineOutlinedIcon
-                                                sx={{
-                                                  fontSize: 16,
-                                                  color: "#3E3E3E",
-                                                }}
-                                              />
-                                            </div>
-                                          )}
-                                          {removeItemFunction && (
-                                            <div
-                                              className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#FFCCCC] transition-all duration-300 ease-in-out hover:bg-[#EEB2B2] lg:flex"
-                                              onClick={() =>
-                                                removeItemFunction(variation.id)
-                                              }
-                                            >
-                                              <span className="flex items-center justify-center transition-all duration-300 ease-in-out">
-                                                <DeleteOutlineOutlinedIcon
-                                                  sx={{
-                                                    fontSize: 16,
-                                                    color: "#AE4A4A",
-                                                  }}
-                                                />
-                                              </span>
-                                            </div>
-                                          )}
-                                        </div>
-                                      )}
                                     </div>
-                                  </>
-                                ))}
-                              </div>
-                            </div>
+                                  </div>
+                                );
+                              })()}
+                            </>
                           )}
                         </div>
                       ))}
