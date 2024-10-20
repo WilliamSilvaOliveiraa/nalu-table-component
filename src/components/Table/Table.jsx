@@ -149,7 +149,6 @@ export default function Table({
         newSelectedItems.add(itemId);
       }
 
-      // Verifica se todos os itens estão selecionados para atualizar a checkbox pai
       const allItemIds = new Set(
         data?.tableInfo?.items?.map((item) => item.id)
       );
@@ -184,7 +183,7 @@ export default function Table({
 
   return (
     <div
-      className={`relative flex flex-col border-neutral-200 bg-white overflow-hidden ${
+      className={`relative flex flex-col border-neutral-200 bg-white  ${
         hasTabs
           ? loading
             ? "h-full rounded-e-2xl rounded-bl-2xl rounded-tl-none border-[1px] lg:rounded-e-2xl lg:rounded-bl-2xl lg:rounded-tl-none lg:border-b-[1px] lg:border-l-[1px] lg:border-r-[1px] lg:border-t-[0px]" // Caso hasTabs seja true e loading true
@@ -385,7 +384,26 @@ export default function Table({
                   {selectedItem ? (
                     <div className="flex flex-col">
                       {/* Renderiza apenas o item selecionado */}
-                      <div className="flex border-b-[0px] border-[#E5E2E1] px-10">
+
+                      <div className="flex border-b-[0px] border-[#E5E2E1] px-10 items-center">
+                        {onSelectionChange && (
+                          <div className="z-[2] mr-4 h-1/2">
+                            <SmallCheckbox
+                              onChange={() =>
+                                handleCheckboxChange(selectedItem.id)
+                              }
+                              checked={selectedCheckbox.has(selectedItem.id)}
+                              sx={{
+                                "&.Mui-checked": {
+                                  color: "#B571EB",
+                                },
+                                "&:not(.Mui-checked)": {
+                                  color: "#CCCCCC",
+                                },
+                              }}
+                            />
+                          </div>
+                        )}
                         {data.tableInfo.columns.map((column, idx) => (
                           <div
                             key={idx}
@@ -1017,6 +1035,12 @@ export default function Table({
                                                   item.variations.length - 1
                                               )
                                                 ? "border-b-[1px] border-[#E5E2E1]"
+                                                : ""
+                                            } ${
+                                              index ===
+                                                sortedItems.length - 1 &&
+                                              vIndex === 0
+                                                ? "border-t-[1px] border-[#E5E2E1]"
                                                 : ""
                                             }`}
                                           >

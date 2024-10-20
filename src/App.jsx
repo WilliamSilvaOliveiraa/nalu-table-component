@@ -1,8 +1,11 @@
 import NaluTable from "./components/NatuTable";
 import tableData from "./data/Data";
 import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [tabSelect, setTabSelect] = useState("Primeira");
+
   return (
     <div className="p-28">
       <NaluTable
@@ -12,9 +15,9 @@ function App() {
         itemsPerPage={10}
         loading={false}
         currentPageProp={1}
-        handleTabChange={(tab) => console.log(tab)}
-        selectedTab="tab1"
-        activeTab="tab1"
+        handleTabChange={(tab) => setTabSelect(tab)}
+        selectedTab={tabSelect}
+        activeTab={tabSelect}
         header={true}
         plusButton={true}
         addItemFunction={() => console.log("add")}
@@ -22,6 +25,9 @@ function App() {
         modalTitle="Modal"
         checkbox={true}
         handleSelectionChange={(selected) => console.log(selected)}
+        handleSaveTabs={(tabs) => console.log(tabs)}
+        variant="carmesin"
+        themeMode="light"
       />
     </div>
   );

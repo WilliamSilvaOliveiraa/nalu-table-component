@@ -1,14 +1,16 @@
 const tableData = {
   tabs: [
     {
-      title: "Tab 1",
+      title: "Primeira",
       quantity: 5,
       checked: true,
+      special: true,
     },
     {
-      title: "Tab 2",
+      title: "Segunda",
       quantity: 10,
-      checked: false,
+      checked: true,
+      special: false,
     },
   ],
   tableInfo: {
@@ -35,6 +37,84 @@ const tableData = {
     items: [
       {
         id: 1,
+        name: "João",
+        age: 25,
+        location: "São Paulo",
+        variations: [
+          {
+            id: 101,
+            color: "Azul",
+            size: "M",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "João",
+        age: 25,
+        location: "São Paulo",
+        variations: [
+          {
+            id: 101,
+            color: "Azul",
+            size: "M",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "João",
+        age: 25,
+        location: "São Paulo",
+        variations: [
+          {
+            id: 101,
+            color: "Azul",
+            size: "M",
+          },
+        ],
+      },
+      {
+        id: 5,
+        name: "João",
+        age: 25,
+        location: "São Paulo",
+        variations: [
+          {
+            id: 101,
+            color: "Azul",
+            size: "M",
+          },
+        ],
+      },
+      {
+        id: 6,
+        name: "João",
+        age: 25,
+        location: "São Paulo",
+        variations: [
+          {
+            id: 101,
+            color: "Azul",
+            size: "M",
+          },
+        ],
+      },
+      {
+        id: 7,
+        name: "João",
+        age: 25,
+        location: "São Paulo",
+        variations: [
+          {
+            id: 101,
+            color: "Azul",
+            size: "M",
+          },
+        ],
+      },
+      {
+        id: 8,
         name: "João",
         age: 25,
         location: "São Paulo",

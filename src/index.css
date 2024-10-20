@@ -31,3 +31,26 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Estiliza toda a scrollbar */
+::-webkit-scrollbar {
+  width: 12px; /* Largura da scrollbar */
+}
+
+/* Estiliza o fundo da scrollbar */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Cor do track da scrollbar */
+}
+
+/* Estiliza a parte deslizante (thumb) da scrollbar */
+::-webkit-scrollbar-thumb {
+  background-color: #dbdbdb; /* Cor da thumb */
+  border-radius: 10px; /* Arredondamento da thumb */
+  border: 2px solid #f1f1f1; /* Borda em torno da thumb */
+  transition: background-color 0.3s; /* Transição de cor ao passar o mouse */
+}
+
+/* Estiliza a thumb quando em hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #cccaca; /* Cor da thumb quando em hover */
+}

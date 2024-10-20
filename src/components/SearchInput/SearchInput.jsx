@@ -54,9 +54,11 @@ const SearchInput = ({
     variant === "small" ? "py-2 px-3 text-sm" : "p-4 text-base"
   } ${inputValue ? "listopen" : ""} ${loading ? " cursor-arrow" : ""}`;
 
-  const optionClassNames = `px-4 py-4 cursor-pointer hover:bg-purple-50 flex items-center gap-4 relative overflow-hidden ${
+  const optionClassNames = `px-4 py-4 cursor-pointer flex items-center gap-4 relative overflow-hidden ${
     variant === "small" ? "text-sm py-2" : "text-base"
-  } ${loading ? "pointer-events-none" : ""}`;
+  } ${
+    loading ? "pointer-events-none" : ""
+  } transition-all duration-500 ease-in-out`;
 
   const imageSizeClassNames = `${
     showImage
@@ -101,16 +103,21 @@ const SearchInput = ({
         onBlur={handleInputBlur}
         disabled={loading}
         readOnly={loading}
-        style={{ backgroundColor: loading ? "#f9f9f9" : "white" }}
+        style={{
+          backgroundColor: loading ? "#f9f9f9" : "white",
+          color: "#787776",
+        }}
       />
-      {!loading && isListOpen && (
+      {!loading && (
         <div
-          className={
-            "absolute z-10 mt-2 w-full rounded-lg border bg-white shadow-lg " +
-            `${
-              hasItemWithoutPhoto ? "bg-gray-200" : ""
-            } max-h-80 overflow-y-auto`
-          }
+          className={`absolute z-10 mt-2 w-full rounded-lg overflow-hidden border bg-white shadow-lg transition-all duration-500 ease-in-out 
+      ${hasItemWithoutPhoto ? "bg-gray-200" : ""} 
+ opacity-100`}
+          style={{
+            maxHeight: isListOpen ? "20rem " : "0",
+            opacity: isListOpen ? 1 : 0,
+            overflowY: isListOpen ? "auto" : "hidden",
+          }}
         >
           {filteredOptions?.length === 0 ? (
             <div className="px-4 py-4 text-gray-500">
@@ -120,7 +127,9 @@ const SearchInput = ({
             filteredOptions?.map((option) => (
               <div
                 key={option.value}
-                className={optionClassNames}
+                className={`${optionClassNames} ${
+                  hoveredItem === option ? "bg-purple-50" : ""
+                }`}
                 onMouseEnter={() => setHoveredItem(option)}
                 onMouseLeave={() => setHoveredItem(null)}
                 onMouseDown={() => {
@@ -128,9 +137,11 @@ const SearchInput = ({
                   setInputValue(formatLabel(getOptionText(option)));
                 }}
               >
-                {hoveredItem === option && (
-                  <div className="absolute left-0 top-1/2 h-full w-2 -translate-x-1/2 -translate-y-1/2 bg-purple-400"></div>
-                )}
+                <div
+                  className={`absolute left-0 top-0 h-full w-1 bg-purple-400 transition-opacity duration-500 ease-in-out ${
+                    hoveredItem === option ? "opacity-100" : "opacity-0"
+                  }`}
+                ></div>
                 <div
                   className={`flex items-center justify-center p-1 ${imageSizeClassNames} ${
                     getImageSrc(option) === "https://placehold.co/600x400"
@@ -156,7 +167,7 @@ const SearchInput = ({
                     </div>
                   )}
                 </div>
-                <p className="font-medium opacity-95">
+                <p className="font-medium opacity-95 text-gray-500">
                   {formatLabel(getOptionText(option))}
                 </p>
               </div>

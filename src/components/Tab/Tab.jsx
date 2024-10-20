@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
-// import EnableCurve from './assets/EnableCurve'
 import FinalEnableCurve from "../../assets/FinalEnableCurve";
+import colorThemes from "../../constants/colorThemes";
 
-// Hook personalizado para medir e ajustar o tamanho
 const useEvenWidth = () => {
   const ref = useRef(null);
   const [width, setWidth] = useState(0);
@@ -35,9 +34,19 @@ const useEvenWidth = () => {
   return [ref, width];
 };
 
-export default function Tab({ tab, toggle, onClick, isFirst }) {
+export default function Tab({
+  tab,
+  toggle,
+  onClick,
+  isFirst,
+  variant,
+  themeMode,
+}) {
   const [tabRef, evenWidth] = useEvenWidth();
   const zIndex = 1;
+
+  const { primary, primaryLow, secondBackground, white, secondText } =
+    colorThemes[variant];
 
   return (
     <div
@@ -49,26 +58,32 @@ export default function Tab({ tab, toggle, onClick, isFirst }) {
       onClick={onClick}
     >
       <div
+        style={{
+          width: evenWidth > 0 ? `${evenWidth}px` : "auto",
+          backgroundColor: !toggle
+            ? secondBackground[themeMode]
+            : white[themeMode],
+        }}
         className={`relative flex items-center justify-center gap-2 rounded-2xl border-[1px] border-neutral-200 px-4 py-2 transition-all duration-300 lg:rounded-b-none lg:rounded-t-2xl lg:border-b-[0px] lg:border-l-[1px] lg:border-r-[1px] lg:border-t-[1px] ${
-          !toggle
-            ? "border-transparent bg-[#F2E8FE]"
-            : "border-neutral-200 bg-white"
+          !toggle ? "border-transparent " : "border-neutral-200 "
         }`}
-        style={{ width: evenWidth > 0 ? `${evenWidth}px` : "auto" }}
       >
         <h5
-          className={`text-[12px] font-medium transition-colors duration-300 ${
-            !toggle ? "text-[#a76da8]" : "text-[#434342]"
-          }`}
+          className={`text-[12px] font-medium transition-colors duration-300`}
+          style={{
+            color: !toggle ? secondText[themeMode] : "#434342",
+          }}
         >
           {tab.title}
         </h5>
         <p
-          className={`flex items-center justify-center px-3 py-[4px] text-[10px] transition-all duration-300 ${
-            !toggle
-              ? "bg-[#F9F4FF] font-semibold text-[#a76da8]"
-              : "bg-[#B24DF8] font-semibold text-white"
-          } rounded-full`}
+          style={{
+            backgroundColor: !toggle
+              ? primaryLow[themeMode]
+              : primary[themeMode],
+            color: !toggle ? secondText[themeMode] : white[themeMode],
+          }}
+          className={`flex font-bold items-center justify-center px-3 py-[4px] text-[10px] transition-all duration-300 rounded-full`}
         >
           {tab.quantity}
         </p>
@@ -96,7 +111,7 @@ export default function Tab({ tab, toggle, onClick, isFirst }) {
             opacity: toggle ? 1 : 0, // Corrigido a sintaxe para interpolação
           }}
         >
-          {/* <FinalEnableCurve /> */}
+          <FinalEnableCurve />
         </div>
       </div>
     </div>

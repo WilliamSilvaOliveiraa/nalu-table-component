@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import Button from "../Button/Button";
+import Button from "@mui/material/Button";
 
 const StyledModal = styled(Modal)({
   display: "flex",
@@ -132,28 +132,47 @@ const ModalTabs = ({ open, onClose, items, onSave, text }) => {
         <div className="mt-0 flex w-full justify-between">
           <div className="w-32">
             <Button
-              text={"Cancelar"}
-              type="button"
-              variant={"outlined"}
-              size={"small"}
-              color="neutral"
+              sx={{
+                width: "100%",
+                backgroundColor: "#9a989c!important",
+                borderRadius: "74px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#fff",
+
+                "&:hover": {
+                  backgroundColor: "#817f82!important",
+                },
+              }}
               onClick={() => {
                 onClose();
               }}
-            />
+            >
+              <p className="h-fit capitalize pt-[2px]"> Cancelar </p>
+            </Button>
           </div>
           <div className="w-32">
             <Button
-              text={"Salvar"}
-              size={"small"}
-              type="button"
-              iconPosition={"left"}
-              variant={"fill"}
-              color="primary"
+              sx={{
+                width: "100%",
+                backgroundColor: "#B571EB!important",
+                borderRadius: "74px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#fff",
+
+                "&:hover": {
+                  backgroundColor: "#9f53db!important",
+                },
+              }}
               onClick={() => {
                 handleSave();
               }}
-            />
+            >
+              <p className="h-fit capitalize pt-[2px]"> Salvar </p>
+            </Button>
           </div>
         </div>
       </ModalContent>

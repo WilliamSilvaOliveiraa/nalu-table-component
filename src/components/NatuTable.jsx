@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Table from "./Table/Table";
 import PresetTabs from "./PresetTabs/PresetTabs";
 import PropTypes from "prop-types";
-// import ModalTabs from "./Modal/ModalTabs";
+import ModalTabs from "./Modal/ModalTabs";
 import Pagination from "./Pagination/Pagination";
 
 NaluTable.propTypes = {
@@ -58,6 +58,8 @@ export default function NaluTable({
   handleSaveTabs,
   selectedTab,
   activeTab,
+  variant = "carmesin",
+  themeMode = "light",
 }) {
   const [tab, setTab] = useState(null);
   const [open, setOpen] = useState(false);
@@ -89,6 +91,8 @@ export default function NaluTable({
                 onTabSelect={handleTabChange}
                 loading={loading}
                 activeTab={activeTab}
+                variant={variant}
+                themeMode={themeMode}
               />
               {handlePageChange && (
                 <div
@@ -265,7 +269,7 @@ export default function NaluTable({
         )}
       </div>
 
-      {/* {tab && (
+      {tab && (
         <ModalTabs
           text={modalTitle}
           open={open}
@@ -273,7 +277,7 @@ export default function NaluTable({
           items={tableData.tabs}
           onSave={handleSaveTabs}
         />
-      )} */}
+      )}
     </>
   );
 }
