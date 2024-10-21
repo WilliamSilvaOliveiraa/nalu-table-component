@@ -1,15 +1,13 @@
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { styled } from "@mui/material/styles";
-import React from "react";
-// import { useTheme } from "../../context/ThemeContext"; // Importando o hook do contexto
 import colorThemes from "../../constants/colorThemes";
 
 const SquareDiv = styled("div")(({ size, variant, themeMode }) => {
-  const { primary, primaryFocusStrong } = colorThemes[variant];
+  const { primary, secondBackground } = colorThemes[variant];
 
   return {
     position: "relative",
-    backgroundColor: primary[themeMode], // Usando a cor do tema
+    backgroundColor: secondBackground[themeMode],
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -30,7 +28,7 @@ const SquareDiv = styled("div")(({ size, variant, themeMode }) => {
       opacity: "0%",
       width: "140%",
       height: "140%",
-      backgroundColor: primaryFocusStrong[themeMode],
+      backgroundColor: primary[themeMode],
       transform: "translate(100%, 120%) rotate(45deg)",
       transition: "all 0.3s ease-in-out",
     },
@@ -42,11 +40,11 @@ const SquareDiv = styled("div")(({ size, variant, themeMode }) => {
 });
 
 const IconWrapper = styled(AddRoundedIcon)(({ themeMode, variant }) => {
-  const { white } = colorThemes[variant];
+  const { white, secondText } = colorThemes[variant];
 
   return {
     fontSize: 18,
-    color: white[themeMode],
+    color: secondText[themeMode],
     zIndex: 1,
     transition: "color 0.3s ease-in-out, transform 0.3s ease-in-out",
     "&.group-hover": {

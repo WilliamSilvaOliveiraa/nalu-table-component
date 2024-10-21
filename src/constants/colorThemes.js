@@ -17,7 +17,7 @@ const colorThemes = {
       dark: "#ad3d3e",
     },
     primary: {
-      light: "text-purple-100",
+      light: "#B24DF8",
       dark: "dark:text-purple-300",
     },
     primaryLow: {
@@ -25,7 +25,7 @@ const colorThemes = {
       dark: "#f2e8fe",
     },
     primaryFocusStrong: {
-      light: "text-purple-200",
+      light: "#B24DF8",
       dark: "dark:text-purple-400",
     },
     white: {

@@ -1,4 +1,4 @@
-import NaluTable from "./components/NatuTable";
+import NaluTable from "./components/NaluTable";
 import tableData from "./data/Data";
 import "./App.css";
 import { useState } from "react";
@@ -26,7 +26,7 @@ function App() {
         checkbox={true}
         handleSelectionChange={(selected) => console.log(selected)}
         handleSaveTabs={(tabs) => console.log(tabs)}
-        variant="carmesin"
+        variant="safira"
         themeMode="light"
       />
     </div>

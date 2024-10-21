@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import KeyboardArrowLeftRoundedIcon from "@mui/icons-material/KeyboardArrowLeftRounded";
 import KeyboardArrowRightRoundedIcon from "@mui/icons-material/KeyboardArrowRightRounded";
 import { useMediaQuery } from "react-responsive";
+import colorThemes from "../../constants/colorThemes";
 
 const Pagination = ({
   itemsTotalCount = 0,
@@ -9,10 +10,13 @@ const Pagination = ({
   itemsPerPage = 10,
   currentPageProp,
   loading,
+  themeMode,
+  variant,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(itemsTotalCount / itemsPerPage);
   const isSmallScreen = useMediaQuery({ maxWidth: 500 });
+  const { primary, primaryFocusStrong } = colorThemes[variant];
 
   useEffect(() => {
     setCurrentPage(1);

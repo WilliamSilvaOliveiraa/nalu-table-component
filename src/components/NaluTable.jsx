@@ -105,6 +105,8 @@ export default function NaluTable({
                     itemsPerPage={itemsPerPage}
                     loading={loading}
                     currentPageProp={currentPageProp}
+                    variant={variant}
+                    themeMode={themeMode}
                   />
                 </div>
               )}
@@ -134,6 +136,8 @@ export default function NaluTable({
                     itemsPerPage={itemsPerPage}
                     loading={loading}
                     currentPageProp={currentPageProp}
+                    variant={variant}
+                    themeMode={themeMode}
                   />
                 ) : (
                   <Pagination
@@ -142,6 +146,8 @@ export default function NaluTable({
                     itemsPerPage={itemsPerPage}
                     loading={loading}
                     currentPageProp={currentPageProp}
+                    variant={variant}
+                    themeMode={themeMode}
                   />
                 )}
               </div>
@@ -169,6 +175,8 @@ export default function NaluTable({
                           itemsPerPage={itemsPerPage}
                           loading={loading}
                           currentPageProp={currentPageProp}
+                          variant={variant}
+                          themeMode={themeMode}
                         />
                       ) : (
                         <Pagination
@@ -177,6 +185,8 @@ export default function NaluTable({
                           itemsPerPage={itemsPerPage}
                           loading={loading}
                           currentPageProp={currentPageProp}
+                          variant={variant}
+                          themeMode={themeMode}
                         />
                       )}
                     </>
@@ -208,6 +218,8 @@ export default function NaluTable({
                           itemsPerPage={itemsPerPage}
                           loading={loading}
                           currentPageProp={currentPageProp}
+                          variant={variant}
+                          themeMode={themeMode}
                         />
                       ) : (
                         <Pagination
@@ -216,6 +228,8 @@ export default function NaluTable({
                           itemsPerPage={itemsPerPage}
                           loading={loading}
                           currentPageProp={currentPageProp}
+                          variant={variant}
+                          themeMode={themeMode}
                         />
                       )}
                     </>
@@ -250,6 +264,8 @@ export default function NaluTable({
                           itemsPerPage={itemsPerPage}
                           loading={loading}
                           currentPageProp={currentPageProp}
+                          variant={variant}
+                          themeMode={themeMode}
                         />
                       ) : (
                         <Pagination
@@ -258,6 +274,8 @@ export default function NaluTable({
                           itemsPerPage={itemsPerPage}
                           loading={loading}
                           currentPageProp={currentPageProp}
+                          variant={variant}
+                          themeMode={themeMode}
                         />
                       )}{" "}
                     </>
