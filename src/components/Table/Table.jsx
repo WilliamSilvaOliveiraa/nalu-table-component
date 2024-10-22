@@ -11,6 +11,7 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import styled from "styled-components";
 import not_found from "../../assets/not_found.svg";
+import colorThemes from "../../constants/colorThemes";
 
 export default function Table({
   data,
@@ -25,6 +26,8 @@ export default function Table({
   removeItemFunction,
   editItemFunction,
   handlePageChange,
+  variant,
+  themeMode,
 }) {
   const [inputValue, setInputValue] = useState("");
   const [sortColumn, setSortColumn] = useState(null);
@@ -32,7 +35,17 @@ export default function Table({
   const [expandedItems, setExpandedItems] = useState({});
   const [selectedItem, setSelectedItem] = useState(null);
 
-  console.log("dentro de tablwe", data);
+  const {
+    primary,
+    primaryFocusStrong,
+    primaryLoading,
+    viewButton,
+    borderChecked,
+    borderUnchecked,
+    viewButtonIcon,
+    addButtonIcon,
+    addButton,
+  } = colorThemes[variant];
 
   const hasVariations = data?.tableInfo?.items?.some((item) => {
     return Array.isArray(item.variations) && item.variations.length > 0;
@@ -181,6 +194,8 @@ export default function Table({
     );
   }
 
+  const LogoMarca = "https://placehold.co/600x400";
+
   return (
     <div
       className={`relative flex flex-col border-neutral-200 bg-white  ${
@@ -219,11 +234,22 @@ export default function Table({
                   plusButton(e);
                 }
               }}
-              className={`scale-1 group relative hidden h-fit items-center justify-center gap-1 rounded-full px-4 py-2 text-white transition-all lg:flex ${
-                loading
-                  ? "cursor-not-allowed bg-[#dba2ff]"
-                  : "bg-[#B24DF8] hover:bg-[#9841d2]"
-              }`}
+              className="scale-1 group relative hidden h-fit items-center justify-center gap-1 rounded-full px-4 py-2 text-white transition-all lg:flex"
+              style={{
+                backgroundColor: loading
+                  ? primaryLoading[themeMode]
+                  : primary[themeMode],
+                cursor: loading ? "not-allowed" : "pointer",
+              }}
+              onMouseOver={(e) =>
+                !loading &&
+                (e.currentTarget.style.backgroundColor =
+                  primaryFocusStrong[themeMode])
+              }
+              onMouseOut={(e) =>
+                !loading &&
+                (e.currentTarget.style.backgroundColor = primary[themeMode])
+              }
               disabled={loading}
             >
               <span
@@ -271,7 +297,7 @@ export default function Table({
                         onChange={handleParentCheckboxChange}
                         sx={{
                           "&.Mui-checked": {
-                            color: "#B571EB",
+                            color: borderChecked[themeMode],
                           },
                           "&:not(.Mui-checked)": {
                             color: "#CCCCCC",
@@ -291,7 +317,7 @@ export default function Table({
                         onChange={handleParentCheckboxChange}
                         sx={{
                           "&.Mui-checked": {
-                            color: "#B571EB",
+                            color: borderChecked[themeMode],
                           },
                           "&:not(.Mui-checked)": {
                             color: "#CCCCCC",
@@ -395,7 +421,7 @@ export default function Table({
                               checked={selectedCheckbox.has(selectedItem.id)}
                               sx={{
                                 "&.Mui-checked": {
-                                  color: "#B571EB",
+                                  color: borderChecked[themeMode],
                                 },
                                 "&:not(.Mui-checked)": {
                                   color: "#CCCCCC",
@@ -445,24 +471,38 @@ export default function Table({
                           <div className="flex flex-1 items-center justify-center gap-1 py-4">
                             {viewItemFunction && (
                               <div
-                                className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#C2D6E8] transition-all duration-300 ease-in-out hover:bg-[#ADC6DD]"
+                                key={selectedItem.id}
+                                style={{
+                                  backgroundColor: viewButton[themeMode],
+                                }}
+                                className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg transition-all duration-300 ease-in-out "
                                 onClick={() =>
                                   viewItemFunction(selectedItem.id)
                                 }
                               >
                                 <RemoveRedEyeIcon
-                                  sx={{ fontSize: 16, color: "#0053A0" }}
+                                  sx={{
+                                    fontSize: 16,
+                                    color: viewButtonIcon[themeMode],
+                                  }}
                                 />
                               </div>
                             )}
                             {addItemFunction && (
                               <div
-                                className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#DFCDEB] transition-all duration-300 ease-in-out hover:bg-[#D7C2E6] lg:flex"
+                                key={selectedItem.id}
+                                style={{
+                                  backgroundColor: addButton[themeMode],
+                                }}
+                                className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out lg:flex"
                                 onClick={() => addItemFunction(selectedItem.id)}
                               >
-                                <span className="flex rotate-0 items-center justify-center transition-all duration-300 ease-in-out group-hover:rotate-45">
+                                <span className="flex  items-center justify-center transition-all duration-300 ease-in-out ">
                                   <AddRoundedIcon
-                                    sx={{ fontSize: 16, color: "#9B09FF" }}
+                                    sx={{
+                                      fontSize: 16,
+                                      color: addButtonIcon[themeMode],
+                                    }}
                                   />
                                 </span>
                               </div>
@@ -524,12 +564,9 @@ export default function Table({
                       {selectedItem.variations &&
                         selectedItem.variations.length > 0 && (
                           <>
-                            {/* Remova ou comente a linha de console.log */}
-
                             {(() => {
                               const maxHeight =
                                 selectedItem.variations.length * 70;
-                              console.log("aqui", maxHeight);
 
                               return (
                                 <div
@@ -616,7 +653,12 @@ export default function Table({
                                             <div className="flex flex-1 items-center justify-center gap-1 py-5">
                                               {viewItemFunction && (
                                                 <div
-                                                  className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#C2D6E8] transition-all duration-300 ease-in-out hover:bg-[#ADC6DD]"
+                                                  key={selectedItem.id}
+                                                  style={{
+                                                    backgroundColor:
+                                                      viewButton[themeMode],
+                                                  }}
+                                                  className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg transition-all duration-300 ease-in-out "
                                                   onClick={() =>
                                                     viewItemFunction(
                                                       selectedItem.id
@@ -626,25 +668,36 @@ export default function Table({
                                                   <RemoveRedEyeIcon
                                                     sx={{
                                                       fontSize: 16,
-                                                      color: "#0053A0",
+                                                      color:
+                                                        viewButtonIcon[
+                                                          themeMode
+                                                        ],
                                                     }}
                                                   />
                                                 </div>
                                               )}
                                               {addItemFunction && (
                                                 <div
-                                                  className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#DFCDEB] transition-all duration-300 ease-in-out hover:bg-[#D7C2E6] lg:flex"
+                                                  key={variation.id}
+                                                  style={{
+                                                    backgroundColor:
+                                                      addButton[themeMode],
+                                                  }}
+                                                  className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out lg:flex"
                                                   onClick={() =>
                                                     addItemFunction(
                                                       variation.id
                                                     )
                                                   }
                                                 >
-                                                  <span className="flex rotate-0 items-center justify-center transition-all duration-300 ease-in-out group-hover:rotate-45">
+                                                  <span className="flex  items-center justify-center transition-all duration-300 ease-in-out ">
                                                     <AddRoundedIcon
                                                       sx={{
                                                         fontSize: 16,
-                                                        color: "#9B09FF",
+                                                        color:
+                                                          addButtonIcon[
+                                                            themeMode
+                                                          ],
                                                       }}
                                                     />
                                                   </span>
@@ -779,24 +832,34 @@ export default function Table({
                                 <div className="flex flex-1 items-center justify-center gap-1 py-4">
                                   {viewItemFunction && (
                                     <div
-                                      className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#C2D6E8] transition-all duration-300 ease-in-out hover:bg-[#ADC6DD]"
+                                      key={item.id}
+                                      style={{
+                                        backgroundColor: viewButton[themeMode],
+                                      }}
+                                      className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg transition-all duration-300 ease-in-out "
                                       onClick={() => viewItemFunction(item.id)}
                                     >
                                       <RemoveRedEyeIcon
-                                        sx={{ fontSize: 16, color: "#0053A0" }}
+                                        sx={{
+                                          fontSize: 16,
+                                          color: viewButtonIcon[themeMode],
+                                        }}
                                       />
                                     </div>
                                   )}
                                   {addItemFunction && (
                                     <div
-                                      className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#DFCDEB] transition-all duration-300 ease-in-out hover:bg-[#D7C2E6] lg:flex"
+                                      style={{
+                                        backgroundColor: addButton[themeMode],
+                                      }}
+                                      className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out lg:flex"
                                       onClick={() => addItemFunction(item.id)}
                                     >
-                                      <span className="flex rotate-0 items-center justify-center transition-all duration-300 ease-in-out group-hover:rotate-45">
+                                      <span className="flex  items-center justify-center transition-all duration-300 ease-in-out ">
                                         <AddRoundedIcon
                                           sx={{
                                             fontSize: 16,
-                                            color: "#9B09FF",
+                                            color: addButtonIcon[themeMode],
                                           }}
                                         />
                                       </span>
@@ -873,7 +936,7 @@ export default function Table({
                                     checked={selectedCheckbox.has(item.id)}
                                     sx={{
                                       "&.Mui-checked": {
-                                        color: "#B571EB",
+                                        color: borderChecked[themeMode],
                                       },
                                       "&:not(.Mui-checked)": {
                                         color: "#CCCCCC",
@@ -920,24 +983,33 @@ export default function Table({
                                 <div className="flex flex-1 items-center justify-center gap-1 py-5">
                                   {viewItemFunction && (
                                     <div
-                                      className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#C2D6E8] transition-all duration-300 ease-in-out hover:bg-[#ADC6DD]"
+                                      style={{
+                                        backgroundColor: viewButton[themeMode],
+                                      }}
+                                      className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg transition-all duration-300 ease-in-out "
                                       onClick={() => viewItemFunction(item.id)}
                                     >
                                       <RemoveRedEyeIcon
-                                        sx={{ fontSize: 16, color: "#0053A0" }}
+                                        sx={{
+                                          fontSize: 16,
+                                          color: viewButtonIcon[themeMode],
+                                        }}
                                       />
                                     </div>
                                   )}
                                   {addItemFunction && (
                                     <div
-                                      className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#DFCDEB] transition-all duration-300 ease-in-out hover:bg-[#D7C2E6] lg:flex"
+                                      style={{
+                                        backgroundColor: addButton[themeMode],
+                                      }}
+                                      className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out lg:flex"
                                       onClick={() => addItemFunction(item.id)}
                                     >
-                                      <span className="flex rotate-0 items-center justify-center transition-all duration-300 ease-in-out group-hover:rotate-45">
+                                      <span className="flex  items-center justify-center transition-all duration-300 ease-in-out ">
                                         <AddRoundedIcon
                                           sx={{
                                             fontSize: 16,
-                                            color: "#9B09FF",
+                                            color: addButtonIcon[themeMode],
                                           }}
                                         />
                                       </span>
@@ -1003,11 +1075,8 @@ export default function Table({
                           {/* Conteúdo expandido */}
                           {item?.variations && item.variations.length > 0 && (
                             <>
-                              {/* Remova ou comente a linha de console.log */}
-
                               {(() => {
                                 const maxHeight = item.variations.length * 70;
-                                console.log("aqui", maxHeight);
 
                                 return (
                                   <div
@@ -1101,7 +1170,12 @@ export default function Table({
                                               <div className="flex flex-1 items-center justify-center gap-1 py-5">
                                                 {viewItemFunction && (
                                                   <div
-                                                    className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#C2D6E8] transition-all duration-300 ease-in-out hover:bg-[#ADC6DD]"
+                                                    key={variation.id}
+                                                    style={{
+                                                      backgroundColor:
+                                                        viewButton[themeMode],
+                                                    }}
+                                                    className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg transition-all duration-300 ease-in-out "
                                                     onClick={() =>
                                                       viewItemFunction(
                                                         variation.id
@@ -1111,25 +1185,35 @@ export default function Table({
                                                     <RemoveRedEyeIcon
                                                       sx={{
                                                         fontSize: 16,
-                                                        color: "#0053A0",
+                                                        color:
+                                                          viewButtonIcon[
+                                                            themeMode
+                                                          ],
                                                       }}
                                                     />
                                                   </div>
                                                 )}
                                                 {addItemFunction && (
                                                   <div
-                                                    className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#DFCDEB] transition-all duration-300 ease-in-out hover:bg-[#D7C2E6] lg:flex"
+                                                    style={{
+                                                      backgroundColor:
+                                                        addButton[themeMode],
+                                                    }}
+                                                    className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out lg:flex"
                                                     onClick={() =>
                                                       addItemFunction(
                                                         variation.id
                                                       )
                                                     }
                                                   >
-                                                    <span className="flex rotate-0 items-center justify-center transition-all duration-300 ease-in-out group-hover:rotate-45">
+                                                    <span className="flex  items-center justify-center transition-all duration-300 ease-in-out ">
                                                       <AddRoundedIcon
                                                         sx={{
                                                           fontSize: 16,
-                                                          color: "#9B09FF",
+                                                          color:
+                                                            addButtonIcon[
+                                                              themeMode
+                                                            ],
                                                         }}
                                                       />
                                                     </span>

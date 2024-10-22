@@ -16,7 +16,9 @@ const Pagination = ({
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(itemsTotalCount / itemsPerPage);
   const isSmallScreen = useMediaQuery({ maxWidth: 500 });
-  const { primary, primaryFocusStrong } = colorThemes[variant];
+  const { primary, white, buttonShadow, hoverText } = colorThemes[variant];
+  const [isHovered, setIsHovered] = useState(false);
+  const [isHoveredNext, setIsHoveredNext] = useState(false);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -143,10 +145,29 @@ const Pagination = ({
             <button
               onClick={handlePrevious}
               disabled={currentPage === 1 || loading}
-              className="aspect-square h-[34px] rounded-full bg-[#ffffff] text-sm font-semibold text-[#b1aeb0] transition-colors duration-300 ease-out hover:bg-[#B24DF8] hover:text-white disabled:cursor-not-allowed disabled:text-[#c2c2c2] disabled:hover:bg-[#f2f0f2] disabled:hover:text-[#c2c2c2]"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              style={{
+                backgroundColor:
+                  currentPage === 1 || loading
+                    ? "#f2f0f2"
+                    : isHovered
+                    ? primary[themeMode]
+                    : white[themeMode],
+                color:
+                  currentPage === 1 || loading
+                    ? "#c2c2c2"
+                    : isHovered
+                    ? "#FFFFFF"
+                    : "#c2c2c2",
+                cursor:
+                  currentPage === 1 || loading ? "not-allowed" : "pointer",
+              }}
+              className="aspect-square h-[34px] rounded-full text-sm font-semibold transition-colors duration-300 ease-out"
             >
               <KeyboardArrowLeftRoundedIcon />
             </button>
+
             <div className="flex rounded-full bg-[#ffffff] px-2">
               {isSmallScreen
                 ? getPageNumbersPhone().map((number, index) => (
@@ -154,14 +175,25 @@ const Pagination = ({
                       key={index}
                       onClick={() => handleClick(number)}
                       disabled={number === "..." || loading}
-                      className={`relative h-[34px] w-[34px] rounded-xl bg-[#ffffff] text-sm font-semibold transition-colors duration-300 ease-out ${
-                        number === currentPage
-                          ? "z-20 text-white"
-                          : "text-[#b1aeb0] hover:text-[#B24DF8]"
-                      } ${number === "..." ? "cursor-default" : ""}`}
+                      style={{
+                        backgroundColor: "#ffffff",
+                        color: number === currentPage ? "white" : "#b1aeb0",
+                      }}
+                      className={`relative h-[34px] w-[34px] rounded-xl text-sm font-semibold transition-colors duration-300 ease-out ${
+                        number === "..." ? "cursor-default" : ""
+                      }`}
+                      onMouseOver={(e) =>
+                        !(number === "..." || loading) &&
+                        (e.currentTarget.style.color = "")
+                      }
+                      onMouseOut={(e) =>
+                        !(number === "..." || loading) &&
+                        (e.currentTarget.style.color =
+                          number === currentPage ? "white" : "#b1aeb0")
+                      }
                     >
                       <span
-                        className={`absolute inset-0 rounded-xl bg-[#B24DF8] transition-all duration-300 ease-out ${
+                        className={`absolute inset-0 rounded-xl  transition-all duration-300 ease-out ${
                           number === currentPage
                             ? "scale-100 opacity-100"
                             : "scale-0 opacity-0"
@@ -169,8 +201,10 @@ const Pagination = ({
                         style={{
                           boxShadow:
                             number === currentPage
-                              ? "0px 0px 10px 2px rgba(178, 77, 248,0.3)"
+                              ? buttonShadow[themeMode]
                               : "0px 0px 0px 0px rgba(178, 77, 248,0)",
+
+                          backgroundColor: primary[themeMode],
                         }}
                       />
                       <span className="relative z-10">
@@ -183,14 +217,35 @@ const Pagination = ({
                       key={index}
                       onClick={() => handleClick(number)}
                       disabled={number === "..." || loading}
-                      className={`relative h-[34px] w-[34px] rounded-xl bg-[#ffffff] text-sm font-semibold transition-colors duration-300 ease-out ${
-                        number === currentPage
-                          ? "z-20 text-white"
-                          : "text-[#b1aeb0] hover:text-[#B24DF8]"
-                      } ${number === "..." ? "cursor-default" : ""}`}
+                      style={{
+                        position: "relative",
+                        height: "34px",
+                        width: "34px",
+                        borderRadius: "0.75rem",
+                        backgroundColor: "#ffffff",
+                        fontSize: "0.875rem",
+                        fontWeight: "600",
+                        transition: "color 300ms ease-out",
+                        zIndex: number === currentPage ? "20" : "auto",
+                        color: number === currentPage ? "white" : "#b1aeb0",
+                        cursor: number === "..." ? "default" : "pointer",
+                      }}
+                      onMouseOver={(e) =>
+                        !(
+                          number === "..." ||
+                          loading ||
+                          number === currentPage
+                        ) &&
+                        (e.currentTarget.style.color = hoverText[themeMode])
+                      }
+                      onMouseOut={(e) =>
+                        !(number === "..." || loading) &&
+                        (e.currentTarget.style.color =
+                          number === currentPage ? "white" : "#b1aeb0")
+                      }
                     >
                       <span
-                        className={`absolute inset-0 rounded-xl bg-[#B24DF8] transition-all duration-300 ease-out ${
+                        className={`absolute inset-0 rounded-xl transition-all duration-300 ease-out ${
                           number === currentPage
                             ? "scale-100 opacity-100"
                             : "scale-0 opacity-0"
@@ -198,8 +253,9 @@ const Pagination = ({
                         style={{
                           boxShadow:
                             number === currentPage
-                              ? "0px 0px 10px 2px rgba(178, 77, 248,0.3)"
+                              ? buttonShadow[themeMode]
                               : "0px 0px 0px 0px rgba(178, 77, 248,0)",
+                          backgroundColor: primary[themeMode],
                         }}
                       />
                       <span className="relative z-10">
@@ -211,7 +267,27 @@ const Pagination = ({
             <button
               onClick={handleNext}
               disabled={currentPage === totalPages || loading}
-              className="aspect-square h-[34px] rounded-full bg-[#ffffff] text-sm font-semibold text-[#b1aeb0] transition-colors duration-300 ease-out hover:bg-[#B24DF8] hover:text-white disabled:cursor-not-allowed disabled:text-[#c2c2c2] disabled:hover:bg-[#f2f0f2] disabled:hover:text-[#c2c2c2]"
+              onMouseEnter={() => setIsHoveredNext(true)}
+              onMouseLeave={() => setIsHoveredNext(false)}
+              style={{
+                backgroundColor:
+                  currentPage === totalPages || loading
+                    ? "#f2f0f2"
+                    : isHoveredNext
+                    ? primary[themeMode]
+                    : white[themeMode],
+                color:
+                  currentPage === totalPages || loading
+                    ? "#c2c2c2"
+                    : isHoveredNext
+                    ? "#FFFFFF"
+                    : "#c2c2c2",
+                cursor:
+                  currentPage === totalPages || loading
+                    ? "not-allowed"
+                    : "pointer",
+              }}
+              className="aspect-square h-[34px] rounded-full text-sm font-semibold transition-colors duration-300 ease-out"
             >
               <KeyboardArrowRightRoundedIcon />
             </button>

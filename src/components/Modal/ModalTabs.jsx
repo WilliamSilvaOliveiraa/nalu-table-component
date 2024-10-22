@@ -11,6 +11,7 @@ import {
 import { styled } from "@mui/system";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import Button from "@mui/material/Button";
+import colorThemes from "../../constants/colorThemes";
 
 const StyledModal = styled(Modal)({
   display: "flex",
@@ -18,20 +19,22 @@ const StyledModal = styled(Modal)({
   justifyContent: "center",
 });
 
-const SmallCheckbox = styled(Checkbox)({
-  "& .MuiSvgIcon-root": {
-    fontSize: 20,
-  },
-  padding: 4,
-  "&.Mui-disabled": {
-    color: "#CCCCCC",
-    opacity: 0.6,
-  },
-  "&.Mui-checked.Mui-disabled": {
-    color: "#B571EB",
-    opacity: 0.3,
-  },
-});
+const SmallCheckbox = styled(Checkbox)(
+  ({ themeMode, colorThemes, variant }) => ({
+    "& .MuiSvgIcon-root": {
+      fontSize: 20,
+    },
+    padding: 4,
+    "&.Mui-disabled": {
+      color: "#CCCCCC",
+      opacity: 0.6,
+    },
+    "&.Mui-checked.Mui-disabled": {
+      color: colorThemes[variant]?.borderChecked[themeMode] || "#000",
+      opacity: 0.3,
+    },
+  })
+);
 
 const ModalContent = styled(Box)({
   width: 600,
@@ -44,8 +47,18 @@ const ModalContent = styled(Box)({
   borderRadius: "24px",
 });
 
-const ModalTabs = ({ open, onClose, items, onSave, text }) => {
+const ModalTabs = ({
+  open,
+  onClose,
+  items,
+  onSave,
+  text,
+  variant,
+  themeMode,
+}) => {
   const [checkedItems, setCheckedItems] = useState([]);
+  const { backgroundList, borderChecked, borderUnchecked, borderCheckedHover } =
+    colorThemes[variant];
 
   useEffect(() => {
     if (open) {
@@ -91,10 +104,12 @@ const ModalTabs = ({ open, onClose, items, onSave, text }) => {
             <ListItem
               key={index}
               sx={{
-                backgroundColor: item.checked ? "#F8F1FD" : "transparent",
+                backgroundColor: item.checked
+                  ? backgroundList[themeMode]
+                  : "transparent",
                 border: item.checked
-                  ? "1px solid #B571EB"
-                  : "1px solid #929090",
+                  ? `1px solid ${borderChecked[themeMode]}`
+                  : `1px solid ${borderUnchecked[themeMode]}`,
                 borderRadius: "8px",
                 marginBottom: index < checkedItems.length - 1 ? "16px" : "0px",
                 gap: "4px",
@@ -104,14 +119,17 @@ const ModalTabs = ({ open, onClose, items, onSave, text }) => {
                 checked={item.checked}
                 disabled={item.special}
                 onChange={() => handleToggle(index)}
+                themeMode={themeMode}
+                colorThemes={colorThemes}
+                variant={variant}
                 sx={{
                   "&.Mui-checked": {
-                    color: "#B571EB",
-                    cursor: item.special ? "not-allowed" : "pointer", // Condição direta fora dos estilos aninhados
+                    color: borderChecked[themeMode],
+                    cursor: item.special ? "not-allowed" : "pointer",
                   },
                   "&:not(.Mui-checked)": {
                     color: "#CCCCCC",
-                    cursor: item.special ? "not-allowed" : "pointer", // Condição direta fora dos estilos aninhados
+                    cursor: item.special ? "not-allowed" : "pointer",
                   },
                 }}
               />
@@ -119,7 +137,9 @@ const ModalTabs = ({ open, onClose, items, onSave, text }) => {
               <ListItemText
                 primary={item.title}
                 sx={{
-                  color: item.checked ? "#B571EB" : "#929090",
+                  color: item.checked
+                    ? borderChecked[themeMode]
+                    : borderUnchecked[themeMode],
                 }}
                 primaryTypographyProps={{
                   fontSize: "12px",
@@ -156,7 +176,7 @@ const ModalTabs = ({ open, onClose, items, onSave, text }) => {
             <Button
               sx={{
                 width: "100%",
-                backgroundColor: "#B571EB!important",
+                backgroundColor: borderChecked[themeMode],
                 borderRadius: "74px",
                 display: "flex",
                 alignItems: "center",
@@ -164,7 +184,7 @@ const ModalTabs = ({ open, onClose, items, onSave, text }) => {
                 color: "#fff",
 
                 "&:hover": {
-                  backgroundColor: "#9f53db!important",
+                  backgroundColor: borderCheckedHover[themeMode],
                 },
               }}
               onClick={() => {

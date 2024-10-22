@@ -10,7 +10,7 @@ function App() {
     <div className="p-28">
       <NaluTable
         tableData={tableData}
-        totalItems={20}
+        totalItems={80}
         handlePageChange={(page) => console.log(page)}
         itemsPerPage={10}
         loading={false}
@@ -22,6 +22,8 @@ function App() {
         plusButton={true}
         addItemFunction={() => console.log("add")}
         viewItemFunction={() => console.log("view")}
+        removeItemFunction={() => console.log("remove")}
+        editItemFunction={() => console.log("edit")}
         modalTitle="Modal"
         checkbox={true}
         handleSelectionChange={(selected) => console.log(selected)}

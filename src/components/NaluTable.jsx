@@ -126,6 +126,8 @@ export default function NaluTable({
               removeItemFunction={removeItemFunction}
               editItemFunction={editItemFunction}
               handlePageChange={handlePageChange}
+              variant={variant}
+              themeMode={themeMode}
             />
             {handlePageChange && (
               <div style={{ marginTop: "24px" }}>
@@ -206,6 +208,8 @@ export default function NaluTable({
                   removeItemFunction={removeItemFunction}
                   editItemFunction={editItemFunction}
                   handlePageChange={handlePageChange}
+                  variant={variant}
+                  themeMode={themeMode}
                 />
                 <div style={{ marginTop: "24px" }}>
                   {handlePageChange && (
@@ -252,6 +256,8 @@ export default function NaluTable({
                   removeItemFunction={removeItemFunction}
                   editItemFunction={editItemFunction}
                   handlePageChange={handlePageChange}
+                  variant={variant}
+                  themeMode={themeMode}
                 />
                 <div style={{ marginTop: "24px", marginBottom: "8px" }}>
                   {handlePageChange && (
@@ -294,6 +300,8 @@ export default function NaluTable({
           onClose={handleClose}
           items={tableData.tabs}
           onSave={handleSaveTabs}
+          variant={variant}
+          themeMode={themeMode}
         />
       )}
     </>
