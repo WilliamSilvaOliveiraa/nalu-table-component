@@ -41,7 +41,7 @@ export default function Table({
     primaryLoading,
     viewButton,
     borderChecked,
-    borderUnchecked,
+
     viewButtonIcon,
     addButtonIcon,
     addButton,
@@ -221,9 +221,11 @@ export default function Table({
                 inputValue={inputValue}
                 setInputValue={setInputValue}
                 onItemClick={handleItemClick}
-                showImage={true}
+                showImage={false}
                 variant="small"
                 loading={loading}
+                variantTheme={variant}
+                themeMode={themeMode}
               />
             )}
           </div>
@@ -332,7 +334,7 @@ export default function Table({
               {data?.tableInfo?.columns?.map((column, index) => (
                 <div
                   key={index}
-                  className={`group flex py-2 text-[12px] font-semibold text-[#929090] transition-all duration-300 ${
+                  className={`group flex select-none py-2 text-[12px] font-semibold text-[#929090] transition-all duration-300 ${
                     column.alignment === "left"
                       ? "justify-start"
                       : column.alignment === "center"

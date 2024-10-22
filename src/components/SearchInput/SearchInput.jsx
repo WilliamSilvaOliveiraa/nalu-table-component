@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import colorThemes from "../../constants/colorThemes";
 
 const getOptionText = (option) => {
   return option.label || option.name || option.title || "";
@@ -37,9 +38,13 @@ const SearchInput = ({
   loading,
   placeholder = "Pesquisar",
   variant = "default",
+  variantTheme,
+  themeMode,
 }) => {
   const [isListOpen, setIsListOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
+
+  const { hoverSearchInput, primary } = colorThemes[variantTheme];
 
   const hasItemWithoutPhoto = displayedOptions?.some(
     (option) =>
@@ -127,9 +132,13 @@ const SearchInput = ({
             filteredOptions?.map((option) => (
               <div
                 key={option.value}
-                className={`${optionClassNames} ${
-                  hoveredItem === option ? "bg-purple-50" : ""
-                }`}
+                className={optionClassNames}
+                style={{
+                  backgroundColor:
+                    hoveredItem === option
+                      ? hoverSearchInput[themeMode]
+                      : "transparent",
+                }}
                 onMouseEnter={() => setHoveredItem(option)}
                 onMouseLeave={() => setHoveredItem(null)}
                 onMouseDown={() => {
@@ -138,7 +147,10 @@ const SearchInput = ({
                 }}
               >
                 <div
-                  className={`absolute left-0 top-0 h-full w-1 bg-purple-400 transition-opacity duration-500 ease-in-out ${
+                  style={{
+                    backgroundColor: primary[themeMode],
+                  }}
+                  className={`absolute left-0 top-0 h-full w-1 transition-opacity duration-500 ease-in-out ${
                     hoveredItem === option ? "opacity-100" : "opacity-0"
                   }`}
                 ></div>
@@ -159,8 +171,13 @@ const SearchInput = ({
                     />
                   ) : (
                     <div
-                      className={`flex h-full w-full items-center justify-center text-purple-600 ${
-                        variant === "small" ? "text-[10px]" : "text-xs"
+                      style={{
+                        color: primary[themeMode],
+                      }}
+                      className={`flex h-full w-full items-center justify-center  ${
+                        variant === "small"
+                          ? "text-[10px] font-bold"
+                          : "text-xs"
                       }`}
                     >
                       {getInitials(getOptionText(option))}

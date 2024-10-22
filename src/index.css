@@ -6,32 +6,40 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
+  height: 100%;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  min-height: 100vh;
+  height: auto;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
+  background-color: #f3f6fb;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Resto do seu CSS da scrollbar continua igual */
 /* Estiliza toda a scrollbar */
 ::-webkit-scrollbar {
   width: 12px; /* Largura da scrollbar */

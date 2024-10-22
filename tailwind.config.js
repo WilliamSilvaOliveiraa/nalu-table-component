@@ -5,5 +5,13 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        ".scrollbar-gutter-stable": {
+          "scrollbar-gutter": "stable",
+        },
+      });
+    },
+  ],
 };

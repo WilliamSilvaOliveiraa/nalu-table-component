@@ -7,7 +7,7 @@ function App() {
   const [tabSelect, setTabSelect] = useState("Primeira");
 
   return (
-    <div className="p-28">
+    <div className="p-20 h-full">
       <NaluTable
         tableData={tableData}
         totalItems={80}
@@ -28,7 +28,7 @@ function App() {
         checkbox={true}
         handleSelectionChange={(selected) => console.log(selected)}
         handleSaveTabs={(tabs) => console.log(tabs)}
-        variant="safira"
+        variant="carmesin"
         themeMode="light"
       />
     </div>

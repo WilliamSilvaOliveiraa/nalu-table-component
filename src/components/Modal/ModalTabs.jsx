@@ -78,12 +78,26 @@ const ModalTabs = ({
     onClose();
   };
 
+  useEffect(() => {
+    if (open) {
+      const originalPaddingRight = window.getComputedStyle(
+        document.body
+      ).paddingRight;
+      document.body.style.paddingRight = "12px";
+
+      return () => {
+        document.body.style.paddingRight = originalPaddingRight;
+      };
+    }
+  }, [open]);
+
   return (
     <StyledModal
       open={open}
       onClose={onClose}
       aria-labelledby="modal-tabs-title"
       aria-describedby="modal-tabs-description"
+      keepMounted
     >
       <ModalContent>
         <div className="flex w-full justify-between">

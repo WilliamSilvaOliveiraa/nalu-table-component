@@ -5,7 +5,7 @@ import { light } from "@mui/material/styles/createPalette";
 const colorThemes = {
   safira: {
     background: {
-      light: "#9841D2",
+      light: "#ffffff",
       dark: "dark:bg-purple-800",
     },
     secondBackground: {
@@ -84,10 +84,14 @@ const colorThemes = {
       light: "#929090",
       dark: "dark:text-purple-300",
     },
+    hoverSearchInput: {
+      light: "#faf5ff",
+      dark: "dark:bg-purple-800",
+    },
   },
   carmesin: {
     background: {
-      light: "#b34647",
+      light: "#ffffff",
       dark: "#d16263",
     },
     primary: {
@@ -165,6 +169,10 @@ const colorThemes = {
     borderUnchecked: {
       light: "#929090",
       dark: "dark:text-purple-300",
+    },
+    hoverSearchInput: {
+      light: "#fff7f7",
+      dark: "dark:bg-purple-800",
     },
   },
 };
