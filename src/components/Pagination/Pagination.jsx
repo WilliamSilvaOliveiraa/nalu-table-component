@@ -16,7 +16,15 @@ const Pagination = ({
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(itemsTotalCount / itemsPerPage);
   const isSmallScreen = useMediaQuery({ maxWidth: 500 });
-  const { primary, white, buttonShadow, hoverText } = colorThemes[variant];
+  const {
+    primary,
+    white,
+    buttonShadow,
+    numberPagination,
+    hoverText,
+    background,
+    buttonDisabled,
+  } = colorThemes[variant];
   const [isHovered, setIsHovered] = useState(false);
   const [isHoveredNext, setIsHoveredNext] = useState(false);
 
@@ -135,7 +143,6 @@ const Pagination = ({
       handleClick(currentPage + 1);
     }
   };
-  console.log(itemsTotalCount);
 
   return (
     <>
@@ -150,10 +157,10 @@ const Pagination = ({
               style={{
                 backgroundColor:
                   currentPage === 1 || loading
-                    ? "#f2f0f2"
+                    ? buttonDisabled[themeMode]
                     : isHovered
                     ? primary[themeMode]
-                    : white[themeMode],
+                    : background[themeMode],
                 color:
                   currentPage === 1 || loading
                     ? "#c2c2c2"
@@ -168,7 +175,12 @@ const Pagination = ({
               <KeyboardArrowLeftRoundedIcon />
             </button>
 
-            <div className="flex rounded-full bg-[#ffffff] px-2">
+            <div
+              style={{
+                backgroundColor: background[themeMode],
+              }}
+              className="flex rounded-full  px-2"
+            >
               {isSmallScreen
                 ? getPageNumbersPhone().map((number, index) => (
                     <button
@@ -176,8 +188,11 @@ const Pagination = ({
                       onClick={() => handleClick(number)}
                       disabled={number === "..." || loading}
                       style={{
-                        backgroundColor: "#ffffff",
-                        color: number === currentPage ? "white" : "#b1aeb0",
+                        backgroundColor: background[themeMode],
+                        color:
+                          number === currentPage
+                            ? "white"
+                            : numberPagination[themeMode],
                       }}
                       className={`relative h-[34px] w-[34px] rounded-xl text-sm font-semibold transition-colors duration-300 ease-out ${
                         number === "..." ? "cursor-default" : ""
@@ -189,7 +204,9 @@ const Pagination = ({
                       onMouseOut={(e) =>
                         !(number === "..." || loading) &&
                         (e.currentTarget.style.color =
-                          number === currentPage ? "white" : "#b1aeb0")
+                          number === currentPage
+                            ? "white"
+                            : numberPagination[themeMode])
                       }
                     >
                       <span
@@ -222,12 +239,15 @@ const Pagination = ({
                         height: "34px",
                         width: "34px",
                         borderRadius: "0.75rem",
-                        backgroundColor: "#ffffff",
+                        backgroundColor: background[themeMode],
                         fontSize: "0.875rem",
                         fontWeight: "600",
                         transition: "color 300ms ease-out",
                         zIndex: number === currentPage ? "20" : "auto",
-                        color: number === currentPage ? "white" : "#b1aeb0",
+                        color:
+                          number === currentPage
+                            ? "white"
+                            : numberPagination[themeMode],
                         cursor: number === "..." ? "default" : "pointer",
                       }}
                       onMouseOver={(e) =>
@@ -241,7 +261,9 @@ const Pagination = ({
                       onMouseOut={(e) =>
                         !(number === "..." || loading) &&
                         (e.currentTarget.style.color =
-                          number === currentPage ? "white" : "#b1aeb0")
+                          number === currentPage
+                            ? "white"
+                            : numberPagination[themeMode])
                       }
                     >
                       <span
@@ -272,10 +294,10 @@ const Pagination = ({
               style={{
                 backgroundColor:
                   currentPage === totalPages || loading
-                    ? "#f2f0f2"
+                    ? buttonDisabled[themeMode]
                     : isHoveredNext
                     ? primary[themeMode]
-                    : white[themeMode],
+                    : background[themeMode],
                 color:
                   currentPage === totalPages || loading
                     ? "#c2c2c2"

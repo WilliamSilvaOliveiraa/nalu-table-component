@@ -49,6 +49,8 @@ const SearchInput = ({
     primary,
     backgroundTop,
     backgroundTopLoadingInput,
+    backgroundInput,
+    backgroundPerfilSearchInput,
   } = colorThemes[variantTheme];
 
   const hasItemWithoutPhoto = displayedOptions?.some(
@@ -117,7 +119,7 @@ const SearchInput = ({
         readOnly={loading}
         style={{
           backgroundColor: loading
-            ? backgroundTopLoadingInput[themMode]
+            ? backgroundTopLoadingInput[themeMode]
             : backgroundTop[themeMode],
           color: "#787776",
           borderColor: backgroundTop[themeMode],
@@ -126,13 +128,16 @@ const SearchInput = ({
       {!loading && (
         <div
           className={`absolute z-10 mt-2 w-full rounded-lg overflow-hidden border  shadow-lg transition-all duration-500 ease-in-out 
-      ${hasItemWithoutPhoto ? "bg-gray-200" : ""} 
+     
  opacity-100`}
           style={{
             maxHeight: isListOpen ? "20rem " : "0",
             opacity: isListOpen ? 1 : 0,
             overflowY: isListOpen ? "auto" : "hidden",
             borderColor: backgroundTop[themeMode],
+            backgroundColor: hasItemWithoutPhoto
+              ? backgroundInput[themeMode]
+              : "",
           }}
         >
           {filteredOptions?.length === 0 ? (
@@ -148,7 +153,7 @@ const SearchInput = ({
                   backgroundColor:
                     hoveredItem === option
                       ? hoverSearchInput[themeMode]
-                      : "transparent",
+                      : backgroundInput[themeMode],
                 }}
                 onMouseEnter={() => setHoveredItem(option)}
                 onMouseLeave={() => setHoveredItem(null)}
@@ -166,11 +171,14 @@ const SearchInput = ({
                   }`}
                 ></div>
                 <div
-                  className={`flex items-center justify-center p-1 ${imageSizeClassNames} ${
-                    getImageSrc(option) === "https://placehold.co/600x400"
-                      ? "bg-gray-100"
-                      : "bg-white"
-                  } ${showImage ? "rounded-md" : "rounded-full"}`}
+                  style={{
+                    backgroundColor:
+                      getImageSrc(option) === "https://placehold.co/600x400"
+                        ? backgroundPerfilSearchInput[themeMode]
+                        : "#ffffff",
+                  }}
+                  className={`flex items-center justify-center p-1 ${imageSizeClassNames}
+                   ${showImage ? "rounded-md" : "rounded-full"}`}
                 >
                   {showImage ? (
                     <img

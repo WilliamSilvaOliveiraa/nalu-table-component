@@ -4,6 +4,10 @@ const colorThemes = {
       light: "#ffffff",
       dark: "#0A0B0E",
     },
+    backgroundInput: {
+      light: "#ffffff",
+      dark: "#17191C",
+    },
     backgroundTop: {
       light: "#F8F6F5",
       dark: "#17191C",
@@ -12,9 +16,25 @@ const colorThemes = {
       light: "#FBFAF9",
       dark: "#17191C",
     },
+    backgroundPerfilSearchInput: {
+      light: "#f3f4f6",
+      dark: "#976da1",
+    },
     borderVariation: {
       light: "#E5E2E1",
       dark: "#282E33",
+    },
+    textTopContent: {
+      light: "#434342",
+      dark: "#e3e3e3",
+    },
+    numberPagination: {
+      light: "#b1aeb0",
+      dark: "#E3E3E3",
+    },
+    buttonDisabled: {
+      light: "#f2f0f2",
+      dark: "#343036",
     },
     backgroundTopLoadingInput: {
       light: "#f9f9f9",
@@ -22,7 +42,7 @@ const colorThemes = {
     },
     backgroundBorder: {
       light: "#e1e2e5",
-      dark: "#282E33",
+      dark: "#33383d",
     },
     textContent: {
       light: "#787776",
@@ -30,11 +50,11 @@ const colorThemes = {
     },
     secondBackground: {
       light: "#F2E8FE",
-      dark: "#161A1D",
+      dark: "#493e57",
     },
     secondText: {
       light: "#a76da8",
-      dark: "#ad3d3e",
+      dark: "#c0aed6",
     },
     primary: {
       light: "#B24DF8",
@@ -42,7 +62,7 @@ const colorThemes = {
     },
     primaryLow: {
       light: "#F9F4FF",
-      dark: "#f2e8fe",
+      dark: "#371b38",
     },
     primaryFocusStrong: {
       light: "#B24DF8",
@@ -50,7 +70,7 @@ const colorThemes = {
     },
     white: {
       light: "#ffffff",
-      dark: "dark:text-white",
+      dark: "#ffffff",
     },
     buttonShadow: {
       light: "0px 0px 10px 2px rgba(178, 77, 248,0.3)",
@@ -58,7 +78,7 @@ const colorThemes = {
     },
     hoverText: {
       light: "#B24DF8",
-      dark: "#ad3d3e",
+      dark: "#cca0eb",
     },
     primaryLoading: {
       light: "#dba2ff",
@@ -103,7 +123,7 @@ const colorThemes = {
     },
     borderChecked: {
       light: "#B571EB",
-      dark: "dark:text-purple-300",
+      dark: "#9f52e3",
     },
     borderCheckedHover: {
       light: "#9f53db",

@@ -52,6 +52,8 @@ export default function Tab({
     white,
     background,
     secondText,
+    backgroundBorder,
+    textTopContent,
   } = colorThemes[variant];
 
   return (
@@ -69,15 +71,16 @@ export default function Tab({
           backgroundColor: !toggle
             ? secondBackground[themeMode]
             : background[themeMode],
+          borderColor: toggle ? backgroundBorder[themeMode] : "transparent",
         }}
-        className={`relative flex items-center justify-center gap-2 rounded-2xl border-[1px] border-neutral-200 px-4 py-2 transition-all duration-300 lg:rounded-b-none lg:rounded-t-2xl lg:border-b-[0px] lg:border-l-[1px] lg:border-r-[1px] lg:border-t-[1px] ${
-          !toggle ? "border-transparent " : "border-neutral-200 "
+        className={`relative flex items-center justify-center gap-2 rounded-2xl border-[1px]  px-4 py-2 transition-all duration-300 lg:rounded-b-none lg:rounded-t-2xl lg:border-b-[0px] lg:border-l-[1px] lg:border-r-[1px] lg:border-t-[1px] 
+     
         }`}
       >
         <h5
           className={`text-[12px] font-medium transition-colors duration-300`}
           style={{
-            color: !toggle ? secondText[themeMode] : "#434342",
+            color: !toggle ? secondText[themeMode] : textTopContent[themeMode],
           }}
         >
           {tab.title}
@@ -96,14 +99,13 @@ export default function Tab({
       </div>
       <div
         style={{
-          zIndex: zIndex - 1,
+          zIndex: zIndex + 1,
           marginLeft: !toggle ? "-1px" : "-1.06px",
-          marginBottom: "-1.1px", // Não é necessário o operador ternário, pois o valor é o mesmo
+          marginBottom: "-1.1px",
           overflow: "hidden",
           position: "absolute",
           bottom: "0",
-          left: "100.2%",
-
+          left: "100%",
           width: "20px",
           height: "20px",
           pointerEvents: "none",
@@ -114,10 +116,13 @@ export default function Tab({
         <div
           style={{
             transition: "all 0.3s ease-in-out",
-            opacity: toggle ? 1 : 0, // Corrigido a sintaxe para interpolação
+            opacity: toggle ? 1 : 0,
           }}
         >
-          <FinalEnableCurve />
+          <FinalEnableCurve
+            fillColor={background[themeMode]}
+            borderColor={backgroundBorder[themeMode]}
+          />
         </div>
       </div>
     </div>

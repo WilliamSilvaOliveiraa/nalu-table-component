@@ -5,9 +5,22 @@ import { useState } from "react";
 
 function App() {
   const [tabSelect, setTabSelect] = useState("Primeira");
+  const [theme, setTheme] = useState("dark");
+
+  const handleToggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   return (
     <div className="p-20 h-full">
+      <button
+        onClick={handleToggleTheme}
+        style={{
+          backgroundColor: "red",
+        }}
+      >
+        Olá
+      </button>
       <NaluTable
         tableData={tableData}
         totalItems={80}
@@ -29,7 +42,7 @@ function App() {
         handleSelectionChange={(selected) => console.log(selected)}
         handleSaveTabs={(tabs) => console.log(tabs)}
         variant="safira"
-        themeMode="dark"
+        themeMode={theme}
       />
     </div>
   );

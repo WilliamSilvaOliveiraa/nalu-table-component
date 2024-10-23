@@ -1,6 +1,6 @@
-import React from "react";
+import PropTypes from "prop-types";
 
-function FinalEnableCurve() {
+function FinalEnableCurve({ fillColor = "#fff", borderColor = "#000" }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,12 +22,17 @@ function FinalEnableCurve() {
           <path fill="#fff" d="M0 0h20v20H0V0z"></path>
         </mask>
         <g mask="url(#mask0_3063_12257)">
+          {/* Triângulo preenchido */}
           <path
-            fill="#fff"
+            fill={fillColor}
             d="M0 .677V20.16s38.503-.006 20.003-.005C1.503 20.156 0 5.676 0 .676z"
           ></path>
+
+          {/* Curva com a borda aplicada */}
           <path
-            fill="url(#paint0_linear_3063_12257)"
+            stroke={borderColor}
+            strokeWidth="0.3"
+            fill="none" // Não preencher a curva, apenas a borda
             d="M20.003 19.415a.5.5 0 010 1v-1zm0 1c-9.41 0-14.457-3.764-17.119-8.238C.25 7.747 0 2.697 0 .176h1c0 2.48.252 7.3 2.744 11.49 2.465 4.144 7.17 7.749 16.259 7.749v1z"
           ></path>
         </g>
@@ -51,5 +56,10 @@ function FinalEnableCurve() {
     </svg>
   );
 }
+
+FinalEnableCurve.propTypes = {
+  fillColor: PropTypes.string,
+  borderColor: PropTypes.string,
+};
 
 export default FinalEnableCurve;
