@@ -1,16 +1,36 @@
-// src/constants/colorThemes.js
-
-import { light } from "@mui/material/styles/createPalette";
-
 const colorThemes = {
   safira: {
     background: {
       light: "#ffffff",
-      dark: "dark:bg-purple-800",
+      dark: "#0A0B0E",
+    },
+    backgroundTop: {
+      light: "#F8F6F5",
+      dark: "#17191C",
+    },
+    backgroundVariation: {
+      light: "#FBFAF9",
+      dark: "#17191C",
+    },
+    borderVariation: {
+      light: "#E5E2E1",
+      dark: "#282E33",
+    },
+    backgroundTopLoadingInput: {
+      light: "#f9f9f9",
+      dark: "#242629",
+    },
+    backgroundBorder: {
+      light: "#e1e2e5",
+      dark: "#282E33",
+    },
+    textContent: {
+      light: "#787776",
+      dark: "#8a8a8a",
     },
     secondBackground: {
       light: "#F2E8FE",
-      dark: "dark:bg-purple-800",
+      dark: "#161A1D",
     },
     secondText: {
       light: "#a76da8",
@@ -18,7 +38,7 @@ const colorThemes = {
     },
     primary: {
       light: "#B24DF8",
-      dark: "dark:text-purple-300",
+      dark: "#5E4DB2",
     },
     primaryLow: {
       light: "#F9F4FF",
@@ -46,27 +66,36 @@ const colorThemes = {
     },
     viewButton: {
       light: "#C2D6E8",
-      dark: "dark:text-purple-300",
+      dark: "#09326C",
     },
-    viewButtonHover: {
-      light: "#ADC6DD",
-      dark: "dark:text-purple-300",
-    },
+
     viewButtonIcon: {
       light: "#0053A0",
-      dark: "dark:text-purple-300",
+      dark: "##E9F2FF",
     },
     addButton: {
       light: "#DFCDEB",
-      dark: "dark:text-purple-300",
-    },
-    addButtonHover: {
-      light: "#D7C2E6",
-      dark: "dark:text-purple-300",
+      dark: "#50253F",
     },
     addButtonIcon: {
       light: "#9B09FF",
-      dark: "dark:text-purple-300",
+      dark: "#FFECF8",
+    },
+    editButton: {
+      light: "#EBEBEB",
+      dark: "#22272B",
+    },
+    editButtonIcon: {
+      light: "#3E3E3E",
+      dark: "#DEE4EA",
+    },
+    removeButton: {
+      light: "#FFCCCC",
+      dark: "#5D1F1A",
+    },
+    removeButtonIcon: {
+      light: "#AE4A4A",
+      dark: "#FFECEB",
     },
     backgroundList: {
       light: "#F8F1FD",
@@ -134,10 +163,7 @@ const colorThemes = {
       light: "#e6c1c7",
       dark: "dark:text-purple-300",
     },
-    viewButtonHover: {
-      light: "#deafb2",
-      dark: "dark:text-purple-300",
-    },
+
     viewButtonIcon: {
       light: "#9e0003",
       dark: "dark:text-purple-300",
@@ -146,9 +172,21 @@ const colorThemes = {
       light: "#ebccd9",
       dark: "dark:text-purple-300",
     },
-    addButtonHover: {
-      light: "#e3bacc",
-      dark: "dark:text-purple-300",
+    editButton: {
+      light: "#EBEBEB",
+      dark: "#50253F",
+    },
+    editButtonIcon: {
+      light: "#3E3E3E",
+      dark: "#FFECF8",
+    },
+    removeButton: {
+      light: "#FFCCCC",
+      dark: "#50253F",
+    },
+    removeButtonIcon: {
+      light: "#AE4A4A",
+      dark: "#FFECF8",
     },
     addButtonIcon: {
       light: "#9e0032",

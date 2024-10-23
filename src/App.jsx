@@ -28,8 +28,8 @@ function App() {
         checkbox={true}
         handleSelectionChange={(selected) => console.log(selected)}
         handleSaveTabs={(tabs) => console.log(tabs)}
-        variant="carmesin"
-        themeMode="light"
+        variant="safira"
+        themeMode="dark"
       />
     </div>
   );

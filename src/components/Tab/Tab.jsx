@@ -45,8 +45,14 @@ export default function Tab({
   const [tabRef, evenWidth] = useEvenWidth();
   const zIndex = 1;
 
-  const { primary, primaryLow, secondBackground, white, secondText } =
-    colorThemes[variant];
+  const {
+    primary,
+    primaryLow,
+    secondBackground,
+    white,
+    background,
+    secondText,
+  } = colorThemes[variant];
 
   return (
     <div
@@ -62,7 +68,7 @@ export default function Tab({
           width: evenWidth > 0 ? `${evenWidth}px` : "auto",
           backgroundColor: !toggle
             ? secondBackground[themeMode]
-            : white[themeMode],
+            : background[themeMode],
         }}
         className={`relative flex items-center justify-center gap-2 rounded-2xl border-[1px] border-neutral-200 px-4 py-2 transition-all duration-300 lg:rounded-b-none lg:rounded-t-2xl lg:border-b-[0px] lg:border-l-[1px] lg:border-r-[1px] lg:border-t-[1px] ${
           !toggle ? "border-transparent " : "border-neutral-200 "

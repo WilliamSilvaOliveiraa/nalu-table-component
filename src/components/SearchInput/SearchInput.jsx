@@ -44,7 +44,12 @@ const SearchInput = ({
   const [isListOpen, setIsListOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
 
-  const { hoverSearchInput, primary } = colorThemes[variantTheme];
+  const {
+    hoverSearchInput,
+    primary,
+    backgroundTop,
+    backgroundTopLoadingInput,
+  } = colorThemes[variantTheme];
 
   const hasItemWithoutPhoto = displayedOptions?.some(
     (option) =>
@@ -55,9 +60,11 @@ const SearchInput = ({
     getOptionText(option)?.toLowerCase().includes(inputValue?.toLowerCase())
   );
 
-  const inputClassNames = `w-full border rounded-[8px] outline-none ${
-    variant === "small" ? "py-2 px-3 text-sm" : "p-4 text-base"
-  } ${inputValue ? "listopen" : ""} ${loading ? " cursor-arrow" : ""}`;
+  const inputClassNames = `w-full border rounded-[8px] outline-none 
+
+  ${variant === "small" ? "py-2 px-3 text-sm" : "p-4 text-base"} ${
+    inputValue ? "listopen" : ""
+  } ${loading ? " cursor-arrow" : ""}`;
 
   const optionClassNames = `px-4 py-4 cursor-pointer flex items-center gap-4 relative overflow-hidden ${
     variant === "small" ? "text-sm py-2" : "text-base"
@@ -109,19 +116,23 @@ const SearchInput = ({
         disabled={loading}
         readOnly={loading}
         style={{
-          backgroundColor: loading ? "#f9f9f9" : "white",
+          backgroundColor: loading
+            ? backgroundTopLoadingInput[themMode]
+            : backgroundTop[themeMode],
           color: "#787776",
+          borderColor: backgroundTop[themeMode],
         }}
       />
       {!loading && (
         <div
-          className={`absolute z-10 mt-2 w-full rounded-lg overflow-hidden border bg-white shadow-lg transition-all duration-500 ease-in-out 
+          className={`absolute z-10 mt-2 w-full rounded-lg overflow-hidden border  shadow-lg transition-all duration-500 ease-in-out 
       ${hasItemWithoutPhoto ? "bg-gray-200" : ""} 
  opacity-100`}
           style={{
             maxHeight: isListOpen ? "20rem " : "0",
             opacity: isListOpen ? 1 : 0,
             overflowY: isListOpen ? "auto" : "hidden",
+            borderColor: backgroundTop[themeMode],
           }}
         >
           {filteredOptions?.length === 0 ? (

@@ -41,10 +41,19 @@ export default function Table({
     primaryLoading,
     viewButton,
     borderChecked,
-
+    background,
+    backgroundTop,
     viewButtonIcon,
+    backgroundBorder,
+    textContent,
     addButtonIcon,
     addButton,
+    editButton,
+    editButtonIcon,
+    removeButton,
+    borderVariation,
+    backgroundVariation,
+    removeButtonIcon,
   } = colorThemes[variant];
 
   const hasVariations = data?.tableInfo?.items?.some((item) => {
@@ -198,16 +207,20 @@ export default function Table({
 
   return (
     <div
-      className={`relative flex flex-col border-neutral-200 bg-white  ${
+      style={{
+        backgroundColor: background[themeMode],
+        borderColor: backgroundBorder[themeMode],
+      }}
+      className={`relative flex flex-col  ${
         hasTabs
           ? loading
             ? "h-full rounded-e-2xl rounded-bl-2xl rounded-tl-none border-[1px] lg:rounded-e-2xl lg:rounded-bl-2xl lg:rounded-tl-none lg:border-b-[1px] lg:border-l-[1px] lg:border-r-[1px] lg:border-t-[0px]" // Caso hasTabs seja true e loading true
             : "mt-3 h-full rounded-2xl border-[1px] lg:mt-0 lg:rounded-e-2xl lg:rounded-bl-2xl lg:rounded-tl-none lg:border-b-[1px] lg:border-l-[1px] lg:border-r-[1px] lg:border-t-[0px]" // Caso hasTabs true e loading false
           : !header && !loading && size === "small" // Nova condição adicional
-          ? "h-[400px] overflow-hidden rounded-xl border-[1px] border-neutral-200" // Condição visual para não ter header, não estar carregando e ser "small"
+          ? "h-[400px] overflow-hidden rounded-xl border-[1px] " // Condição visual para não ter header, não estar carregando e ser "small"
           : size === "small" && loading && !header && !hasTabs // Nova condição adicional para size small, loading true, e sem header e tabs
-          ? "h-[400px] rounded-xl border-[px] border-neutral-200" // Condição visual para size small, loading true, sem header e sem tabs
-          : "h-full overflow-hidden rounded-2xl border-[1px] border-neutral-200" // Caso hasTabs seja false
+          ? "h-[400px] rounded-xl border-[px]" // Condição visual para size small, loading true, sem header e sem tabs
+          : "h-full overflow-hidden rounded-2xl border-[1px] 0" // Caso hasTabs seja false
       }`}
     >
       {/* Header com o campo de busca e o botão de adicionar */}
@@ -285,7 +298,8 @@ export default function Table({
         >
           {!loading && (
             <div
-              className={`lg-rounded-none sticky top-0 z-[4] flex h-auto w-full bg-[#F8F6F5] ${
+              style={{ backgroundColor: backgroundTop[themeMode] }}
+              className={`lg-rounded-none sticky top-0 z-[4] flex h-auto w-full  ${
                 size === "small" ? "px-4 py-2" : "px-10 py-3"
               } ${loading ? "pointer-events-none opacity-0" : ""} `}
             >
@@ -413,7 +427,12 @@ export default function Table({
                     <div className="flex flex-col">
                       {/* Renderiza apenas o item selecionado */}
 
-                      <div className="flex border-b-[0px] border-[#E5E2E1] px-10 items-center">
+                      <div
+                        style={{
+                          borderColor: backgroundBorder[themeMode],
+                        }}
+                        className="flex border-b-[0px]  px-10 items-center"
+                      >
                         {onSelectionChange && (
                           <div className="z-[2] mr-4 h-1/2">
                             <SmallCheckbox
@@ -459,7 +478,12 @@ export default function Table({
                                 />
                               </div>
                             ) : (
-                              <p className="z-[3] text-[12px] font-medium text-[#787776]">
+                              <p
+                                style={{
+                                  color: textContent[themeMode],
+                                }}
+                                className="z-[3] text-[12px] font-medium "
+                              >
                                 {truncateText(selectedItem[column.ref], 18)}
                               </p>
                             )}
@@ -512,26 +536,38 @@ export default function Table({
 
                             {editItemFunction && (
                               <div
-                                className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#EBEBEB] transition-all duration-300 ease-in-out hover:bg-[#DDDCDC] lg:flex"
+                                style={{
+                                  backgroundColor: editButton[themeMode],
+                                }}
+                                className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out lg:flex"
                                 onClick={() =>
                                   editItemFunction(selectedItem.id)
                                 }
                               >
                                 <ModeEditOutlineOutlinedIcon
-                                  sx={{ fontSize: 16, color: "#3E3E3E" }}
+                                  sx={{
+                                    fontSize: 16,
+                                    color: editButtonIcon[themeMode],
+                                  }}
                                 />
                               </div>
                             )}
                             {removeItemFunction && (
                               <div
-                                className="group flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#FFCCCC] transition-all duration-300 ease-in-out hover:bg-[#EEB2B2]"
+                                style={{
+                                  backgroundColor: removeButton[themeMode],
+                                }}
+                                className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out  lg:flex"
                                 onClick={() =>
                                   removeItemFunction(selectedItem.id)
                                 }
                               >
                                 <span className="flex items-center justify-center transition-all duration-300 ease-in-out">
                                   <DeleteOutlineOutlinedIcon
-                                    sx={{ fontSize: 16, color: "#AE4A4A" }}
+                                    sx={{
+                                      fontSize: 16,
+                                      color: removeButtonIcon[themeMode],
+                                    }}
                                   />
                                 </span>
                               </div>
@@ -539,18 +575,27 @@ export default function Table({
                             {selectedItem.variations &&
                               selectedItem.variations.length > 0 && (
                                 <div
-                                  className="flex h-7 cursor-pointer items-center justify-between gap-2 rounded-lg bg-[#EBEBEB] px-3 transition-all duration-300 ease-in-out hover:bg-[#E5E2E1]"
+                                  style={{
+                                    backgroundColor: editButton[themeMode],
+                                  }}
+                                  className="flex h-7 cursor-pointer items-center justify-between gap-2 rounded-lg  px-3 transition-all duration-300 ease-in-out "
                                   onClick={() =>
                                     toggleItemExpansionUnique(selectedItem.id)
                                   }
                                 >
-                                  <p className="text-[12px] font-semibold text-[#68646A]">
+                                  <p
+                                    className="text-[12px] font-semibold
+"
+                                    style={{
+                                      color: editButtonIcon[themeMode],
+                                    }}
+                                  >
                                     {selectedItem.variations.length}
                                   </p>
                                   <KeyboardArrowDownRoundedIcon
                                     sx={{
                                       fontSize: 16,
-                                      color: "#68646A",
+                                      color: editButtonIcon[themeMode],
                                       transform: expandedItems[selectedItem.id]
                                         ? "rotate(180deg)"
                                         : "rotate(0)",
@@ -583,21 +628,26 @@ export default function Table({
                                       : { maxHeight: "0px" }
                                   }
                                 >
-                                  <div className="bg-[#FBFAF9]">
+                                  <div
+                                    style={{
+                                      backgroundColor:
+                                        backgroundVariation[themeMode],
+                                    }}
+                                  >
                                     {selectedItem.variations.map(
                                       (variation, vIndex) => (
                                         <div
                                           key={vIndex}
-                                          className={`flex px-10 ${
-                                            vIndex <
-                                            selectedItem.variations.length - 1
-                                              ? "border-b-[1px] border-[#E5E2E1] "
-                                              : ""
-                                          } ${
-                                            vIndex === 0
-                                              ? "border-t-[1px] border-[#E5E2E1]"
-                                              : ""
-                                          }`}
+                                          style={{
+                                            borderColor:
+                                              vIndex ===
+                                                sortedItems.length - 1 &&
+                                              vIndex ===
+                                                item.variations.length - 1
+                                                ? "transparent"
+                                                : borderVariation[themeMode],
+                                          }}
+                                          className={`flex px-10 `}
                                         >
                                           {onSelectionChange && (
                                             <div className="mr-4 select-none opacity-0">
@@ -637,7 +687,15 @@ export default function Table({
                                                     />
                                                   </div>
                                                 ) : (
-                                                  <p className="z-[3] text-[12px] font-medium text-[#787776]">
+                                                  <p
+                                                    className="z-[3] text-[12px] font-medium 
+                                                  
+                                                  "
+                                                    style={{
+                                                      color:
+                                                        textContent[themeMode],
+                                                    }}
+                                                  >
                                                     {truncateText(
                                                       variation[column.ref],
                                                       18
@@ -708,7 +766,11 @@ export default function Table({
 
                                               {editItemFunction && (
                                                 <div
-                                                  className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#EBEBEB] transition-all duration-300 ease-in-out hover:bg-[#DDDCDC] lg:flex"
+                                                  style={{
+                                                    backgroundColor:
+                                                      editButton[themeMode],
+                                                  }}
+                                                  className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out lg:flex"
                                                   onClick={() =>
                                                     editItemFunction(
                                                       variation.id
@@ -718,14 +780,21 @@ export default function Table({
                                                   <ModeEditOutlineOutlinedIcon
                                                     sx={{
                                                       fontSize: 16,
-                                                      color: "#3E3E3E",
+                                                      color:
+                                                        editButtonIcon[
+                                                          themeMode
+                                                        ],
                                                     }}
                                                   />
                                                 </div>
                                               )}
                                               {removeItemFunction && (
                                                 <div
-                                                  className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#FFCCCC] transition-all duration-300 ease-in-out hover:bg-[#EEB2B2] lg:flex"
+                                                  style={{
+                                                    backgroundColor:
+                                                      removeButton[themeMode],
+                                                  }}
+                                                  className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out  lg:flex"
                                                   onClick={() =>
                                                     removeItemFunction(
                                                       variation.id
@@ -736,7 +805,10 @@ export default function Table({
                                                     <DeleteOutlineOutlinedIcon
                                                       sx={{
                                                         fontSize: 16,
-                                                        color: "#AE4A4A",
+                                                        color:
+                                                          removeButtonIcon[
+                                                            themeMode
+                                                          ],
                                                       }}
                                                     />
                                                   </span>
@@ -774,7 +846,7 @@ export default function Table({
                             <div
                               className={`z-[3] flex items-center px-4 ${
                                 index !== sortedItems.length - 1
-                                  ? "border-b-[1px] border-[#E5E2E1]"
+                                  ? "border-b-[1px] border-[#e1e4e5]"
                                   : ""
                               }`}
                             >
@@ -820,7 +892,13 @@ export default function Table({
                                       />
                                     </div>
                                   ) : (
-                                    <p className="z-[3] text-[12px] font-medium text-[#787776]">
+                                    <p
+                                      style={{
+                                        color: textContent[themeMode],
+                                      }}
+                                      className="z-[3] text-[12px] font-medium 
+                                    "
+                                    >
                                       {truncateText(item[column.ref], 18)}
                                     </p>
                                   )}
@@ -870,17 +948,27 @@ export default function Table({
 
                                   {editItemFunction && (
                                     <div
-                                      className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#EBEBEB] transition-all duration-300 ease-in-out hover:bg-[#DDDCDC] lg:flex"
+                                      style={{
+                                        backgroundColor: editButton[themeMode],
+                                      }}
+                                      className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out lg:flex"
                                       onClick={() => editItemFunction(item.id)}
                                     >
                                       <ModeEditOutlineOutlinedIcon
-                                        sx={{ fontSize: 16, color: "#3E3E3E" }}
+                                        sx={{
+                                          fontSize: 16,
+                                          color: editButtonIcon[themeMode],
+                                        }}
                                       />
                                     </div>
                                   )}
                                   {removeItemFunction && (
                                     <div
-                                      className="group flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#FFCCCC] transition-all duration-300 ease-in-out hover:bg-[#EEB2B2]"
+                                      style={{
+                                        backgroundColor:
+                                          removeButton[themeMode],
+                                      }}
+                                      className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out  lg:flex"
                                       onClick={() =>
                                         removeItemFunction(item.id)
                                       }
@@ -889,7 +977,7 @@ export default function Table({
                                         <DeleteOutlineOutlinedIcon
                                           sx={{
                                             fontSize: 16,
-                                            color: "#AE4A4A",
+                                            color: removeButtonIcon[themeMode],
                                           }}
                                         />
                                       </span>
@@ -898,18 +986,27 @@ export default function Table({
                                   {item.variations &&
                                     item.variations.length > 0 && (
                                       <div
-                                        className="flex h-7 cursor-pointer items-center justify-between gap-2 rounded-lg bg-[#EBEBEB] px-3 transition-all duration-300 ease-in-out hover:bg-[#E5E2E1]"
+                                        style={{
+                                          backgroundColor:
+                                            editButton[themeMode],
+                                        }}
+                                        className="flex h-7 cursor-pointer items-center justify-between gap-2 rounded-lg  px-3 transition-all duration-300 ease-in-out "
                                         onClick={() =>
                                           toggleItemExpansion(index)
                                         }
                                       >
-                                        <p className="text-[12px] font-semibold text-[#68646A]">
+                                        <p
+                                          className="text-[12px] font-semibold "
+                                          style={{
+                                            color: editButtonIcon[themeMode],
+                                          }}
+                                        >
                                           {item.variations.length}
                                         </p>
                                         <KeyboardArrowDownRoundedIcon
                                           sx={{
                                             fontSize: 16,
-                                            color: "#68646A",
+                                            color: editButtonIcon[themeMode],
                                             transform: expandedItems[index]
                                               ? "rotate(180deg)"
                                               : "rotate(0)",
@@ -925,9 +1022,15 @@ export default function Table({
                             <div
                               className={`z-[3] flex items-center px-10 ${
                                 index !== sortedItems.length - 1
-                                  ? "border-b-[1px] border-[#E5E2E1]"
+                                  ? "border-b-[1px] "
                                   : ""
                               }`}
+                              style={{
+                                borderColor:
+                                  index === sortedItems.length - 1
+                                    ? "transparent"
+                                    : backgroundBorder[themeMode],
+                              }}
                             >
                               {onSelectionChange && (
                                 <div className="z-[2] mr-4 h-1/2">
@@ -971,7 +1074,12 @@ export default function Table({
                                       />
                                     </div>
                                   ) : (
-                                    <p className="z-[3] text-[12px] font-medium text-[#787776]">
+                                    <p
+                                      style={{
+                                        color: textContent[themeMode],
+                                      }}
+                                      className="z-[3] text-[12px] font-medium "
+                                    >
                                       {truncateText(item[column.ref], 18)}
                                     </p>
                                   )}
@@ -1020,17 +1128,27 @@ export default function Table({
 
                                   {editItemFunction && (
                                     <div
-                                      className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#EBEBEB] transition-all duration-300 ease-in-out hover:bg-[#DDDCDC] lg:flex"
+                                      style={{
+                                        backgroundColor: editButton[themeMode],
+                                      }}
+                                      className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out lg:flex"
                                       onClick={() => editItemFunction(item.id)}
                                     >
                                       <ModeEditOutlineOutlinedIcon
-                                        sx={{ fontSize: 16, color: "#3E3E3E" }}
+                                        sx={{
+                                          fontSize: 16,
+                                          color: editButtonIcon[themeMode],
+                                        }}
                                       />
                                     </div>
                                   )}
                                   {removeItemFunction && (
                                     <div
-                                      className="group flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#FFCCCC] transition-all duration-300 ease-in-out hover:bg-[#EEB2B2]"
+                                      style={{
+                                        backgroundColor:
+                                          removeButton[themeMode],
+                                      }}
+                                      className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out  lg:flex"
                                       onClick={() =>
                                         removeItemFunction(item.id)
                                       }
@@ -1039,7 +1157,7 @@ export default function Table({
                                         <DeleteOutlineOutlinedIcon
                                           sx={{
                                             fontSize: 16,
-                                            color: "#AE4A4A",
+                                            color: removeButtonIcon[themeMode],
                                           }}
                                         />
                                       </span>
@@ -1048,19 +1166,28 @@ export default function Table({
                                   {item.variations &&
                                     item.variations.length > 0 && (
                                       <div
-                                        className="flex h-7 cursor-pointer items-center justify-between gap-2 rounded-lg bg-[#EBEBEB] px-3 transition-all duration-300 ease-in-out hover:bg-[#E5E2E1]"
+                                        style={{
+                                          backgroundColor:
+                                            editButton[themeMode],
+                                        }}
+                                        className="flex h-7 cursor-pointer items-center justify-between gap-2 rounded-lg  px-3 transition-all duration-300 ease-in-out "
                                         onClick={() =>
                                           toggleItemExpansion(index)
                                         }
                                         title="Variações"
                                       >
-                                        <p className="text-[12px] font-semibold text-[#68646A]">
+                                        <p
+                                          className="text-[12px] font-semibold "
+                                          style={{
+                                            color: editButtonIcon[themeMode],
+                                          }}
+                                        >
                                           {item.variations.length}
                                         </p>
                                         <KeyboardArrowDownRoundedIcon
                                           sx={{
                                             fontSize: 16,
-                                            color: "#68646A",
+                                            color: editButtonIcon[themeMode],
                                             transform: expandedItems[index]
                                               ? "rotate(180deg)"
                                               : "rotate(0)",
@@ -1093,27 +1220,26 @@ export default function Table({
                                         : {}
                                     }
                                   >
-                                    <div className="bg-[#FBFAF9]">
+                                    <div
+                                      style={{
+                                        backgroundColor:
+                                          backgroundVariation[themeMode],
+                                      }}
+                                    >
                                       {item.variations.map(
                                         (variation, vIndex) => (
                                           <div
                                             key={vIndex}
-                                            className={`flex px-10 ${
-                                              !(
-                                                index ===
+                                            style={{
+                                              borderColor:
+                                                vIndex ===
                                                   sortedItems.length - 1 &&
                                                 vIndex ===
                                                   item.variations.length - 1
-                                              )
-                                                ? "border-b-[1px] border-[#E5E2E1]"
-                                                : ""
-                                            } ${
-                                              index ===
-                                                sortedItems.length - 1 &&
-                                              vIndex === 0
-                                                ? "border-t-[1px] border-[#E5E2E1]"
-                                                : ""
-                                            }`}
+                                                  ? "transparent"
+                                                  : borderVariation[themeMode],
+                                            }}
+                                            className={`flex px-10 `}
                                           >
                                             {onSelectionChange && (
                                               <div className="mr-4 select-none opacity-0">
@@ -1154,7 +1280,15 @@ export default function Table({
                                                       />
                                                     </div>
                                                   ) : (
-                                                    <p className="z-[3] text-[12px] font-medium text-[#787776]">
+                                                    <p
+                                                      className="z-[3] text-[12px] font-medium "
+                                                      style={{
+                                                        color:
+                                                          textContent[
+                                                            themeMode
+                                                          ],
+                                                      }}
+                                                    >
                                                       {truncateText(
                                                         variation[column.ref],
                                                         18
@@ -1223,7 +1357,11 @@ export default function Table({
                                                 )}
                                                 {editItemFunction && (
                                                   <div
-                                                    className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#EBEBEB] transition-all duration-300 ease-in-out hover:bg-[#DDDCDC] lg:flex"
+                                                    style={{
+                                                      backgroundColor:
+                                                        editButton[themeMode],
+                                                    }}
+                                                    className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out lg:flex"
                                                     onClick={() =>
                                                       editItemFunction(
                                                         variation.id
@@ -1233,14 +1371,21 @@ export default function Table({
                                                     <ModeEditOutlineOutlinedIcon
                                                       sx={{
                                                         fontSize: 16,
-                                                        color: "#3E3E3E",
+                                                        color:
+                                                          editButtonIcon[
+                                                            themeMode
+                                                          ],
                                                       }}
                                                     />
                                                   </div>
                                                 )}
                                                 {removeItemFunction && (
                                                   <div
-                                                    className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg bg-[#FFCCCC] transition-all duration-300 ease-in-out hover:bg-[#EEB2B2] lg:flex"
+                                                    style={{
+                                                      backgroundColor:
+                                                        removeButton[themeMode],
+                                                    }}
+                                                    className="group hidden h-7 w-7 cursor-pointer items-center justify-center rounded-lg  transition-all duration-300 ease-in-out  lg:flex"
                                                     onClick={() =>
                                                       removeItemFunction(
                                                         variation.id
@@ -1251,7 +1396,10 @@ export default function Table({
                                                       <DeleteOutlineOutlinedIcon
                                                         sx={{
                                                           fontSize: 16,
-                                                          color: "#AE4A4A",
+                                                          color:
+                                                            removeButtonIcon[
+                                                              themeMode
+                                                            ],
                                                         }}
                                                       />
                                                     </span>
