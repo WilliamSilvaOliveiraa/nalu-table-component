@@ -36,16 +36,16 @@ const SmallCheckbox = styled(Checkbox)(
   })
 );
 
-const ModalContent = styled(Box)({
+const ModalContent = styled(Box)(({ themeMode, variant, colorThemes }) => ({
   width: 600,
-  backgroundColor: "#fff",
+  backgroundColor: colorThemes[variant]?.background[themeMode] || "#fff",
   display: "flex",
   flexDirection: "column",
   boxShadow: 24,
   gap: "32px",
   padding: "32px",
   borderRadius: "24px",
-});
+}));
 
 const ModalTabs = ({
   open,
@@ -57,8 +57,19 @@ const ModalTabs = ({
   themeMode,
 }) => {
   const [checkedItems, setCheckedItems] = useState([]);
-  const { backgroundList, borderChecked, borderUnchecked, borderCheckedHover } =
-    colorThemes[variant];
+  const {
+    backgroundList,
+    borderChecked,
+    borderUnchecked,
+    borderCheckedHover,
+    primary,
+    buttonCancel,
+    buttonCancelHover,
+    textTopModalSubtitle,
+    notBorderChecked,
+
+    textTopModal,
+  } = colorThemes[variant];
 
   useEffect(() => {
     if (open) {
@@ -99,18 +110,36 @@ const ModalTabs = ({
       aria-describedby="modal-tabs-description"
       keepMounted
     >
-      <ModalContent>
+      <ModalContent
+        themeMode={themeMode}
+        colorThemes={colorThemes}
+        variant={variant}
+      >
         <div className="flex w-full justify-between">
           <div>
-            <h2 id="modal-tabs-title" className="text-lg text-[#32363A]">
+            <h2
+              style={{
+                color: textTopModal[themeMode],
+              }}
+              id="modal-tabs-title"
+              className="text-lg "
+            >
               Acrescentar tabs
             </h2>
-            <p id="modal-tabs-description" className="text-base text-[#929090]">
+            <p
+              style={{
+                color: textTopModalSubtitle[themeMode],
+              }}
+              id="modal-tabs-description"
+              className="text-base "
+            >
               Controle quais tabs mostrar em {text}
             </p>
           </div>
           <IconButton onClick={onClose} sx={{ width: 30, height: 30 }}>
-            <CloseRoundedIcon sx={{ fontSize: 18 }} />
+            <CloseRoundedIcon
+              sx={{ fontSize: 18, color: textTopModal[themeMode] }}
+            />
           </IconButton>
         </div>
         <List>
@@ -142,7 +171,7 @@ const ModalTabs = ({
                     cursor: item.special ? "not-allowed" : "pointer",
                   },
                   "&:not(.Mui-checked)": {
-                    color: "#CCCCCC",
+                    color: notBorderChecked[themeMode],
                     cursor: item.special ? "not-allowed" : "pointer",
                   },
                 }}
@@ -168,7 +197,7 @@ const ModalTabs = ({
             <Button
               sx={{
                 width: "100%",
-                backgroundColor: "#9a989c!important",
+                backgroundColor: buttonCancel[themeMode],
                 borderRadius: "74px",
                 display: "flex",
                 alignItems: "center",
@@ -176,7 +205,7 @@ const ModalTabs = ({
                 color: "#fff",
 
                 "&:hover": {
-                  backgroundColor: "#817f82!important",
+                  backgroundColor: buttonCancelHover[themeMode],
                 },
               }}
               onClick={() => {
@@ -190,7 +219,7 @@ const ModalTabs = ({
             <Button
               sx={{
                 width: "100%",
-                backgroundColor: borderChecked[themeMode],
+                backgroundColor: primary[themeMode],
                 borderRadius: "74px",
                 display: "flex",
                 alignItems: "center",

@@ -16,6 +16,14 @@ const colorThemes = {
       light: "#FBFAF9",
       dark: "#3F3F3F",
     },
+    textTopModal: {
+      light: "#32363a",
+      dark: "#e3e3e3",
+    },
+    textTopModalSubtitle: {
+      light: "#929090",
+      dark: "#bababa",
+    },
     backgroundPerfilSearchInput: {
       light: "#f3f4f6",
       dark: "#8b8b8b",
@@ -131,19 +139,31 @@ const colorThemes = {
     },
     backgroundList: {
       light: "#F8F1FD",
-      dark: "dark:bg-purple-800",
+      dark: "#37313b",
     },
     borderChecked: {
       light: "#B571EB",
       dark: "#6D59CE",
     },
+    notBorderChecked: {
+      light: "#cccccc",
+      dark: "#5C5757",
+    },
     borderCheckedHover: {
       light: "#9f53db",
-      dark: "dark:text-purple-300",
+      dark: "#62379e",
     },
     borderUnchecked: {
       light: "#929090",
-      dark: "dark:text-purple-300",
+      dark: "#756c6c",
+    },
+    buttonCancel: {
+      light: "#9a989c",
+      dark: "#47444e",
+    },
+    buttonCancelHover: {
+      light: "#817f82",
+      dark: "#3a3642",
     },
     hoverSearchInput: {
       light: "#faf5ff",
