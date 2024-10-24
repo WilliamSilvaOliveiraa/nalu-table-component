@@ -2,23 +2,27 @@ const colorThemes = {
   safira: {
     background: {
       light: "#ffffff",
-      dark: "#0A0B0E",
+      dark: "#282828",
     },
     backgroundInput: {
       light: "#ffffff",
-      dark: "#17191C",
+      dark: "#282828",
     },
     backgroundTop: {
       light: "#F8F6F5",
-      dark: "#17191C",
+      dark: "#3f3f3f",
     },
     backgroundVariation: {
       light: "#FBFAF9",
-      dark: "#17191C",
+      dark: "#3F3F3F",
     },
     backgroundPerfilSearchInput: {
       light: "#f3f4f6",
-      dark: "#976da1",
+      dark: "#8b8b8b",
+    },
+    backgroundLetterSearchInput: {
+      light: "#B24DF8",
+      dark: "#E5DCFF",
     },
     borderVariation: {
       light: "#E5E2E1",
@@ -34,7 +38,15 @@ const colorThemes = {
     },
     buttonDisabled: {
       light: "#f2f0f2",
-      dark: "#343036",
+      dark: "#47444e",
+    },
+    headerTableText: {
+      light: "#929090",
+      dark: "#E3E3E3",
+    },
+    headerTableTextHover: {
+      light: "#6f6c6f",
+      dark: "#E3E3E3",
     },
     backgroundTopLoadingInput: {
       light: "#f9f9f9",
@@ -46,15 +58,15 @@ const colorThemes = {
     },
     textContent: {
       light: "#787776",
-      dark: "#8a8a8a",
+      dark: "#F0EBF0",
     },
     secondBackground: {
       light: "#F2E8FE",
-      dark: "#493e57",
+      dark: "#312e39",
     },
     secondText: {
       light: "#a76da8",
-      dark: "#c0aed6",
+      dark: "#AD96C9",
     },
     primary: {
       light: "#B24DF8",
@@ -62,7 +74,7 @@ const colorThemes = {
     },
     primaryLow: {
       light: "#F9F4FF",
-      dark: "#371b38",
+      dark: "#512667",
     },
     primaryFocusStrong: {
       light: "#B24DF8",
@@ -103,7 +115,7 @@ const colorThemes = {
     },
     editButton: {
       light: "#EBEBEB",
-      dark: "#22272B",
+      dark: "#1B1A1A",
     },
     editButtonIcon: {
       light: "#3E3E3E",
@@ -123,7 +135,7 @@ const colorThemes = {
     },
     borderChecked: {
       light: "#B571EB",
-      dark: "#9f52e3",
+      dark: "#6D59CE",
     },
     borderCheckedHover: {
       light: "#9f53db",
@@ -135,7 +147,11 @@ const colorThemes = {
     },
     hoverSearchInput: {
       light: "#faf5ff",
-      dark: "dark:bg-purple-800",
+      dark: "#2D2D2D",
+    },
+    textItemSearchInput: {
+      light: "#6b7280",
+      dark: "#a8aeba",
     },
   },
   carmesin: {

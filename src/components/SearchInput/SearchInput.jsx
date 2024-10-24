@@ -50,7 +50,9 @@ const SearchInput = ({
     backgroundTop,
     backgroundTopLoadingInput,
     backgroundInput,
+    backgroundLetterSearchInput,
     backgroundPerfilSearchInput,
+    textItemSearchInput,
   } = colorThemes[variantTheme];
 
   const hasItemWithoutPhoto = displayedOptions?.some(
@@ -191,7 +193,7 @@ const SearchInput = ({
                   ) : (
                     <div
                       style={{
-                        color: primary[themeMode],
+                        color: backgroundLetterSearchInput[themeMode],
                       }}
                       className={`flex h-full w-full items-center justify-center  ${
                         variant === "small"
@@ -203,7 +205,12 @@ const SearchInput = ({
                     </div>
                   )}
                 </div>
-                <p className="font-medium opacity-95 text-gray-500">
+                <p
+                  style={{
+                    color: textItemSearchInput[themeMode],
+                  }}
+                  className="font-medium opacity-95 "
+                >
                   {formatLabel(getOptionText(option))}
                 </p>
               </div>

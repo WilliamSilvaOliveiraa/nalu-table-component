@@ -13,6 +13,16 @@ import styled from "styled-components";
 import not_found from "../../assets/not_found.svg";
 import colorThemes from "../../constants/colorThemes";
 
+const HeaderCell = styled.div`
+  &.header-orderable {
+    color: ${(props) => props.textColor || "#929090"};
+
+    &:hover {
+      color: ${(props) => props.hoverColor || "#6f6c6f"};
+    }
+  }
+`;
+
 export default function Table({
   data,
   addItemFunction,
@@ -348,7 +358,10 @@ export default function Table({
               {data?.tableInfo?.columns?.map((column, index) => (
                 <div
                   key={index}
-                  className={`group flex select-none py-2 text-[12px] font-semibold text-[#929090] transition-all duration-300 ${
+                  style={{
+                    color: textContent[themeMode],
+                  }}
+                  className={`group flex select-none py-2 text-[12px] font-semibold transition-all duration-300  ${
                     column.alignment === "left"
                       ? "justify-start"
                       : column.alignment === "center"
@@ -359,7 +372,9 @@ export default function Table({
                       ? "w-[100px]"
                       : "flex-1"
                   } ${
-                    column.ordering ? "cursor-pointer hover:text-[#6f6c6f]" : ""
+                    column.ordering
+                      ? "cursor-pointer opacity-100 hover:opacity-80 "
+                      : ""
                   }`}
                   onClick={() => handleHeaderClick(column)}
                 >
@@ -368,14 +383,14 @@ export default function Table({
                     <ArrowDropDownRoundedIcon
                       sx={{
                         fontSize: 18,
-                        color: "#929090",
+                        color: textContent[themeMode],
                         transition: "all 0.3s ease",
                       }}
                       className={`transform ${
                         sortDirection[column.header] === "asc"
                           ? ""
                           : "rotate-180"
-                      } group-hover:text-[#6f6c6f]`}
+                      } opacity-100 group-hover:opacity-80 `}
                     />
                   )}
                 </div>
