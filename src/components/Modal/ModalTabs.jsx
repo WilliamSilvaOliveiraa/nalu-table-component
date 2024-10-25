@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Modal,
   Box,
@@ -9,6 +9,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import PropTypes from "prop-types";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import Button from "@mui/material/Button";
 import colorThemes from "../../constants/colorThemes";
@@ -241,6 +242,24 @@ const ModalTabs = ({
       </ModalContent>
     </StyledModal>
   );
+};
+
+// Define a forma dos itens na prop items (que vem de tableData.tabs)
+const TabItemShape = PropTypes.shape({
+  title: PropTypes.string.isRequired,
+  checked: PropTypes.bool.isRequired,
+  special: PropTypes.bool,
+});
+
+// PropTypes ajustadas para refletir exatamente como você está usando o componente
+ModalTabs.propTypes = {
+  text: PropTypes.string.isRequired, // modalTitle
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired, // handleClose
+  items: PropTypes.arrayOf(TabItemShape).isRequired, // tableData.tabs
+  onSave: PropTypes.func.isRequired, // handleSaveTabs
+  variant: PropTypes.string.isRequired,
+  themeMode: PropTypes.string.isRequired,
 };
 
 export default ModalTabs;

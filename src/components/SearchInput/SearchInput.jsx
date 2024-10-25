@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import colorThemes from "../../constants/colorThemes";
 
 const getOptionText = (option) => {
@@ -65,7 +66,6 @@ const SearchInput = ({
   );
 
   const inputClassNames = `w-full border rounded-[8px] outline-none 
-
   ${variant === "small" ? "py-2 px-3 text-sm" : "p-4 text-base"} ${
     inputValue ? "listopen" : ""
   } ${loading ? " cursor-arrow" : ""}`;
@@ -129,9 +129,7 @@ const SearchInput = ({
       />
       {!loading && (
         <div
-          className={`absolute z-10 mt-2 w-full rounded-lg overflow-hidden border  shadow-lg transition-all duration-500 ease-in-out 
-     
- opacity-100`}
+          className={`absolute z-10 mt-2 w-full rounded-lg overflow-hidden border shadow-lg transition-all duration-500 ease-in-out opacity-100`}
           style={{
             maxHeight: isListOpen ? "20rem " : "0",
             opacity: isListOpen ? 1 : 0,
@@ -220,6 +218,40 @@ const SearchInput = ({
       )}
     </div>
   );
+};
+
+// Define the shape of an option object
+const OptionShape = PropTypes.shape({
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  label: PropTypes.string,
+  name: PropTypes.string,
+  title: PropTypes.string,
+  foto: PropTypes.string,
+  image: PropTypes.string,
+  imagem: PropTypes.string,
+  picture: PropTypes.string,
+});
+
+SearchInput.propTypes = {
+  // Required props
+  inputValue: PropTypes.string.isRequired,
+  setInputValue: PropTypes.func.isRequired,
+  displayedOptions: PropTypes.arrayOf(OptionShape).isRequired,
+  onItemClick: PropTypes.func.isRequired,
+  variantTheme: PropTypes.string.isRequired,
+  themeMode: PropTypes.string.isRequired,
+
+  showImage: PropTypes.bool,
+  loading: PropTypes.bool,
+  placeholder: PropTypes.string,
+  variant: PropTypes.oneOf(["default", "small"]),
+};
+
+SearchInput.defaultProps = {
+  showImage: true,
+  loading: false,
+  placeholder: "Pesquisar",
+  variant: "default",
 };
 
 export default SearchInput;

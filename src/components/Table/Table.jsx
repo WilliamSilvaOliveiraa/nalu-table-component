@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SearchInput from "../SearchInput/SearchInput";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
@@ -13,15 +13,56 @@ import styled from "styled-components";
 import NotFound from "../../assets/NotFound.jsx";
 import colorThemes from "../../constants/colorThemes";
 
-const HeaderCell = styled.div`
-  &.header-orderable {
-    color: ${(props) => props.textColor || "#929090"};
+import PropTypes from "prop-types";
 
-    &:hover {
-      color: ${(props) => props.hoverColor || "#6f6c6f"};
-    }
-  }
-`;
+Table.propTypes = {
+  // Data object containing table information
+  data: PropTypes.shape({
+    tableInfo: PropTypes.shape({
+      items: PropTypes.arrayOf(PropTypes.object),
+      columns: PropTypes.arrayOf(
+        PropTypes.shape({
+          header: PropTypes.string.isRequired,
+          ref: PropTypes.string.isRequired,
+          ordering: PropTypes.bool,
+        })
+      ),
+    }),
+  }),
+
+  // Callback functions for table actions
+  addItemFunction: PropTypes.func,
+  viewItemFunction: PropTypes.func,
+  removeItemFunction: PropTypes.func,
+  editItemFunction: PropTypes.func,
+  handlePageChange: PropTypes.func,
+  onSelectionChange: PropTypes.func,
+
+  // Boolean flags and configuration
+  hasTabs: PropTypes.bool,
+  header: PropTypes.bool,
+  plusButton: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+  loading: PropTypes.bool,
+
+  // Appearance configuration
+  size: PropTypes.oneOf(["small", "large"]),
+  variant: PropTypes.string.isRequired,
+  themeMode: PropTypes.string.isRequired,
+};
+
+Table.defaultProps = {
+  loading: true,
+  data: {
+    tableInfo: {
+      items: [],
+      columns: [],
+    },
+  },
+  hasTabs: false,
+  header: true,
+  plusButton: false,
+  size: "large",
+};
 
 export default function Table({
   data,

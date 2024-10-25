@@ -1,70 +1,69 @@
-import React from "react";
+import PropTypes from "prop-types";
 
 const colorClasses = {
   primary: {
-    fill: "tw-bg-primary text-white rounded-[74px]",
-    ghost: "tw-ghost-bg-primary rounded-[4px] tw-text-primary",
+    fill: "bg-primary text-white rounded-lg",
+    ghost: "hover:bg-primary/10 rounded text-primary",
     outlined:
-      "tw-ghost-bg-primary tw-text-primary border border-[var(--primary-color)] rounded-[74px]",
+      "hover:bg-primary/10 text-primary border border-primary rounded-lg",
   },
   danger: {
-    fill: "tw-bg-danger text-white rounded-[74px]",
-    ghost: "tw-ghost-bg-danger rounded-[4px] tw-text-danger",
-    outlined:
-      "tw-ghost-bg-danger tw-text-danger border border-[var(--danger-color)] rounded-[74px]",
+    fill: "bg-red-500 text-white rounded-lg",
+    ghost: "hover:bg-red-50 rounded text-red-500",
+    outlined: "hover:bg-red-50 text-red-500 border border-red-500 rounded-lg",
   },
   warning: {
-    fill: "tw-bg-warning text-white rounded-[74px]",
-    ghost: "tw-ghost-bg-warning rounded-[4px] tw-text-warning",
+    fill: "bg-yellow-500 text-white rounded-lg",
+    ghost: "hover:bg-yellow-50 rounded text-yellow-500",
     outlined:
-      "tw-ghost-bg-warning tw-text-warning border border-[var(--warning-color)] rounded-[74px]",
+      "hover:bg-yellow-50 text-yellow-500 border border-yellow-500 rounded-lg",
   },
   success: {
-    fill: "tw-bg-success text-white rounded-[74px]",
-    ghost: "tw-ghost-bg-success rounded-[4px] tw-text-success",
+    fill: "bg-green-500 text-white rounded-lg",
+    ghost: "hover:bg-green-50 rounded text-green-500",
     outlined:
-      "tw-ghost-bg-success tw-text-success border border-[var(--success-color)] rounded-[74px]",
+      "hover:bg-green-50 text-green-500 border border-green-500 rounded-lg",
   },
   info: {
-    fill: "tw-bg-info text-white rounded-[74px]",
-    ghost: "tw-ghost-bg-info rounded-[4px] tw-text-info",
+    fill: "bg-blue-500 text-white rounded-lg",
+    ghost: "hover:bg-blue-50 rounded text-blue-500",
     outlined:
-      "tw-ghost-bg-info tw-text-info border border-[var(--info-color)] rounded-[74px]",
+      "hover:bg-blue-50 text-blue-500 border border-blue-500 rounded-lg",
   },
   neutral: {
-    fill: "tw-bg-neutral text-white rounded-[74px]",
-    ghost: "tw-ghost-bg-neutral rounded-[4px] tw-text-neutral",
+    fill: "bg-gray-500 text-white rounded-lg",
+    ghost: "hover:bg-gray-50 rounded text-gray-500",
     outlined:
-      "tw-ghost-bg-neutral tw-text-neutral border border-[var(--neutral-color)] rounded-[74px]",
+      "hover:bg-gray-50 text-gray-500 border border-gray-500 rounded-lg",
   },
   light: {
-    fill: "tw-bg-light tw-text-light  rounded-[74px]",
-    ghost: "tw-ghost-bg-light rounded-[4px] tw-text-light ",
+    fill: "bg-gray-100 text-gray-800 rounded-lg",
+    ghost: "hover:bg-gray-50 rounded text-gray-800",
     outlined:
-      "tw-ghost-bg-light tw-text-light bg-white border border-[var(--text-neutral-90)] rounded-[74px]",
+      "hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-lg",
   },
 };
 
 const sizeOptions = {
-  small: "py-[0.4rem] px-3 text-[0.875rem]",
-  medium: "py-2 px-4 text-[1rem]",
-  large: "py-4 px-6 text-[1rem]",
-  default: "py-2 px-4 text-[1rem]",
+  small: "py-1 px-3 text-sm",
+  medium: "py-2 px-4 text-base",
+  large: "py-4 px-6 text-base",
+  default: "py-2 px-4 text-base",
 };
 
 const Button = ({
-  color,
-  disabled,
-  variant,
+  color = "primary",
+  disabled = false,
+  variant = "fill",
   size = "default",
-  text,
-  icon,
-  iconPosition,
-  onClick,
-  customStyle,
-  type,
-  onLoading,
-  reference,
+  text = "",
+  icon = null,
+  iconPosition = "right",
+  onClick = () => {},
+  customStyle = "",
+  type = "button",
+  onLoading = false,
+  reference = null,
   countActiveFilter = 0,
 }) => {
   const getColorClass = (color, variant) => {
@@ -78,15 +77,17 @@ const Button = ({
   let iconClass = iconPosition === "left" ? "mr-2" : "ml-2";
   iconClass = `${iconClass} ${countActiveFilter > 0 ? "ml-6" : ""}`;
   const sizeClass = sizeOptions[size];
-  const buttonClass = ` transition duration-300 ease-in-out 
-  ${colorClass} 
-  ${sizeClass} 
-  ${countActiveFilter === 0 && "justify-center"}
-  ${disabled ? "cursor-default opacity-50" : "cursor-pointer"}`;
+  const buttonClass = `
+    transition duration-300 ease-in-out
+    ${colorClass}
+    ${sizeClass}
+    ${countActiveFilter === 0 && "justify-center"}
+    ${disabled ? "cursor-default opacity-50" : "cursor-pointer"}
+  `;
 
   return (
     <button
-      ref={reference || null}
+      ref={reference}
       className={`flex font-medium items-center w-full ${buttonClass}`}
       onClick={onClick}
       type={type}
@@ -102,6 +103,62 @@ const Button = ({
       {iconPosition === "center" && icon && <span>{icon}</span>}
     </button>
   );
+};
+
+Button.propTypes = {
+  // Color variants
+  color: PropTypes.oneOf([
+    "primary",
+    "danger",
+    "warning",
+    "success",
+    "info",
+    "neutral",
+    "light",
+  ]),
+
+  // Button states
+  disabled: PropTypes.bool,
+  onLoading: PropTypes.bool,
+
+  // Visual variants
+  variant: PropTypes.oneOf(["fill", "ghost", "outlined"]),
+  size: PropTypes.oneOf(["small", "medium", "large", "default"]),
+
+  // Content
+  text: PropTypes.string,
+  icon: PropTypes.node,
+  iconPosition: PropTypes.oneOf(["left", "right", "center"]),
+
+  // Styling
+  customStyle: PropTypes.string,
+
+  // Functionality
+  onClick: PropTypes.func,
+  type: PropTypes.oneOf(["button", "submit", "reset"]),
+  reference: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]),
+
+  // Other
+  countActiveFilter: PropTypes.number,
+};
+
+Button.defaultProps = {
+  color: "primary",
+  disabled: false,
+  variant: "fill",
+  size: "default",
+  text: "",
+  icon: null,
+  iconPosition: "right",
+  onClick: () => {},
+  customStyle: "",
+  type: "button",
+  onLoading: false,
+  reference: null,
+  countActiveFilter: 0,
 };
 
 export default Button;

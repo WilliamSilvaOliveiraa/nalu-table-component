@@ -28,9 +28,9 @@ function App() {
         checkbox={false}
         handleSelectionChange={(selected) => console.log(selected)}
         handleSaveTabs={(tabs) => console.log(tabs)}
-        variant="sapphire"
+        variant="crimson"
         themeMode="light"
-        size="small"
+        size=""
       />
     </div>
   );

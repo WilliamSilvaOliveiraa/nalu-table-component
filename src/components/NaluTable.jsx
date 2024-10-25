@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Table from "./Table/Table";
 import PresetTabs from "./PresetTabs/PresetTabs";
 import PropTypes from "prop-types";
@@ -24,6 +24,8 @@ NaluTable.propTypes = {
   editItemFunction: PropTypes.func,
   currentPageProp: PropTypes.number,
   handleSaveTabs: PropTypes.func,
+  variant: PropTypes.string,
+  themeMode: PropTypes.string,
   selectedTab: PropTypes.string,
   activeTab: PropTypes.string,
 };
@@ -90,6 +92,7 @@ export default function NaluTable({
                 plusButtonClick={handleOpen}
                 onTabSelect={handleTabChange}
                 loading={loading}
+                selectedTab={selectedTab}
                 activeTab={activeTab}
                 variant={variant}
                 themeMode={themeMode}
