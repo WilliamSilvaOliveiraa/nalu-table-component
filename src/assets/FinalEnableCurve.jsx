@@ -31,7 +31,7 @@ function FinalEnableCurve({ fillColor = "#fff", borderColor = "#000" }) {
           {/* Curva com a borda aplicada */}
           <path
             stroke={borderColor}
-            strokeWidth="0.3"
+            strokeWidth="0.4"
             fill="none" // Não preencher a curva, apenas a borda
             d="M20.003 19.415a.5.5 0 010 1v-1zm0 1c-9.41 0-14.457-3.764-17.119-8.238C.25 7.747 0 2.697 0 .176h1c0 2.48.252 7.3 2.744 11.49 2.465 4.144 7.17 7.749 16.259 7.749v1z"
           ></path>

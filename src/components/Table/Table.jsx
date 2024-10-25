@@ -10,7 +10,7 @@ import { Checkbox, Skeleton } from "@mui/material";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import styled from "styled-components";
-import not_found from "../../assets/not_found.svg";
+import NotFound from "../../assets/NotFound.jsx";
 import colorThemes from "../../constants/colorThemes";
 
 const HeaderCell = styled.div`
@@ -64,6 +64,8 @@ export default function Table({
     borderVariation,
     backgroundVariation,
     removeButtonIcon,
+    backgroundLoading,
+    skeletonLoading,
   } = colorThemes[variant];
 
   const hasVariations = data?.tableInfo?.items?.some((item) => {
@@ -221,17 +223,19 @@ export default function Table({
         backgroundColor: background[themeMode],
         borderColor: backgroundBorder[themeMode],
       }}
-      className={`relative flex flex-col  ${
-        hasTabs
-          ? loading
-            ? "h-full rounded-e-2xl rounded-bl-2xl rounded-tl-none border-[1px] lg:rounded-e-2xl lg:rounded-bl-2xl lg:rounded-tl-none lg:border-b-[1px] lg:border-l-[1px] lg:border-r-[1px] lg:border-t-[0px]" // Caso hasTabs seja true e loading true
-            : "mt-3 h-full rounded-2xl border-[1px] lg:mt-0 lg:rounded-e-2xl lg:rounded-bl-2xl lg:rounded-tl-none lg:border-b-[1px] lg:border-l-[1px] lg:border-r-[1px] lg:border-t-[0px]" // Caso hasTabs true e loading false
-          : !header && !loading && size === "small" // Nova condição adicional
-          ? "h-[400px] overflow-hidden rounded-xl border-[1px] " // Condição visual para não ter header, não estar carregando e ser "small"
-          : size === "small" && loading && !header && !hasTabs // Nova condição adicional para size small, loading true, e sem header e tabs
-          ? "h-[400px] rounded-xl border-[px]" // Condição visual para size small, loading true, sem header e sem tabs
-          : "h-full overflow-hidden rounded-2xl border-[1px] 0" // Caso hasTabs seja false
-      }`}
+      className={`relative flex flex-col 
+                  overflow-hidden
+        ${
+          hasTabs
+            ? loading
+              ? "h-full rounded-e-2xl rounded-bl-2xl rounded-tl-none border-[1px] lg:rounded-e-2xl lg:rounded-bl-2xl lg:rounded-tl-none lg:border-b-[1px] lg:border-l-[1px] lg:border-r-[1px] lg:border-t-[0px]" // Caso hasTabs seja true e loading true
+              : "mt-3 h-full rounded-2xl border-[1px] lg:mt-0 lg:rounded-e-2xl lg:rounded-bl-2xl lg:rounded-tl-none lg:border-b-[1px] lg:border-l-[1px] lg:border-r-[1px] lg:border-t-[0px]" // Caso hasTabs true e loading false
+            : !header && !loading && size === "small"
+            ? "h-[400px] overflow-hidden rounded-xl border-[1px] "
+            : size === "small" && loading && !header && !hasTabs
+            ? "h-[400px] rounded-xl border-[px]"
+            : "h-full overflow-hidden rounded-2xl border-[1px] "
+        }`}
     >
       {/* Header com o campo de busca e o botão de adicionar */}
 
@@ -302,9 +306,13 @@ export default function Table({
       )}
 
       {/* Cabeçalhos da tabela */}
-      <div className="relative overflow-x-auto">
+      <div className="relative overflow-x-auto ">
         <div
-          className={size === "small" ? "relative" : "relative min-w-[1240px]"}
+          className={
+            size === "small"
+              ? "relative  min-w-[1240px]"
+              : "relative min-w-[1240px]"
+          }
         >
           {!loading && (
             <div
@@ -423,12 +431,20 @@ export default function Table({
 
           {/* Conteúdo da tabela */}
           {loading ? (
-            <div className="flex h-full w-full flex-col gap-4 bg-white pb-5 pl-5 pr-5 pt-0 opacity-50 lg:rounded-b-2xl">
+            <div
+              style={{
+                backgroundColor: backgroundLoading[themeMode],
+              }}
+              className="flex h-full w-full flex-col gap-4  pb-5 pl-5 pr-5 pt-5 pt-0 opacity-50 lg:rounded-b-2xl"
+            >
               {Array.from({ length: 5 }).map((_, index) => (
                 <Skeleton
                   key={index}
                   variant="rounded"
-                  sx={{ borderRadius: "16px" }}
+                  sx={{
+                    borderRadius: "16px",
+                    backgroundColor: skeletonLoading[themeMode],
+                  }}
                   width="100%"
                   height="68px"
                 />
@@ -446,7 +462,7 @@ export default function Table({
                         style={{
                           borderColor: backgroundBorder[themeMode],
                         }}
-                        className="flex border-b-[0px]  px-10 items-center"
+                        className="flex border-b-[0px] px-10 items-center"
                       >
                         {onSelectionChange && (
                           <div className="z-[2] mr-4 h-1/2">
@@ -656,13 +672,16 @@ export default function Table({
                                           style={{
                                             borderColor:
                                               vIndex ===
-                                                sortedItems.length - 1 &&
-                                              vIndex ===
-                                                item.variations.length - 1
+                                              selectedItem.variations.length - 1
                                                 ? "transparent"
                                                 : borderVariation[themeMode],
                                           }}
-                                          className={`flex px-10 `}
+                                          className={`flex px-10 ${
+                                            vIndex !==
+                                            selectedItem.variations.length - 1
+                                              ? "border-b-[1px]"
+                                              : ""
+                                          }`}
                                         >
                                           {onSelectionChange && (
                                             <div className="mr-4 select-none opacity-0">
@@ -859,11 +878,13 @@ export default function Table({
                         <div key={index} className="z-[3] flex flex-col">
                           {size === "small" ? (
                             <div
-                              className={`z-[3] flex items-center px-4 ${
-                                index !== sortedItems.length - 1
-                                  ? "border-b-[1px] border-[#e1e4e5]"
-                                  : ""
-                              }`}
+                              style={{
+                                borderColor:
+                                  index === sortedItems.length - 1
+                                    ? "transparent"
+                                    : backgroundBorder[themeMode],
+                              }}
+                              className={`z-[3] flex items-center px-4 border-b-[1px] `}
                             >
                               {onSelectionChange && (
                                 <div className="mr-4 h-1/2">
@@ -874,7 +895,7 @@ export default function Table({
                                     checked={selectedCheckbox.has(item.id)}
                                     sx={{
                                       "&.Mui-checked": {
-                                        color: "#B571EB",
+                                        color: borderChecked[themeMode],
                                       },
                                       "&:not(.Mui-checked)": {
                                         color: "#CCCCCC",
@@ -1247,14 +1268,14 @@ export default function Table({
                                             key={vIndex}
                                             style={{
                                               borderColor:
-                                                vIndex ===
+                                                index ===
                                                   sortedItems.length - 1 &&
                                                 vIndex ===
                                                   item.variations.length - 1
                                                   ? "transparent"
                                                   : borderVariation[themeMode],
                                             }}
-                                            className={`flex px-10 `}
+                                            className={`flex px-10 border-b-[1px]`}
                                           >
                                             {onSelectionChange && (
                                               <div className="mr-4 select-none opacity-0">
@@ -1439,12 +1460,7 @@ export default function Table({
               ) : (
                 <div className="flex h-full w-full flex-col items-center justify-center gap-5 pt-11">
                   <div className="w-[20%]">
-                    <img
-                      src={not_found}
-                      //   src="https://placehold.co/400"
-                      alt="Nenhum registro encontrado"
-                      className="h-full w-full object-contain"
-                    />
+                    <NotFound variant={variant} />
                   </div>
 
                   <div className="mb-10 flex w-full items-center justify-center gap-4">
