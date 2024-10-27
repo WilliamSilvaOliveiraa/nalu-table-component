@@ -8,8 +8,8 @@ import "./Dots/style.css";
 
 NaluTable.propTypes = {
   tableData: PropTypes.array.isRequired,
-  header: PropTypes.array.isRequired,
-  plusButton: PropTypes.node,
+  header: PropTypes.bool,
+  plusButton: PropTypes.bool,
   totalItems: PropTypes.number,
   itemsPerPage: PropTypes.number,
   addItemFunction: PropTypes.func,
@@ -24,7 +24,7 @@ NaluTable.propTypes = {
   editItemFunction: PropTypes.func,
   currentPageProp: PropTypes.number,
   handleSaveTabs: PropTypes.func,
-  LogoMarca: PropTypes.string,
+  brandLogo: PropTypes.string,
   variant: PropTypes.string,
   theme: PropTypes.string,
   selectedTab: PropTypes.string,
@@ -33,8 +33,8 @@ NaluTable.propTypes = {
 
 NaluTable.defaultProps = {
   tableData: [],
-  header: [],
-  plusButton: null,
+  header: true,
+  plusButton: true,
   totalItems: 0,
   itemsPerPage: 10,
   addItemFunction: () => {},
@@ -44,7 +44,7 @@ NaluTable.defaultProps = {
   handleTabChange: () => {},
   loading: false,
   handleSelectionChange: null,
-  size: "",
+  size: "default",
   removeItemFunction: () => {},
   editItemFunction: () => {},
   currentPageProp: 1,
@@ -53,7 +53,7 @@ NaluTable.defaultProps = {
   theme: "light",
   selectedTab: "",
   activeTab: "",
-  LogoMarca: "https://placehold.co/400",
+  brandLogo: "https://placehold.co/400",
 };
 
 export default function NaluTable({
@@ -68,13 +68,12 @@ export default function NaluTable({
   modalTitle,
   handleTabChange,
   loading,
-
   handleSelectionChange,
   size,
   removeItemFunction,
   editItemFunction,
   currentPageProp,
-  LogoMarca,
+  brandLogo,
   handleSaveTabs,
   selectedTab,
   activeTab,
@@ -145,7 +144,7 @@ export default function NaluTable({
               editItemFunction={editItemFunction}
               handlePageChange={handlePageChange}
               variant={variant}
-              LogoMarca={LogoMarca}
+              brandLogo={brandLogo}
               themeMode={theme}
             />
             {handlePageChange && (
@@ -226,7 +225,7 @@ export default function NaluTable({
                   removeItemFunction={removeItemFunction}
                   editItemFunction={editItemFunction}
                   handlePageChange={handlePageChange}
-                  LogoMarca={LogoMarca}
+                  brandLogo={brandLogo}
                   variant={variant}
                   themeMode={theme}
                 />
@@ -273,7 +272,7 @@ export default function NaluTable({
                   size={size}
                   removeItemFunction={removeItemFunction}
                   editItemFunction={editItemFunction}
-                  LogoMarca={LogoMarca}
+                  brandLogo={brandLogo}
                   handlePageChange={handlePageChange}
                   variant={variant}
                   themeMode={theme}

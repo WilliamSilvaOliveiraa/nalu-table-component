@@ -35,7 +35,7 @@ Table.propTypes = {
   editItemFunction: PropTypes.func,
   handlePageChange: PropTypes.func,
   onSelectionChange: PropTypes.func,
-  LogoMarca: PropTypes.string,
+  brandLogo: PropTypes.string,
   hasTabs: PropTypes.bool,
   header: PropTypes.bool,
   plusButton: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
@@ -75,7 +75,7 @@ export default function Table({
   handlePageChange,
   variant,
   themeMode,
-  LogoMarca,
+  brandLogo,
 }) {
   const [inputValue, setInputValue] = useState("");
   const [sortColumn, setSortColumn] = useState(null);
@@ -526,7 +526,7 @@ export default function Table({
                               <div className="flex h-auto w-full items-center justify-start">
                                 <img
                                   className="h-2/6 w-2/6 object-contain"
-                                  src={selectedItem[column.ref] || LogoMarca}
+                                  src={selectedItem[column.ref] || brandLogo}
                                   alt=""
                                 />
                               </div>
@@ -737,7 +737,7 @@ export default function Table({
                                                       className="h-[25%] w-[25%] object-contain"
                                                       src={
                                                         variation[column.ref] ||
-                                                        LogoMarca
+                                                        brandLogo
                                                       }
                                                       alt=""
                                                     />
@@ -945,7 +945,7 @@ export default function Table({
                                     <div className="flex h-[24%] w-[24%] items-center justify-start">
                                       <img
                                         className="h-auto w-full object-contain"
-                                        src={item[column.ref] || LogoMarca}
+                                        src={item[column.ref] || brandLogo}
                                         alt=""
                                       />
                                     </div>
@@ -1127,7 +1127,7 @@ export default function Table({
                                     <div className="flex h-8 w-8 items-center justify-start">
                                       <img
                                         className="h-auto w-full object-contain"
-                                        src={item[column.ref] || LogoMarca}
+                                        src={item[column.ref] || brandLogo}
                                         alt=""
                                       />
                                     </div>
@@ -1332,7 +1332,7 @@ export default function Table({
                                                         src={
                                                           variation[
                                                             column.ref
-                                                          ] || LogoMarca
+                                                          ] || brandLogo
                                                         }
                                                         alt=""
                                                       />
