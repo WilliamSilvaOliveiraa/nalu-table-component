@@ -6,6 +6,10 @@
   "main": "./dist/nalu-table.umd.js",
   "module": "./dist/nalu-table.es.js",
   "style": "./dist/nalu-table.css",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WilliamSilvaOliveiraa/nalu-table-component"
+  },
   "license": "MIT",
   "exports": {
     ".": {
