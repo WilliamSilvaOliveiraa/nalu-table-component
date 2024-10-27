@@ -6,6 +6,10 @@
   "main": "./dist/nalu-table.umd.js",
   "module": "./dist/nalu-table.es.js",
   "style": "./dist/nalu-table.css",
+  "author": {
+    "name": "William Silva",
+    "email": "williamsilva20062005@gmail.com"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/WilliamSilvaOliveiraa/nalu-table-component"
