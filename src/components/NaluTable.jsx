@@ -31,12 +31,28 @@ NaluTable.propTypes = {
 };
 
 NaluTable.defaultProps = {
+  tableData: [],
+  header: [],
   plusButton: null,
   totalItems: 0,
   itemsPerPage: 10,
+  addItemFunction: () => {},
+  viewItemFunction: () => {},
+  handlePageChange: () => {},
+  modalTitle: "",
+  handleTabChange: () => {},
   loading: false,
   checkbox: false,
-  size: "medium",
+  handleSelectionChange: () => {},
+  size: "",
+  removeItemFunction: () => {},
+  editItemFunction: () => {},
+  currentPageProp: 1,
+  handleSaveTabs: () => {},
+  variant: "sapphire",
+  themeMode: "light",
+  selectedTab: "",
+  activeTab: "",
 };
 
 export default function NaluTable({
@@ -60,8 +76,8 @@ export default function NaluTable({
   handleSaveTabs,
   selectedTab,
   activeTab,
-  variant = "carmesin",
-  themeMode = "light",
+  variant,
+  themeMode,
 }) {
   const [tab, setTab] = useState(null);
   const [open, setOpen] = useState(false);
