@@ -6,8 +6,6 @@ const getOptionText = (option) => {
   return option.label || option.name || option.title || "";
 };
 
-const LogoMarca = "https://placehold.co/600x400";
-
 const getInitials = (text) => {
   const words = text.split(" ");
   return words
@@ -25,16 +23,13 @@ const formatLabel = (text) => {
 };
 
 const getImageSrc = (option) => {
-  return (
-    option.foto || option.image || option.imagem || option.picture || LogoMarca
-  );
+  return option.foto || option.image || option.imagem || option.picture || null;
 };
 
 const SearchInput = ({
   inputValue,
   setInputValue,
   displayedOptions,
-  showImage = true,
   onItemClick,
   loading,
   placeholder = "Pesquisar",
@@ -56,11 +51,6 @@ const SearchInput = ({
     textItemSearchInput,
   } = colorThemes[variantTheme];
 
-  const hasItemWithoutPhoto = displayedOptions?.some(
-    (option) =>
-      !option?.foto && !option?.image && !option?.imagem && !option?.picture
-  );
-
   const filteredOptions = displayedOptions?.filter((option) =>
     getOptionText(option)?.toLowerCase().includes(inputValue?.toLowerCase())
   );
@@ -76,15 +66,7 @@ const SearchInput = ({
     loading ? "pointer-events-none" : ""
   } transition-all duration-500 ease-in-out`;
 
-  const imageSizeClassNames = `${
-    showImage
-      ? variant === "small"
-        ? "w-4 h-4"
-        : "w-6 h-6"
-      : variant === "small"
-      ? "w-6 h-6"
-      : "w-8 h-8"
-  }`;
+  const imageSizeClassNames = variant === "small" ? "w-6 h-6" : "w-8 h-8";
 
   const handleInputChange = (e) => {
     if (!loading) {
@@ -103,6 +85,16 @@ const SearchInput = ({
     if (!loading) {
       setTimeout(() => setIsListOpen(false), 200);
     }
+  };
+
+  const getEmptyStateMessage = () => {
+    if (!displayedOptions || displayedOptions.length === 0) {
+      return "Nenhum item disponível";
+    }
+    if (filteredOptions?.length === 0) {
+      return "Nenhum resultado encontrado";
+    }
+    return null;
   };
 
   return (
@@ -131,88 +123,89 @@ const SearchInput = ({
         <div
           className={`absolute z-10 mt-2 w-full rounded-lg overflow-hidden border shadow-lg transition-all duration-500 ease-in-out opacity-100`}
           style={{
-            maxHeight: isListOpen ? "20rem " : "0",
+            maxHeight: isListOpen ? "20rem " : "0rem",
             opacity: isListOpen ? 1 : 0,
             overflowY: isListOpen ? "auto" : "hidden",
             borderColor: backgroundTop[themeMode],
-            backgroundColor: hasItemWithoutPhoto
-              ? backgroundInput[themeMode]
-              : "",
+            backgroundColor: backgroundInput[themeMode],
           }}
         >
-          {filteredOptions?.length === 0 ? (
-            <div className="px-4 py-4 text-gray-500">
-              Nenhum resultado encontrado
+          {getEmptyStateMessage() ? (
+            <div className="px-4 py-4 text-gray-500 text-sm">
+              {getEmptyStateMessage()}
             </div>
           ) : (
-            filteredOptions?.map((option) => (
-              <div
-                key={option.value}
-                className={optionClassNames}
-                style={{
-                  backgroundColor:
-                    hoveredItem === option
-                      ? hoverSearchInput[themeMode]
-                      : backgroundInput[themeMode],
-                }}
-                onMouseEnter={() => setHoveredItem(option)}
-                onMouseLeave={() => setHoveredItem(null)}
-                onMouseDown={() => {
-                  onItemClick(option);
-                  setInputValue(formatLabel(getOptionText(option)));
-                }}
-              >
+            filteredOptions?.map((option) => {
+              const imageSrc = getImageSrc(option);
+              return (
                 <div
-                  style={{
-                    backgroundColor: primary[themeMode],
-                  }}
-                  className={`absolute left-0 top-0 h-full w-1 transition-opacity duration-500 ease-in-out ${
-                    hoveredItem === option ? "opacity-100" : "opacity-0"
-                  }`}
-                ></div>
-                <div
+                  key={option.value}
+                  className={optionClassNames}
                   style={{
                     backgroundColor:
-                      getImageSrc(option) === "https://placehold.co/600x400"
-                        ? backgroundPerfilSearchInput[themeMode]
-                        : "#ffffff",
+                      hoveredItem === option
+                        ? hoverSearchInput[themeMode]
+                        : backgroundInput[themeMode],
                   }}
-                  className={`flex items-center justify-center p-1 ${imageSizeClassNames}
-                   ${showImage ? "rounded-md" : "rounded-full"}`}
+                  onMouseEnter={() => setHoveredItem(option)}
+                  onMouseLeave={() => setHoveredItem(null)}
+                  onMouseDown={() => {
+                    onItemClick(option);
+                    setInputValue(formatLabel(getOptionText(option)));
+                  }}
                 >
-                  {showImage ? (
-                    <img
-                      src={getImageSrc(option)}
-                      className={`h-full w-full object-contain ${
-                        variant === "small" ? "rounded-sm" : "rounded-md"
-                      }`}
-                      alt="Thumbnail"
-                    />
-                  ) : (
-                    <div
-                      style={{
-                        color: backgroundLetterSearchInput[themeMode],
-                      }}
-                      className={`flex h-full w-full items-center justify-center  ${
-                        variant === "small"
-                          ? "text-[10px] font-bold"
-                          : "text-xs"
-                      }`}
-                    >
-                      {getInitials(getOptionText(option))}
-                    </div>
-                  )}
+                  <div
+                    style={{
+                      backgroundColor: primary[themeMode],
+                    }}
+                    className={`absolute left-0 top-0 h-full w-1 transition-opacity duration-500 ease-in-out ${
+                      hoveredItem === option ? "opacity-100" : "opacity-0"
+                    }`}
+                  ></div>
+                  <div
+                    style={{
+                      backgroundColor: imageSrc
+                        ? "#ffffff"
+                        : backgroundPerfilSearchInput[themeMode],
+                    }}
+                    className={`flex items-center justify-center p-1 ${imageSizeClassNames} ${
+                      imageSrc ? "rounded-md" : "rounded-full"
+                    }`}
+                  >
+                    {imageSrc ? (
+                      <img
+                        src={imageSrc}
+                        className={`h-full w-full object-contain ${
+                          variant === "small" ? "rounded-sm" : "rounded-md"
+                        }`}
+                        alt="Thumbnail"
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          color: backgroundLetterSearchInput[themeMode],
+                        }}
+                        className={`flex h-full w-full items-center justify-center ${
+                          variant === "small"
+                            ? "text-[10px] font-bold"
+                            : "text-xs"
+                        }`}
+                      >
+                        {getInitials(getOptionText(option))}
+                      </div>
+                    )}
+                  </div>
+                  <p
+                    style={{
+                      color: textItemSearchInput[themeMode],
+                    }}
+                    className="font-medium opacity-95"
+                  >
+                    {formatLabel(getOptionText(option))}
+                  </p>
                 </div>
-                <p
-                  style={{
-                    color: textItemSearchInput[themeMode],
-                  }}
-                  className="font-medium opacity-95 "
-                >
-                  {formatLabel(getOptionText(option))}
-                </p>
-              </div>
-            ))
+              );
+            })
           )}
         </div>
       )}
@@ -233,7 +226,6 @@ const OptionShape = PropTypes.shape({
 });
 
 SearchInput.propTypes = {
-  // Required props
   inputValue: PropTypes.string.isRequired,
   setInputValue: PropTypes.func.isRequired,
   displayedOptions: PropTypes.arrayOf(OptionShape).isRequired,
@@ -241,14 +233,12 @@ SearchInput.propTypes = {
   variantTheme: PropTypes.string.isRequired,
   themeMode: PropTypes.string.isRequired,
 
-  showImage: PropTypes.bool,
   loading: PropTypes.bool,
   placeholder: PropTypes.string,
   variant: PropTypes.oneOf(["default", "small"]),
 };
 
 SearchInput.defaultProps = {
-  showImage: true,
   loading: false,
   placeholder: "Pesquisar",
   variant: "default",

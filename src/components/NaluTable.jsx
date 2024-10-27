@@ -25,6 +25,7 @@ NaluTable.propTypes = {
   editItemFunction: PropTypes.func,
   currentPageProp: PropTypes.number,
   handleSaveTabs: PropTypes.func,
+  LogoMarca: PropTypes.string,
   variant: PropTypes.string,
   themeMode: PropTypes.string,
   selectedTab: PropTypes.string,
@@ -54,6 +55,7 @@ NaluTable.defaultProps = {
   themeMode: "light",
   selectedTab: "",
   activeTab: "",
+  LogoMarca: "https://placehold.co/400",
 };
 
 export default function NaluTable({
@@ -74,6 +76,7 @@ export default function NaluTable({
   removeItemFunction,
   editItemFunction,
   currentPageProp,
+  LogoMarca,
   handleSaveTabs,
   selectedTab,
   activeTab,
@@ -92,8 +95,6 @@ export default function NaluTable({
       setTab(false);
     }
   }, [tableData?.tabs]);
-
-  console.log("tableData", tableData);
 
   return (
     <>
@@ -147,6 +148,7 @@ export default function NaluTable({
               editItemFunction={editItemFunction}
               handlePageChange={handlePageChange}
               variant={variant}
+              LogoMarca={LogoMarca}
               themeMode={themeMode}
             />
             {handlePageChange && (
@@ -228,6 +230,7 @@ export default function NaluTable({
                   removeItemFunction={removeItemFunction}
                   editItemFunction={editItemFunction}
                   handlePageChange={handlePageChange}
+                  LogoMarca={LogoMarca}
                   variant={variant}
                   themeMode={themeMode}
                 />
@@ -275,6 +278,7 @@ export default function NaluTable({
                   size={size}
                   removeItemFunction={removeItemFunction}
                   editItemFunction={editItemFunction}
+                  LogoMarca={LogoMarca}
                   handlePageChange={handlePageChange}
                   variant={variant}
                   themeMode={themeMode}

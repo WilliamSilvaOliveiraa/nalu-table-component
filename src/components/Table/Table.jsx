@@ -16,7 +16,6 @@ import colorThemes from "../../constants/colorThemes";
 import PropTypes from "prop-types";
 
 Table.propTypes = {
-  // Data object containing table information
   data: PropTypes.shape({
     tableInfo: PropTypes.shape({
       items: PropTypes.arrayOf(PropTypes.object),
@@ -30,21 +29,18 @@ Table.propTypes = {
     }),
   }),
 
-  // Callback functions for table actions
   addItemFunction: PropTypes.func,
   viewItemFunction: PropTypes.func,
   removeItemFunction: PropTypes.func,
   editItemFunction: PropTypes.func,
   handlePageChange: PropTypes.func,
   onSelectionChange: PropTypes.func,
-
-  // Boolean flags and configuration
+  LogoMarca: PropTypes.string,
   hasTabs: PropTypes.bool,
   header: PropTypes.bool,
   plusButton: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   loading: PropTypes.bool,
 
-  // Appearance configuration
   size: PropTypes.oneOf(["small", "large"]),
   variant: PropTypes.string.isRequired,
   themeMode: PropTypes.string.isRequired,
@@ -79,6 +75,7 @@ export default function Table({
   handlePageChange,
   variant,
   themeMode,
+  LogoMarca,
 }) {
   const [inputValue, setInputValue] = useState("");
   const [sortColumn, setSortColumn] = useState(null);
@@ -149,14 +146,12 @@ export default function Table({
       b[data?.tableInfo?.columns.find((col) => col.header === sortColumn).ref];
 
     if (isDate(aValue) && isDate(bValue)) {
-      // Ordenação por datas
       const aDate = parseDate(aValue);
       const bDate = parseDate(bValue);
       return sortDirection[sortColumn] === "asc"
         ? aDate - bDate
         : bDate - aDate;
     } else {
-      // Ordenação por texto
       if (aValue < bValue) return sortDirection[sortColumn] === "asc" ? -1 : 1;
       if (aValue > bValue) return sortDirection[sortColumn] === "asc" ? 1 : -1;
       return 0;
@@ -256,8 +251,6 @@ export default function Table({
     );
   }
 
-  const LogoMarca = "https://placehold.co/600x400";
-
   return (
     <div
       style={{
@@ -289,7 +282,6 @@ export default function Table({
                 inputValue={inputValue}
                 setInputValue={setInputValue}
                 onItemClick={handleItemClick}
-                showImage={false}
                 variant="small"
                 loading={loading}
                 variantTheme={variant}
@@ -459,14 +451,6 @@ export default function Table({
                   </p>
                 </>
               )}
-
-              {/* {loading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50">
-                <p className="text-lg font-semibold text-gray-500">
-                  Carregando...
-                </p>
-              </div>
-            )} */}
             </div>
           )}
 
@@ -476,7 +460,7 @@ export default function Table({
               style={{
                 backgroundColor: backgroundLoading[themeMode],
               }}
-              className="flex h-full w-full flex-col gap-4  pb-5 pl-5 pr-5 pt-5 pt-0 opacity-50 lg:rounded-b-2xl"
+              className="flex h-full w-full flex-col gap-4  pb-5 pl-5 pr-5 pt-5 opacity-50 lg:rounded-b-2xl"
             >
               {Array.from({ length: 5 }).map((_, index) => (
                 <Skeleton
@@ -542,10 +526,7 @@ export default function Table({
                               <div className="flex h-auto w-full items-center justify-start">
                                 <img
                                   className="h-2/6 w-2/6 object-contain"
-                                  src={
-                                    selectedItem[column.ref] ||
-                                    "https://placehold.co/600x400"
-                                  }
+                                  src={selectedItem[column.ref] || LogoMarca}
                                   alt=""
                                 />
                               </div>
