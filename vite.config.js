@@ -9,7 +9,7 @@ export default defineConfig({
       entry: resolve(__dirname, "src/components/NaluTable.jsx"),
       name: "NaluDataTable",
       formats: ["es", "umd"],
-      fileName: (format) => `nalu-data-table.${format}.js`,
+      fileName: (format) => `nalu-table.${format}.js`,
     },
     rollupOptions: {
       external: [
@@ -34,7 +34,7 @@ export default defineConfig({
           tailwindcss: "tailwindcss",
         },
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === "style.css") return "nalu-data-table.css";
+          if (assetInfo.name === "style.css") return "nalu-table.css";
           return assetInfo.name;
         },
       },

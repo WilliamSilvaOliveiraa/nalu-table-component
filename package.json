@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "type": "module",
   "description": "A customizable React data table component with sorting, filtering, and pagination features",
-  "main": "./dist/nalu-data-table.umd.js",
-  "module": "./dist/nalu-data-table.es.js",
-  "style": "./dist/nalu-data-table.css",
+  "main": "./dist/nalu-table.umd.js",
+  "module": "./dist/nalu-table.es.js",
+  "style": "./dist/nalu-table.css",
   "exports": {
     ".": {
-      "import": "./dist/nalu-data-table.es.js",
-      "require": "./dist/nalu-data-table.umd.js"
+      "import": "./dist/nalu-table.es.js",
+      "require": "./dist/nalu-table.umd.js"
     },
-    "./dist/style.css": "./dist/nalu-data-table.css"
+    "./dist/style.css": "./dist/nalu-table.css"
   },
   "files": [
     "dist"
