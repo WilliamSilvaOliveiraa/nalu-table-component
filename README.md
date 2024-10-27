@@ -3,7 +3,7 @@
 A modern, customizable React table component with built-in themes, pagination, and advanced features. Perfect for creating beautiful and functional data tables in your React applications.
 
 [![NPM Version](https://img.shields.io/npm/v/nalu-table)](https://www.npmjs.com/package/nalu-table)
-[![License](https://img.shields.io/npm/l/nalu-table)](https://github.com/yourusername/nalu-table/blob/main/LICENSE)
+[![License](https://img.shields.io/npm/l/nalu-table)](https://github.com/WilliamSilvaOliveiraa/nalu-table-component/blob/main/LICENSE)
 
 ## Features
 
@@ -73,7 +73,8 @@ module.exports = {
 ### 3. Start using the component
 
 ```jsx
-import { NaluTable } from "nalu-table";
+import NaluTable from "nalu-table";
+import "nalu-table/dist/style.css"; //Recommended for best visual experience
 
 // Your component code
 ```
@@ -83,7 +84,9 @@ import { NaluTable } from "nalu-table";
 ## Quick Start
 
 ```jsx
-import { NaluTable } from 'nalu-table';
+import NaluTable from "nalu-table";
+import "nalu-table/dist/style.css"; //Recommended for best visual experience
+
 
 function App() {
  const tableData = {
