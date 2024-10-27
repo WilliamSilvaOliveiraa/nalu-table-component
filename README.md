@@ -7,7 +7,7 @@ A modern, customizable React table component with built-in themes, pagination, a
 
 ## Features
 
-- 🎨 Theme variants (Sapphire & more)
+- 🎨 Theme variants (Sapphire & Crimson)
 - 🌗 Light and dark mode
 - 📱 Responsive design
 - ⚡ Pagination
@@ -157,7 +157,7 @@ function App() {
 <NaluTable
   tableData={data}
   header=true
-  variant="sapphire"
+  variant="crimson"
   theme="light"
 />
 ```
