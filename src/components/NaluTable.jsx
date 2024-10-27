@@ -9,7 +9,7 @@ import "./Dots/style.css";
 NaluTable.propTypes = {
   tableData: PropTypes.array.isRequired,
   header: PropTypes.bool,
-  plusButton: PropTypes.bool,
+  plusButton: PropTypes.func,
   totalItems: PropTypes.number,
   itemsPerPage: PropTypes.number,
   addItemFunction: PropTypes.func,
@@ -34,7 +34,9 @@ NaluTable.propTypes = {
 NaluTable.defaultProps = {
   tableData: [],
   header: true,
-  plusButton: true,
+  plusButton: () => {
+    console.log("Plus Button Click Event");
+  },
   totalItems: 0,
   itemsPerPage: 10,
   addItemFunction: () => {},

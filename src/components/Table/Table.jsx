@@ -38,7 +38,7 @@ Table.propTypes = {
   brandLogo: PropTypes.string,
   hasTabs: PropTypes.bool,
   header: PropTypes.bool,
-  plusButton: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+  plusButton: PropTypes.func,
   loading: PropTypes.bool,
 
   size: PropTypes.oneOf(["small", "large"]),
@@ -56,7 +56,7 @@ Table.defaultProps = {
   },
   hasTabs: false,
   header: true,
-  plusButton: false,
+  plusButton: () => {},
   size: "large",
 };
 
