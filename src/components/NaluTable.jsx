@@ -4,6 +4,7 @@ import PresetTabs from "./PresetTabs/PresetTabs";
 import PropTypes from "prop-types";
 import ModalTabs from "./Modal/ModalTabs";
 import Pagination from "./Pagination/Pagination";
+import "./Dots/style.css";
 
 NaluTable.propTypes = {
   tableData: PropTypes.array.isRequired,

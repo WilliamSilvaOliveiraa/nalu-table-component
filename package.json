@@ -1,28 +1,37 @@
 {
-  "name": "nalu-data-table-package",
-  "private": true,
-  "version": "0.0.0",
+  "name": "nalu-data-table",
+  "version": "1.0.0",
   "type": "module",
+  "main": "./dist/nalu-data-table.umd.js",
+  "module": "./dist/nalu-data-table.es.js",
+  "style": "./dist/nalu-data-table.css",
+  "exports": {
+    ".": {
+      "import": "./dist/nalu-data-table.es.js",
+      "require": "./dist/nalu-data-table.umd.js"
+    },
+    "./dist/style.css": "./dist/nalu-data-table.css"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/copy-css.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^6.1.4",
     "@mui/material": "^6.1.4",
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-responsive": "^10.0.0",
     "styled-components": "^6.1.13",
     "tailwindcss": "^3.4.14"
   },
   "devDependencies": {
-    "@eslint/js": "^9.11.1",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.2",
@@ -31,8 +40,15 @@
     "eslint-plugin-react": "^7.37.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
-    "globals": "^15.9.0",
     "postcss": "^8.4.47",
-    "vite": "^5.4.8"
+    "vite": "^5.4.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.4",
+    "@mui/material": "^6.1.4",
+    "styled-components": "^6.1.13",
+    "tailwindcss": "^3.4.14"
   }
 }
