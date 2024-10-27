@@ -1,7 +1,8 @@
 {
-  "name": "nalu-data-table",
+  "name": "nalu-table",
   "version": "1.0.1",
   "type": "module",
+  "description": "A customizable React data table component with sorting, filtering, and pagination features",
   "main": "./dist/nalu-data-table.umd.js",
   "module": "./dist/nalu-data-table.es.js",
   "style": "./dist/nalu-data-table.css",

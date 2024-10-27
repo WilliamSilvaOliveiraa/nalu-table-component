@@ -18,7 +18,6 @@ NaluTable.propTypes = {
   modalTitle: PropTypes.string,
   handleTabChange: PropTypes.func,
   loading: PropTypes.bool,
-  checkbox: PropTypes.bool,
   handleSelectionChange: PropTypes.func,
   size: PropTypes.string,
   removeItemFunction: PropTypes.func,
@@ -27,7 +26,7 @@ NaluTable.propTypes = {
   handleSaveTabs: PropTypes.func,
   LogoMarca: PropTypes.string,
   variant: PropTypes.string,
-  themeMode: PropTypes.string,
+  theme: PropTypes.string,
   selectedTab: PropTypes.string,
   activeTab: PropTypes.string,
 };
@@ -44,15 +43,14 @@ NaluTable.defaultProps = {
   modalTitle: "",
   handleTabChange: () => {},
   loading: false,
-  checkbox: false,
-  handleSelectionChange: () => {},
+  handleSelectionChange: null,
   size: "",
   removeItemFunction: () => {},
   editItemFunction: () => {},
   currentPageProp: 1,
   handleSaveTabs: () => {},
   variant: "sapphire",
-  themeMode: "light",
+  theme: "light",
   selectedTab: "",
   activeTab: "",
   LogoMarca: "https://placehold.co/400",
@@ -70,7 +68,7 @@ export default function NaluTable({
   modalTitle,
   handleTabChange,
   loading,
-  checkbox,
+
   handleSelectionChange,
   size,
   removeItemFunction,
@@ -81,7 +79,7 @@ export default function NaluTable({
   selectedTab,
   activeTab,
   variant,
-  themeMode,
+  theme,
 }) {
   const [tab, setTab] = useState(null);
   const [open, setOpen] = useState(false);
@@ -113,7 +111,7 @@ export default function NaluTable({
                 selectedTab={selectedTab}
                 activeTab={activeTab}
                 variant={variant}
-                themeMode={themeMode}
+                themeMode={theme}
               />
               {handlePageChange && (
                 <div
@@ -127,7 +125,7 @@ export default function NaluTable({
                     loading={loading}
                     currentPageProp={currentPageProp}
                     variant={variant}
-                    themeMode={themeMode}
+                    themeMode={theme}
                   />
                 </div>
               )}
@@ -141,7 +139,6 @@ export default function NaluTable({
               plusButton={plusButton}
               viewItemFunction={viewItemFunction}
               loading={loading}
-              checkbox={checkbox}
               onSelectionChange={handleSelectionChange}
               size={size}
               removeItemFunction={removeItemFunction}
@@ -149,7 +146,7 @@ export default function NaluTable({
               handlePageChange={handlePageChange}
               variant={variant}
               LogoMarca={LogoMarca}
-              themeMode={themeMode}
+              themeMode={theme}
             />
             {handlePageChange && (
               <div style={{ marginTop: "24px" }}>
@@ -161,7 +158,7 @@ export default function NaluTable({
                     loading={loading}
                     currentPageProp={currentPageProp}
                     variant={variant}
-                    themeMode={themeMode}
+                    themeMode={theme}
                   />
                 ) : (
                   <Pagination
@@ -171,7 +168,7 @@ export default function NaluTable({
                     loading={loading}
                     currentPageProp={currentPageProp}
                     variant={variant}
-                    themeMode={themeMode}
+                    themeMode={theme}
                   />
                 )}
               </div>
@@ -200,7 +197,7 @@ export default function NaluTable({
                           loading={loading}
                           currentPageProp={currentPageProp}
                           variant={variant}
-                          themeMode={themeMode}
+                          themeMode={theme}
                         />
                       ) : (
                         <Pagination
@@ -210,7 +207,7 @@ export default function NaluTable({
                           loading={loading}
                           currentPageProp={currentPageProp}
                           variant={variant}
-                          themeMode={themeMode}
+                          themeMode={theme}
                         />
                       )}
                     </>
@@ -224,7 +221,6 @@ export default function NaluTable({
                   plusButton={plusButton}
                   viewItemFunction={viewItemFunction}
                   loading={loading}
-                  checkbox={checkbox}
                   onSelectionChange={handleSelectionChange}
                   size={size}
                   removeItemFunction={removeItemFunction}
@@ -232,7 +228,7 @@ export default function NaluTable({
                   handlePageChange={handlePageChange}
                   LogoMarca={LogoMarca}
                   variant={variant}
-                  themeMode={themeMode}
+                  themeMode={theme}
                 />
                 <div style={{ marginTop: "24px" }}>
                   {handlePageChange && (
@@ -246,7 +242,7 @@ export default function NaluTable({
                           loading={loading}
                           currentPageProp={currentPageProp}
                           variant={variant}
-                          themeMode={themeMode}
+                          themeMode={theme}
                         />
                       ) : (
                         <Pagination
@@ -256,7 +252,7 @@ export default function NaluTable({
                           loading={loading}
                           currentPageProp={currentPageProp}
                           variant={variant}
-                          themeMode={themeMode}
+                          themeMode={theme}
                         />
                       )}
                     </>
@@ -273,7 +269,6 @@ export default function NaluTable({
                   plusButton={plusButton}
                   viewItemFunction={viewItemFunction}
                   loading={loading}
-                  checkbox={checkbox}
                   onSelectionChange={handleSelectionChange}
                   size={size}
                   removeItemFunction={removeItemFunction}
@@ -281,7 +276,7 @@ export default function NaluTable({
                   LogoMarca={LogoMarca}
                   handlePageChange={handlePageChange}
                   variant={variant}
-                  themeMode={themeMode}
+                  themeMode={theme}
                 />
                 <div style={{ marginTop: "24px", marginBottom: "8px" }}>
                   {handlePageChange && (
@@ -295,7 +290,7 @@ export default function NaluTable({
                           loading={loading}
                           currentPageProp={currentPageProp}
                           variant={variant}
-                          themeMode={themeMode}
+                          themeMode={theme}
                         />
                       ) : (
                         <Pagination
@@ -305,7 +300,7 @@ export default function NaluTable({
                           loading={loading}
                           currentPageProp={currentPageProp}
                           variant={variant}
-                          themeMode={themeMode}
+                          themeMode={theme}
                         />
                       )}{" "}
                     </>
@@ -325,7 +320,7 @@ export default function NaluTable({
           items={tableData.tabs}
           onSave={handleSaveTabs}
           variant={variant}
-          themeMode={themeMode}
+          themeMode={theme}
         />
       )}
     </>
