@@ -13,6 +13,7 @@ import PropTypes from "prop-types";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import Button from "@mui/material/Button";
 import colorThemes from "../../constants/colorThemes";
+import languages from "../../constants/languages";
 
 const StyledModal = styled(Modal)({
   display: "flex",
@@ -56,7 +57,9 @@ const ModalTabs = ({
   text,
   variant,
   themeMode,
+  languageProp,
 }) => {
+  const texts = language[languageProp] || language["en"];
   const [checkedItems, setCheckedItems] = useState([]);
   const {
     backgroundList,

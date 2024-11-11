@@ -32,7 +32,7 @@ const SearchInput = ({
   displayedOptions,
   onItemClick,
   loading,
-  placeholder = "Pesquisar",
+  placeholder = "Search",
   variant = "default",
   variantTheme,
   themeMode,
@@ -240,7 +240,7 @@ SearchInput.propTypes = {
 
 SearchInput.defaultProps = {
   loading: false,
-  placeholder: "Pesquisar",
+  placeholder: "Search",
   variant: "default",
 };
 

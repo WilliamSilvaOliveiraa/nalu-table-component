@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import ModalTabs from "./Modal/ModalTabs";
 import Pagination from "./Pagination/Pagination";
 import "./Dots/style.css";
+import languages from "../constants/languages";
 
 NaluTable.propTypes = {
   tableData: PropTypes.array.isRequired,
@@ -27,6 +28,7 @@ NaluTable.propTypes = {
   brandLogo: PropTypes.string,
   variant: PropTypes.string,
   theme: PropTypes.string,
+  language: PropTypes.string,
   selectedTab: PropTypes.string,
   activeTab: PropTypes.string,
 };
@@ -53,6 +55,7 @@ NaluTable.defaultProps = {
   handleSaveTabs: () => {},
   variant: "sapphire",
   theme: "light",
+  language: "en",
   selectedTab: "",
   activeTab: "",
   brandLogo: "https://placehold.co/400",
@@ -80,6 +83,7 @@ export default function NaluTable({
   selectedTab,
   activeTab,
   variant,
+  language,
   theme,
 }) {
   const [tab, setTab] = useState(null);
@@ -322,6 +326,7 @@ export default function NaluTable({
           onSave={handleSaveTabs}
           variant={variant}
           themeMode={theme}
+          language={language}
         />
       )}
     </>
