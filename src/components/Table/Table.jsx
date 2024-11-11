@@ -12,6 +12,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import styled from "styled-components";
 import NotFound from "../../assets/NotFound.jsx";
 import colorThemes from "../../constants/colorThemes";
+import languages from "../../constants/languages";
 
 import PropTypes from "prop-types";
 
@@ -40,7 +41,7 @@ Table.propTypes = {
   header: PropTypes.bool,
   plusButton: PropTypes.func,
   loading: PropTypes.bool,
-
+  languageProp: PropTypes.string,
   size: PropTypes.oneOf(["small", "large"]),
   variant: PropTypes.string.isRequired,
   themeMode: PropTypes.string.isRequired,
@@ -76,13 +77,14 @@ export default function Table({
   variant,
   themeMode,
   brandLogo,
+  languageProp,
 }) {
   const [inputValue, setInputValue] = useState("");
   const [sortColumn, setSortColumn] = useState(null);
   const [sortDirection, setSortDirection] = useState({});
   const [expandedItems, setExpandedItems] = useState({});
   const [selectedItem, setSelectedItem] = useState(null);
-
+  const texts = languages[languageProp] || languages["en"];
   const {
     primary,
     primaryFocusStrong,
@@ -286,6 +288,7 @@ export default function Table({
                 loading={loading}
                 variantTheme={variant}
                 themeMode={themeMode}
+                languageProp={languageProp}
               />
             )}
           </div>
@@ -328,11 +331,13 @@ export default function Table({
                   loading
                     ? "group-hover:rotate-0 group-hover:opacity-0"
                     : "group-hover:rotate-90 group-hover:opacity-100"
-                } absolute left-[23%] top-1/2 z-10 flex translate-x-[-50%] translate-y-[-50%] rotate-0 items-center justify-center opacity-0 transition-all duration-300`}
+                } absolute ${
+                  languageProp === "en" ? "left-[31%]" : "left-[23%]"
+                } top-1/2 z-10 flex translate-x-[-50%] translate-y-[-50%] rotate-0 items-center justify-center opacity-0 transition-all duration-300`}
               >
                 <AddCircleRoundedIcon sx={{ fontSize: 16 }} />
               </span>
-              <p className="text-[12px] font-medium">Adicionar</p>
+              <p className="text-[12px] font-medium">{texts.plusButton}</p>
             </button>
           )}
         </div>

@@ -54,12 +54,12 @@ const ModalTabs = ({
   onClose,
   items,
   onSave,
-  text,
+  text = "Table",
   variant,
   themeMode,
   languageProp,
 }) => {
-  const texts = language[languageProp] || language["en"];
+  const texts = languages[languageProp] || languages["en"];
   const [checkedItems, setCheckedItems] = useState([]);
   const {
     backgroundList,
@@ -128,7 +128,7 @@ const ModalTabs = ({
               id="modal-tabs-title"
               className="text-lg "
             >
-              Acrescentar tabs
+              {texts.addTabs}
             </h2>
             <p
               style={{
@@ -137,7 +137,7 @@ const ModalTabs = ({
               id="modal-tabs-description"
               className="text-base "
             >
-              Controle quais tabs mostrar em {text}
+              {texts.subTitle} {text}
             </p>
           </div>
           <IconButton onClick={onClose} sx={{ width: 30, height: 30 }}>
@@ -216,7 +216,7 @@ const ModalTabs = ({
                 onClose();
               }}
             >
-              <p className="h-fit capitalize pt-[2px]"> Cancelar </p>
+              <p className="h-fit capitalize pt-[2px]"> {texts.cancel} </p>
             </Button>
           </div>
           <div className="w-32">
@@ -238,7 +238,7 @@ const ModalTabs = ({
                 handleSave();
               }}
             >
-              <p className="h-fit capitalize pt-[2px]"> Salvar </p>
+              <p className="h-fit capitalize pt-[2px]">{texts.save} </p>
             </Button>
           </div>
         </div>

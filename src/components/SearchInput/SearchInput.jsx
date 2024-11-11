@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import colorThemes from "../../constants/colorThemes";
+import languages from "../../constants/languages";
 
 const getOptionText = (option) => {
   return option.label || option.name || option.title || "";
@@ -32,14 +33,15 @@ const SearchInput = ({
   displayedOptions,
   onItemClick,
   loading,
-  placeholder = "Search",
+  placeholder,
   variant = "default",
   variantTheme,
+  languageProp,
   themeMode,
 }) => {
   const [isListOpen, setIsListOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
-
+  const texts = languages[languageProp] || languages["en"];
   const {
     hoverSearchInput,
     primary,
@@ -50,6 +52,8 @@ const SearchInput = ({
     backgroundPerfilSearchInput,
     textItemSearchInput,
   } = colorThemes[variantTheme];
+
+  const effectivePlaceholder = placeholder || texts.placeholder;
 
   const filteredOptions = displayedOptions?.filter((option) =>
     getOptionText(option)?.toLowerCase().includes(inputValue?.toLowerCase())
@@ -89,10 +93,10 @@ const SearchInput = ({
 
   const getEmptyStateMessage = () => {
     if (!displayedOptions || displayedOptions.length === 0) {
-      return "Nenhum item disponível";
+      return texts.noItem;
     }
     if (filteredOptions?.length === 0) {
-      return "Nenhum resultado encontrado";
+      return texts.empty;
     }
     return null;
   };
@@ -104,7 +108,7 @@ const SearchInput = ({
         autoComplete="off"
         className={inputClassNames}
         type="text"
-        placeholder={placeholder}
+        placeholder={effectivePlaceholder}
         value={inputValue}
         onChange={handleInputChange}
         onFocus={handleInputFocus}
@@ -232,7 +236,7 @@ SearchInput.propTypes = {
   onItemClick: PropTypes.func.isRequired,
   variantTheme: PropTypes.string.isRequired,
   themeMode: PropTypes.string.isRequired,
-
+  languageProp: PropTypes.string.isRequired,
   loading: PropTypes.bool,
   placeholder: PropTypes.string,
   variant: PropTypes.oneOf(["default", "small"]),
@@ -240,8 +244,8 @@ SearchInput.propTypes = {
 
 SearchInput.defaultProps = {
   loading: false,
-  placeholder: "Search",
   variant: "default",
+  languageProp: "en",
 };
 
 export default SearchInput;

@@ -12,14 +12,10 @@ const languages = {
     //SearchInput
     empty: "No results found",
     noItem: "No items available",
+    placeholder: "Search",
 
     //Plus
     plusButton: "Add",
-
-    greeting: "Hello",
-    farewell: "Goodbye",
-    welcome: "Welcome to our application",
-    // Adicione mais textos conforme necessário
   },
   "pt-br": {
     //Modal
@@ -33,14 +29,10 @@ const languages = {
     //SearchInput
     empty: "Nenhum resultado encontrado",
     noItem: "Nenhum item disponível",
+    placeholder: "Buscar",
 
     //Plus
     plusButton: "Adicionar",
-
-    greeting: "Olá",
-    farewell: "Adeus",
-    welcome: "Bem-vindo à nossa aplicação",
-    // Adicione mais textos conforme necessário
   },
 };
 

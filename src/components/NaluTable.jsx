@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import ModalTabs from "./Modal/ModalTabs";
 import Pagination from "./Pagination/Pagination";
 import "./Dots/style.css";
-import languages from "../constants/languages";
 
 NaluTable.propTypes = {
   tableData: PropTypes.array.isRequired,
@@ -152,6 +151,7 @@ export default function NaluTable({
               variant={variant}
               brandLogo={brandLogo}
               themeMode={theme}
+              languageProp={language}
             />
             {handlePageChange && (
               <div style={{ marginTop: "24px" }}>
@@ -234,6 +234,7 @@ export default function NaluTable({
                   brandLogo={brandLogo}
                   variant={variant}
                   themeMode={theme}
+                  languageProp={language}
                 />
                 <div style={{ marginTop: "24px" }}>
                   {handlePageChange && (
@@ -282,6 +283,7 @@ export default function NaluTable({
                   handlePageChange={handlePageChange}
                   variant={variant}
                   themeMode={theme}
+                  languageProp={language}
                 />
                 <div style={{ marginTop: "24px", marginBottom: "8px" }}>
                   {handlePageChange && (
@@ -326,7 +328,7 @@ export default function NaluTable({
           onSave={handleSaveTabs}
           variant={variant}
           themeMode={theme}
-          language={language}
+          languageProp={language}
         />
       )}
     </>
