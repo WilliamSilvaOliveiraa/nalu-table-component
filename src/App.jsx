@@ -5,7 +5,12 @@ import tableData from "./Data";
 function App() {
   return (
     <div className="p-20 h-full">
-      <NaluTable itemsPerPage={5} totalItems={20} tableData={tableData} />
+      <NaluTable
+        itemsPerPage={5}
+        totalItems={20}
+        tableData={tableData}
+        theme="dark"
+      />
     </div>
   );
 }

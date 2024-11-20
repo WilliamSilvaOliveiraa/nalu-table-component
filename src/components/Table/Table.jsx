@@ -261,6 +261,7 @@ export default function Table({
       }}
       className={`relative flex flex-col 
                   overflow-hidden
+                  transition-all duration-300 ease-in-out
         ${
           hasTabs
             ? loading
@@ -1492,7 +1493,7 @@ export default function Table({
 
                   <div className="mb-10 flex w-full items-center justify-center gap-4">
                     <h1 className="text-base font-medium text-gray-400">
-                      Nenhum resultado encontrado
+                      {texts.empty}
                     </h1>
 
                     <Dots animation="undulate" dotColor="bg-gray-400" />

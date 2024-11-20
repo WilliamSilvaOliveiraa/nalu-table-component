@@ -41,13 +41,11 @@ const Pagination = ({
     const sidePages = 2;
 
     if (totalPages <= 7) {
-      // Se o número total de páginas for menor ou igual a 7, mostra todas as páginas
       for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(i);
       }
     } else {
       if (currentPage <= 3) {
-        // Se a página atual estiver entre 1 e 3, mostra as 4 primeiras páginas
         for (let i = 1; i <= 4; i++) {
           pageNumbers.push(i);
         }
@@ -56,7 +54,6 @@ const Pagination = ({
           pageNumbers.push(i);
         }
       } else if (currentPage >= totalPages - 2) {
-        // Se a página atual estiver nas últimas 4 páginas, mostra as últimas 4 páginas
         for (let i = 1; i <= 4; i++) {
           pageNumbers.push(i);
         }
@@ -65,7 +62,6 @@ const Pagination = ({
           pageNumbers.push(i);
         }
       } else {
-        // Se a página atual estiver no meio, mostra 2 páginas antes e 2 depois
         pageNumbers.push(1);
         pageNumbers.push("...");
         for (
@@ -87,27 +83,23 @@ const Pagination = ({
     const sidePages = 1;
 
     if (totalPages <= 5) {
-      // Se o número total de páginas for menor ou igual a 5, mostra todas as páginas
       for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(i);
       }
     } else {
       if (currentPage <= 2) {
-        // Se a página atual for 1 ou 2, mostra as 3 primeiras páginas
         for (let i = 1; i <= 3; i++) {
           pageNumbers.push(i);
         }
         pageNumbers.push("...");
         pageNumbers.push(totalPages);
       } else if (currentPage >= totalPages - 1) {
-        // Se a página atual for uma das duas últimas, mostra as 3 últimas páginas
         pageNumbers.push(1);
         pageNumbers.push("...");
         for (let i = totalPages - 2; i <= totalPages; i++) {
           pageNumbers.push(i);
         }
       } else {
-        // Para todas as outras páginas (incluindo a terceira), mostra o "miolo"
         pageNumbers.push(1);
         if (currentPage > 3) pageNumbers.push("...");
         for (

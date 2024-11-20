@@ -18,7 +18,7 @@ const colorThemes = {
     },
     primaryFocusStrong: {
       light: "#B24DF8",
-      dark: "#B24DF8",
+      dark: "#5E4DB2",
     },
     primaryLow: {
       light: "#F9F4FF",
