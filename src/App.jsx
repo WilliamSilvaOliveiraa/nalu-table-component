@@ -9,7 +9,8 @@ function App() {
         itemsPerPage={5}
         totalItems={20}
         tableData={tableData}
-        theme="dark"
+        theme="light"
+        variant="sss"
       />
     </div>
   );

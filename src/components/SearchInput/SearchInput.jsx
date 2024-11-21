@@ -116,6 +116,7 @@ const SearchInput = ({
         disabled={loading}
         readOnly={loading}
         style={{
+          transition: "all 0.3s ease-in-out",
           backgroundColor: loading
             ? backgroundTopLoadingInput[themeMode]
             : backgroundTop[themeMode],

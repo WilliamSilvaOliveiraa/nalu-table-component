@@ -356,7 +356,7 @@ export default function Table({
           {!loading && (
             <div
               style={{ backgroundColor: backgroundTop[themeMode] }}
-              className={`lg-rounded-none sticky top-0 z-[4] flex h-auto w-full  ${
+              className={`lg-rounded-none sticky top-0 z-[4] flex h-auto w-full transition-all duration-300 ease-in-out  ${
                 size === "small" ? "px-4 py-2" : "px-10 py-3"
               } ${loading ? "pointer-events-none opacity-0" : ""} `}
             >

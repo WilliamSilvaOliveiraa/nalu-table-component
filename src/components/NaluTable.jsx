@@ -90,6 +90,12 @@ export default function NaluTable({
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const validatedTheme =
+    theme === "light" || theme === "dark" ? theme : "light";
+
+  const validatedVariant =
+    variant === "sapphire" || variant === "crimson" ? variant : "sapphire";
+
   useEffect(() => {
     if (tableData?.tabs && tableData?.tabs.length > 0) {
       setTab(true);
@@ -114,8 +120,8 @@ export default function NaluTable({
                 loading={loading}
                 selectedTab={selectedTab}
                 activeTab={activeTab}
-                variant={variant}
-                themeMode={theme}
+                variant={validatedVariant}
+                themeMode={validatedTheme}
               />
               {handlePageChange && (
                 <div
@@ -128,8 +134,8 @@ export default function NaluTable({
                     itemsPerPage={itemsPerPage}
                     loading={loading}
                     currentPageProp={currentPageProp}
-                    variant={variant}
-                    themeMode={theme}
+                    variant={validatedVariant}
+                    themeMode={validatedTheme}
                   />
                 </div>
               )}
@@ -148,9 +154,9 @@ export default function NaluTable({
               removeItemFunction={removeItemFunction}
               editItemFunction={editItemFunction}
               handlePageChange={handlePageChange}
-              variant={variant}
+              variant={validatedVariant}
               brandLogo={brandLogo}
-              themeMode={theme}
+              themeMode={validatedTheme}
               languageProp={language}
             />
             {handlePageChange && (
@@ -162,8 +168,8 @@ export default function NaluTable({
                     itemsPerPage={itemsPerPage}
                     loading={loading}
                     currentPageProp={currentPageProp}
-                    variant={variant}
-                    themeMode={theme}
+                    variant={validatedVariant}
+                    themeMode={validatedTheme}
                   />
                 ) : (
                   <Pagination
@@ -172,8 +178,8 @@ export default function NaluTable({
                     itemsPerPage={itemsPerPage}
                     loading={loading}
                     currentPageProp={currentPageProp}
-                    variant={variant}
-                    themeMode={theme}
+                    variant={validatedVariant}
+                    themeMode={validatedTheme}
                   />
                 )}
               </div>
@@ -201,8 +207,8 @@ export default function NaluTable({
                           itemsPerPage={itemsPerPage}
                           loading={loading}
                           currentPageProp={currentPageProp}
-                          variant={variant}
-                          themeMode={theme}
+                          variant={validatedVariant}
+                          themeMode={validatedTheme}
                         />
                       ) : (
                         <Pagination
@@ -211,8 +217,8 @@ export default function NaluTable({
                           itemsPerPage={itemsPerPage}
                           loading={loading}
                           currentPageProp={currentPageProp}
-                          variant={variant}
-                          themeMode={theme}
+                          variant={validatedVariant}
+                          themeMode={validatedTheme}
                         />
                       )}
                     </>
@@ -232,8 +238,8 @@ export default function NaluTable({
                   editItemFunction={editItemFunction}
                   handlePageChange={handlePageChange}
                   brandLogo={brandLogo}
-                  variant={variant}
-                  themeMode={theme}
+                  variant={validatedVariant}
+                  themeMode={validatedTheme}
                   languageProp={language}
                 />
                 <div style={{ marginTop: "24px" }}>
@@ -247,8 +253,8 @@ export default function NaluTable({
                           itemsPerPage={itemsPerPage}
                           loading={loading}
                           currentPageProp={currentPageProp}
-                          variant={variant}
-                          themeMode={theme}
+                          variant={validatedVariant}
+                          themeMode={validatedTheme}
                         />
                       ) : (
                         <Pagination
@@ -257,8 +263,8 @@ export default function NaluTable({
                           itemsPerPage={itemsPerPage}
                           loading={loading}
                           currentPageProp={currentPageProp}
-                          variant={variant}
-                          themeMode={theme}
+                          variant={validatedVariant}
+                          themeMode={validatedTheme}
                         />
                       )}
                     </>
@@ -281,8 +287,8 @@ export default function NaluTable({
                   editItemFunction={editItemFunction}
                   brandLogo={brandLogo}
                   handlePageChange={handlePageChange}
-                  variant={variant}
-                  themeMode={theme}
+                  variant={validatedVariant}
+                  themeMode={validatedTheme}
                   languageProp={language}
                 />
                 <div style={{ marginTop: "24px", marginBottom: "8px" }}>
@@ -296,8 +302,8 @@ export default function NaluTable({
                           itemsPerPage={itemsPerPage}
                           loading={loading}
                           currentPageProp={currentPageProp}
-                          variant={variant}
-                          themeMode={theme}
+                          variant={validatedVariant}
+                          themeMode={validatedTheme}
                         />
                       ) : (
                         <Pagination
@@ -306,8 +312,8 @@ export default function NaluTable({
                           itemsPerPage={itemsPerPage}
                           loading={loading}
                           currentPageProp={currentPageProp}
-                          variant={variant}
-                          themeMode={theme}
+                          variant={validatedVariant}
+                          themeMode={validatedTheme}
                         />
                       )}{" "}
                     </>
@@ -326,8 +332,8 @@ export default function NaluTable({
           onClose={handleClose}
           items={tableData.tabs}
           onSave={handleSaveTabs}
-          variant={variant}
-          themeMode={theme}
+          variant={validatedVariant}
+          themeMode={validatedTheme}
           languageProp={language}
         />
       )}
