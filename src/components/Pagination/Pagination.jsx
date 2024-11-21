@@ -171,7 +171,7 @@ const Pagination = ({
               style={{
                 backgroundColor: background[themeMode],
               }}
-              className="flex rounded-full  px-2"
+              className="flex rounded-full  px-2 transition-all ease-in-out duration-300"
             >
               {isSmallScreen
                 ? getPageNumbersPhone().map((number, index) => (
