@@ -162,7 +162,7 @@ const Pagination = ({
                 cursor:
                   currentPage === 1 || loading ? "not-allowed" : "pointer",
               }}
-              className="aspect-square h-[34px] rounded-full text-sm font-semibold transition-colors duration-300 ease-out"
+              className="aspect-square h-[34px] rounded-full text-sm font-semibold transition-all duration-300 ease-out"
             >
               <KeyboardArrowLeftRoundedIcon />
             </button>
@@ -171,7 +171,7 @@ const Pagination = ({
               style={{
                 backgroundColor: background[themeMode],
               }}
-              className="flex rounded-full  px-2"
+              className="flex rounded-full  px-2 transition-all ease-in-out duration-300"
             >
               {isSmallScreen
                 ? getPageNumbersPhone().map((number, index) => (
@@ -186,7 +186,7 @@ const Pagination = ({
                             ? "white"
                             : numberPagination[themeMode],
                       }}
-                      className={`relative h-[34px] w-[34px] rounded-xl text-sm font-semibold transition-colors duration-300 ease-out ${
+                      className={`relative h-[34px] w-[34px] rounded-xl text-sm font-semibold transition-all duration-300 ease-out ${
                         number === "..." ? "cursor-default" : ""
                       }`}
                       onMouseOver={(e) =>
@@ -234,7 +234,7 @@ const Pagination = ({
                         backgroundColor: background[themeMode],
                         fontSize: "0.875rem",
                         fontWeight: "600",
-                        transition: "color 300ms ease-out",
+                        transition: "all 300ms ease-out",
                         zIndex: number === currentPage ? "20" : "auto",
                         color:
                           number === currentPage
@@ -301,7 +301,7 @@ const Pagination = ({
                     ? "not-allowed"
                     : "pointer",
               }}
-              className="aspect-square h-[34px] rounded-full text-sm font-semibold transition-colors duration-300 ease-out"
+              className="aspect-square h-[34px] rounded-full text-sm font-semibold transition-all duration-300 ease-out"
             >
               <KeyboardArrowRightRoundedIcon />
             </button>
