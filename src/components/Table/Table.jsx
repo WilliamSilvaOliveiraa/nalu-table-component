@@ -458,7 +458,11 @@ export default function Table({
                       loading ? `opacity-0` : `opacity-100`
                     } flex w-full items-center justify-center py-2 text-[12px] font-semibold `}
                   >
-                    {data?.tableInfo?.items > 0 ? texts.textAction : <p>‎</p>}
+                    {data?.tableInfo?.items.length > 0 ? (
+                      texts.textAction
+                    ) : (
+                      <p>‎</p>
+                    )}
                   </p>
                 </>
               )}
