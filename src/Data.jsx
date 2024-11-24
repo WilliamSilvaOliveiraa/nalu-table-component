@@ -23,12 +23,12 @@ const tableData = {
         alignment: "left",
         ordering: true,
       },
-      {
-        header: "Idade",
-        ref: "age",
-        alignment: "center",
-        ordering: false,
-      },
+      // {
+      //   header: "Idade",
+      //   ref: "age",
+      //   alignment: "center",
+      //   ordering: false,
+      // },
       {
         header: "Localização",
         ref: "location",

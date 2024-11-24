@@ -194,7 +194,7 @@ export default function NaluTable({
         ) : (
           <>
             {header ? (
-              <div className="relative flex h-auto flex-col">
+              <div className="relative flex h-full flex-col">
                 <div
                   style={{
                     position: "absolute",
@@ -279,7 +279,7 @@ export default function NaluTable({
                 </div>
               </div>
             ) : (
-              <div className="relative flex h-auto flex-col">
+              <div className="relative flex h-full flex-col  ">
                 <Table
                   data={tableData}
                   hasTabs={tab}

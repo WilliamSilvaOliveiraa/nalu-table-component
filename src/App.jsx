@@ -4,7 +4,7 @@ import tableData from "./Data";
 
 function App() {
   return (
-    <div className="p-20 h-full w-full ">
+    <div className="p-20 h-screen w-full  ">
       <NaluTable />
     </div>
   );

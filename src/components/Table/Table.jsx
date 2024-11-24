@@ -348,11 +348,12 @@ export default function Table({
       )}
 
       {/* Cabeçalhos da tabela */}
-      <div className="relative overflow-x-auto ">
+      <div className="relative overflow-x-auto h-full">
         <div
           style={{
             minWidth: `${minWidth}px`,
             position: "relative",
+            height: "100%",
           }}
         >
           {!loading && (
@@ -905,16 +906,13 @@ export default function Table({
                       ))}
                     </div>
                   ) : (
-                    <div className="z-[3] flex h-full flex-col overflow-auto w-full">
+                    <div className="z-[3] flex h-auto flex-col overflow-auto w-full">
                       {sortedItems.map((item, index) => (
                         <div key={index} className="z-[3] flex flex-col">
                           {size === "small" ? (
                             <div
                               style={{
-                                borderColor:
-                                  index === sortedItems.length - 1
-                                    ? "transparent"
-                                    : backgroundBorder[themeMode],
+                                borderColor: backgroundBorder[themeMode],
                               }}
                               className={`z-[3] flex items-center px-8 border-b-[1px] gap-4 `}
                             >
@@ -1490,7 +1488,7 @@ export default function Table({
                   )}{" "}
                 </>
               ) : (
-                <div className="flex h-full w-full flex-col items-center justify-center gap-5 pt-11">
+                <div className="flex h-full w-full flex-col items-center justify-center gap-5 ">
                   <div className="w-[20%]">
                     <NotFound variant={variant} />
                   </div>
