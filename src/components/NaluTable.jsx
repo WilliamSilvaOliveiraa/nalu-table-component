@@ -30,6 +30,7 @@ NaluTable.propTypes = {
   language: PropTypes.string,
   selectedTab: PropTypes.string,
   activeTab: PropTypes.string,
+  minWidth: PropTypes.string,
 };
 
 NaluTable.defaultProps = {
@@ -42,7 +43,7 @@ NaluTable.defaultProps = {
   itemsPerPage: 10,
   addItemFunction: () => {},
   viewItemFunction: () => {},
-  handlePageChange: () => {},
+  handlePageChange: undefined,
   modalTitle: "",
   handleTabChange: () => {},
   loading: false,
@@ -58,6 +59,7 @@ NaluTable.defaultProps = {
   selectedTab: "",
   activeTab: "",
   brandLogo: "https://placehold.co/400",
+  minWidth: 1200,
 };
 
 export default function NaluTable({
@@ -84,6 +86,7 @@ export default function NaluTable({
   variant,
   language,
   theme,
+  minWidth,
 }) {
   const [tab, setTab] = useState(null);
   const [open, setOpen] = useState(false);
@@ -97,6 +100,8 @@ export default function NaluTable({
       setTab(false);
     }
   }, [tableData?.tabs]);
+
+  // console.log(tab);
 
   return (
     <>
@@ -152,6 +157,7 @@ export default function NaluTable({
               brandLogo={brandLogo}
               themeMode={theme}
               languageProp={language}
+              minWidth={minWidth}
             />
             {handlePageChange && (
               <div style={{ marginTop: "24px" }}>
@@ -235,6 +241,7 @@ export default function NaluTable({
                   variant={variant}
                   themeMode={theme}
                   languageProp={language}
+                  minWidth={minWidth}
                 />
                 <div style={{ marginTop: "24px" }}>
                   {handlePageChange && (
@@ -284,6 +291,7 @@ export default function NaluTable({
                   variant={variant}
                   themeMode={theme}
                   languageProp={language}
+                  minWidth={minWidth}
                 />
                 <div style={{ marginTop: "24px", marginBottom: "8px" }}>
                   {handlePageChange && (

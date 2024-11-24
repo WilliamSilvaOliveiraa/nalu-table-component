@@ -134,6 +134,8 @@ function App() {
 | `modalTitle`      | `string`  | `""`                         | Title for the modal                                 |
 | `selectedTab`     | `string`  | `""`                         | Currently selected tab                              |
 | `activeTab`       | `string`  | `""`                         | Currently active tab                                |
+| `language`        | `string`  | `"en"`                       | Table language (only 'en' and 'pt-br'')             |
+| `minWidth`        | `number`  | `1200`                       | Minimum content width (ScrollBar)                   |
 | `brandlogo`       | `string`  | `"https://placehold.co/400"` | URL for the logo image                              |
 
 ### Event Handlers

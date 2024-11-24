@@ -1,18 +1,27 @@
 import NaluTable from "./components/NaluTable";
-import "./App.css";
+//Dados de exemplo
 import tableData from "./Data";
 
 function App() {
   return (
-    <div className="p-20 h-full">
-      <NaluTable
-        itemsPerPage={5}
-        totalItems={20}
-        tableData={tableData}
-        theme="dark"
-      />
+    <div className="p-20 h-full w-full ">
+      <NaluTable />
     </div>
   );
 }
 
 export default App;
+
+//Exemplo de uso do componente NaluTable
+
+{
+  /* <NaluTable
+itemsPerPage={5}
+totalItems={20}
+tableData={tableData}
+theme="dark"
+size="small"
+minWidth={2000}
+handlePageChange={(page) => console.log(page)}
+/> */
+}

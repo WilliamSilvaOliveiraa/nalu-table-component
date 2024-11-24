@@ -16,6 +16,9 @@ const languages = {
 
     //Plus
     plusButton: "Add",
+
+    //Action
+    textAction: "Action",
   },
   "pt-br": {
     //Modal
@@ -33,6 +36,9 @@ const languages = {
 
     //Plus
     plusButton: "Adicionar",
+
+    //Action
+    textAction: "Ação",
   },
 };
 

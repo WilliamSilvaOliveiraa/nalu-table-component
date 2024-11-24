@@ -46,7 +46,7 @@ const colorThemes = {
     },
     viewButtonIcon: {
       light: "#0053A0",
-      dark: "##E9F2FF",
+      dark: "#E9F2FF",
     },
     addButton: {
       light: "#DFCDEB",

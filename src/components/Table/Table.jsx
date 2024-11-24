@@ -45,6 +45,7 @@ Table.propTypes = {
   size: PropTypes.oneOf(["small", "large"]),
   variant: PropTypes.string.isRequired,
   themeMode: PropTypes.string.isRequired,
+  minWidth: PropTypes.number,
 };
 
 Table.defaultProps = {
@@ -78,6 +79,7 @@ export default function Table({
   themeMode,
   brandLogo,
   languageProp,
+  minWidth,
 }) {
   const [inputValue, setInputValue] = useState("");
   const [sortColumn, setSortColumn] = useState(null);
@@ -108,6 +110,7 @@ export default function Table({
     skeletonLoading,
   } = colorThemes[variant];
 
+  // console.log(data);
   const hasVariations = data?.tableInfo?.items?.some((item) => {
     return Array.isArray(item.variations) && item.variations.length > 0;
   });
@@ -268,9 +271,9 @@ export default function Table({
               ? "h-full rounded-e-2xl rounded-bl-2xl rounded-tl-none border-[1px] lg:rounded-e-2xl lg:rounded-bl-2xl lg:rounded-tl-none lg:border-b-[1px] lg:border-l-[1px] lg:border-r-[1px] lg:border-t-[0px]" // Caso hasTabs seja true e loading true
               : "mt-3 h-full rounded-2xl border-[1px] lg:mt-0 lg:rounded-e-2xl lg:rounded-bl-2xl lg:rounded-tl-none lg:border-b-[1px] lg:border-l-[1px] lg:border-r-[1px] lg:border-t-[0px]" // Caso hasTabs true e loading false
             : !header && !loading && size === "small"
-            ? "h-[400px] overflow-hidden rounded-xl border-[1px] "
+            ? "h-full overflow-hidden rounded-xl border-[1px] "
             : size === "small" && loading && !header && !hasTabs
-            ? "h-[400px] rounded-xl border-[px]"
+            ? "h-full rounded-xl border-[px]"
             : "h-full overflow-hidden rounded-2xl border-[1px] "
         }`}
     >
@@ -347,17 +350,16 @@ export default function Table({
       {/* Cabeçalhos da tabela */}
       <div className="relative overflow-x-auto ">
         <div
-          className={
-            size === "small"
-              ? "relative  min-w-[1240px]"
-              : "relative min-w-[1240px]"
-          }
+          style={{
+            minWidth: `${minWidth}px`,
+            position: "relative",
+          }}
         >
           {!loading && (
             <div
               style={{ backgroundColor: backgroundTop[themeMode] }}
-              className={`lg-rounded-none sticky top-0 z-[4] flex h-auto w-full  ${
-                size === "small" ? "px-4 py-2" : "px-10 py-3"
+              className={`lg-rounded-none sticky top-0 z-[4] flex h-auto w-auto gap-4 ${
+                size === "small" ? "px-8 py-2" : "px-10 py-3"
               } ${loading ? "pointer-events-none opacity-0" : ""} `}
             >
               {data?.tableInfo?.items?.length > 0 ? (
@@ -408,16 +410,14 @@ export default function Table({
                   style={{
                     color: textContent[themeMode],
                   }}
-                  className={`group flex select-none py-2 text-[12px] font-semibold transition-all duration-300  ${
+                  className={`group flex select-none py-2 text-[12px] font-semibold transition-all duration-300 w-full ${
                     column.alignment === "left"
                       ? "justify-start"
                       : column.alignment === "center"
                       ? "justify-center"
                       : "justify-end"
                   } ${
-                    column.header.toLowerCase() === "imagem"
-                      ? "w-[100px]"
-                      : "flex-1"
+                    column.header.toLowerCase() === "imagem" ? "w-[100px]" : ""
                   } ${
                     column.ordering
                       ? "cursor-pointer opacity-100 hover:opacity-80 "
@@ -449,11 +449,15 @@ export default function Table({
                 removeItemFunction) && (
                 <>
                   <p
+                    style={{
+                      color: textContent[themeMode],
+                      transition: "all 0.3s ease",
+                    }}
                     className={` ${
-                      loading ? `opacity-100` : `opacity-0`
-                    } flex flex-1 items-center justify-center py-2 text-[12px] font-semibold text-[#929090]`}
+                      loading ? `opacity-0` : `opacity-100`
+                    } flex w-full items-center justify-center py-2 text-[12px] font-semibold `}
                   >
-                    Ação
+                    {data?.tableInfo?.items > 0 ? texts.textAction : <p>‎</p>}
                   </p>
                 </>
               )}
@@ -901,7 +905,7 @@ export default function Table({
                       ))}
                     </div>
                   ) : (
-                    <div className="z-[3] flex h-full flex-col overflow-auto">
+                    <div className="z-[3] flex h-full flex-col overflow-auto w-full">
                       {sortedItems.map((item, index) => (
                         <div key={index} className="z-[3] flex flex-col">
                           {size === "small" ? (
@@ -912,7 +916,7 @@ export default function Table({
                                     ? "transparent"
                                     : backgroundBorder[themeMode],
                               }}
-                              className={`z-[3] flex items-center px-4 border-b-[1px] `}
+                              className={`z-[3] flex items-center px-8 border-b-[1px] gap-4 `}
                             >
                               {onSelectionChange && (
                                 <div className="mr-4 h-1/2">
@@ -1084,7 +1088,7 @@ export default function Table({
                             </div>
                           ) : (
                             <div
-                              className={`z-[3] flex items-center px-10 ${
+                              className={`z-[3] flex items-center px-10 gap-4 ${
                                 index !== sortedItems.length - 1
                                   ? "border-b-[1px] "
                                   : ""
@@ -1303,7 +1307,7 @@ export default function Table({
                                                   ? "transparent"
                                                   : borderVariation[themeMode],
                                             }}
-                                            className={`flex px-10 border-b-[1px]`}
+                                            className={`flex px-10 border-b-[1px] gap-4`}
                                           >
                                             {onSelectionChange && (
                                               <div className="mr-4 select-none opacity-0">
