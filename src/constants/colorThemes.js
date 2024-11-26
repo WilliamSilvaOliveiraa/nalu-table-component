@@ -38,7 +38,7 @@ const colorThemes = {
     },
     primaryLoading: {
       light: "#dba2ff",
-      dark: "#ad3d3e",
+      dark: "#B24DF8",
     },
     viewButton: {
       light: "#C2D6E8",
