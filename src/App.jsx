@@ -5,9 +5,9 @@ import tableData from "./Data";
 function App() {
   return (
     <div className="p-20 h-screen w-full  ">
-      <NaluTable />
+      {/* <NaluTable /> */}
 
-      {/* <NaluTable
+      <NaluTable
         itemsPerPage={5}
         totalItems={20}
         tableData={tableData}
@@ -15,7 +15,8 @@ function App() {
         size="small"
         minWidth={2000}
         handlePageChange={(page) => console.log(page)}
-      /> */}
+        activeTab="Primeira"
+      />
     </div>
   );
 }

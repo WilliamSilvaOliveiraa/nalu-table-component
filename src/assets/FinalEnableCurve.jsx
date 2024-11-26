@@ -1,6 +1,7 @@
-import PropTypes from "prop-types";
-
-function FinalEnableCurve({ fillColor = "#fff", borderColor = "#000" }) {
+export default function FinalEnableCurve({
+  fillColor = "#fff",
+  borderColor = "#000",
+}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -25,12 +26,18 @@ function FinalEnableCurve({ fillColor = "#fff", borderColor = "#000" }) {
           {/* Triângulo preenchido */}
           <path
             fill={fillColor}
+            style={{
+              transition: "fill 300ms ease",
+            }}
             d="M0 .677V20.16s38.503-.006 20.003-.005C1.503 20.156 0 5.676 0 .676z"
           ></path>
 
           {/* Curva com a borda aplicada */}
           <path
             stroke={borderColor}
+            style={{
+              transition: "stroke 300ms ease",
+            }}
             strokeWidth="0.4"
             fill="none" // Não preencher a curva, apenas a borda
             d="M20.003 19.415a.5.5 0 010 1v-1zm0 1c-9.41 0-14.457-3.764-17.119-8.238C.25 7.747 0 2.697 0 .176h1c0 2.48.252 7.3 2.744 11.49 2.465 4.144 7.17 7.749 16.259 7.749v1z"
@@ -56,10 +63,3 @@ function FinalEnableCurve({ fillColor = "#fff", borderColor = "#000" }) {
     </svg>
   );
 }
-
-FinalEnableCurve.propTypes = {
-  fillColor: PropTypes.string,
-  borderColor: PropTypes.string,
-};
-
-export default FinalEnableCurve;

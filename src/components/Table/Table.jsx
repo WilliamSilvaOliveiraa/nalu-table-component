@@ -918,7 +918,7 @@ export default function Table({
                               style={{
                                 borderColor: backgroundBorder[themeMode],
                               }}
-                              className={`z-[3] flex items-center px-8 border-b-[1px] gap-4 `}
+                              className={`z-[3] flex items-center px-8 border-b-[1px] gap-4 transition-all duration-300 ease-in-out`}
                             >
                               {onSelectionChange && (
                                 <div className="mr-4 h-1/2">

@@ -1,20 +1,20 @@
 //Exemplo de dados para a tabela
 
 const tableData = {
-  // tabs: [
-  //   {
-  //     title: "Primeira",
-  //     quantity: 5,
-  //     checked: true,
-  //     special: true,
-  //   },
-  //   {
-  //     title: "Segunda",
-  //     quantity: 10,
-  //     checked: true,
-  //     special: false,
-  //   },
-  // ],
+  tabs: [
+    {
+      title: "Primeira",
+      quantity: 5,
+      checked: true,
+      special: true,
+    },
+    {
+      title: "Segunda",
+      quantity: 10,
+      checked: true,
+      special: false,
+    },
+  ],
   tableInfo: {
     columns: [
       {
