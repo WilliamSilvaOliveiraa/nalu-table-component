@@ -502,7 +502,7 @@ export default function Table({
                         style={{
                           borderColor: backgroundBorder[themeMode],
                         }}
-                        className="flex border-b-[0px] px-10 items-center"
+                        className="flex border-b-[0px] px-10 items-center transition-all duration-300 ease-in-out"
                       >
                         {onSelectionChange && (
                           <div className="z-[2] mr-4 h-1/2">
@@ -713,7 +713,7 @@ export default function Table({
                                                 ? "transparent"
                                                 : borderVariation[themeMode],
                                           }}
-                                          className={`flex px-10 ${
+                                          className={`flex px-10  transition-all duration-300 ease-in-out${
                                             vIndex !==
                                             selectedItem.variations.length - 1
                                               ? "border-b-[1px]"
@@ -1090,7 +1090,7 @@ export default function Table({
                             </div>
                           ) : (
                             <div
-                              className={`z-[3] flex items-center px-10 gap-4 ${
+                              className={`z-[3] flex items-center px-10 gap-4 transition-all duration-300 ease-in-out ${
                                 index !== sortedItems.length - 1
                                   ? "border-b-[1px] "
                                   : ""
@@ -1309,7 +1309,7 @@ export default function Table({
                                                   ? "transparent"
                                                   : borderVariation[themeMode],
                                             }}
-                                            className={`flex px-10 border-b-[1px] gap-4`}
+                                            className={`flex px-10 border-b-[1px] gap-4 transition-all duration-300 ease-in-out`}
                                           >
                                             {onSelectionChange && (
                                               <div className="mr-4 select-none opacity-0">
